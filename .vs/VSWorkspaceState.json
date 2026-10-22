@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Anirok",
-    "\\Anirok\\EjemploABM"
+    "\\Anirok\\EjemploABM",
+    "\\Anirok\\EjemploABM\\Controladores"
   ],
-  "SelectedNode": "\\Anirok\\EjemploABM.sln",
+  "SelectedNode": "\\Anirok\\EjemploABM\\Controladores\\Detalle_Controller.cs",
   "PreviewInSolutionExplorer": false
 }

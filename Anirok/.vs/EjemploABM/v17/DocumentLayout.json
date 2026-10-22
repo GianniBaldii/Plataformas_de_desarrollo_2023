@@ -1,0 +1,839 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|c:\\proyectos\\plataformas_de_desarrollo_2023\\anirok\\ejemploabm\\formcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|c:\\proyectos\\plataformas_de_desarrollo_2023\\anirok\\ejemploabm\\controladores\\detalle_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\detalle_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controladores\\venta_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\venta_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controladores\\producto_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\producto_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formventa.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formventa.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controladores\\usuario_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\usuario_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\productos_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\productos_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\productos_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\productos_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsetearurls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsetearurls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsetearurls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsetearurls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controladores\\db_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\db_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formverprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formverprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formverprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formverprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsubcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsubcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsubcategorias.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsubcategorias.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsubcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsubcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\index.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\index.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formsetearurls.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formsetearurls.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\venta_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\venta_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\modelo\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\modelo\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\subcategoria_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\subcategoria_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\subcategoria_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\subcategoria_uc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\subcategoria_uc.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\subcategoria_uc.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarvendedorcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarvendedorcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarvendedorcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarvendedorcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminaradmincat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminaradmincat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formdesactivacionlogica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formdesactivacionlogica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarsub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarsub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\modelo\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\modelo\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\modelo\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\modelo\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formventa.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formventa.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formproducto.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formproducto.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarcat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarsub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarsub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminarsub.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminarsub.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\subcategoria_uc.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\subcategoria_uc.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formeliminar.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formeliminar.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controlesdeusuario\\usuarios_uc.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controlesdeusuario\\usuarios_uc.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormCategorias.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormCategorias.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormCategorias.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormCategorias.cs [Dise\u00F1o]",
+              "RelativeToolTip": "EjemploABM\\FormCategorias.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:35.483Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FormVenta.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVenta.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormVenta.Designer.cs",
+              "ViewState": "AQIAADADAAAAAAAAAAAswD4DAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Venta_Controller.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Venta_Controller.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Controladores\\Venta_Controller.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Venta_Controller.cs",
+              "RelativeToolTip": "EjemploABM\\Controladores\\Venta_Controller.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAqwEgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Detalle_Controller.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Detalle_Controller.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Controladores\\Detalle_Controller.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Detalle_Controller.cs",
+              "RelativeToolTip": "EjemploABM\\Controladores\\Detalle_Controller.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBcAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Usuario_Controller.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Usuario_Controller.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Controladores\\Usuario_Controller.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Usuario_Controller.cs",
+              "RelativeToolTip": "EjemploABM\\Controladores\\Usuario_Controller.cs",
+              "ViewState": "AQIAAJ8AAAAAAAAAAADwv6MAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Producto_Controller.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Producto_Controller.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Controladores\\Producto_Controller.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\Producto_Controller.cs",
+              "RelativeToolTip": "EjemploABM\\Controladores\\Producto_Controller.cs",
+              "ViewState": "AQIAAPoAAAAAAAAAAAAwwAcBAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FormVenta.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVenta.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FormProducto.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormProducto.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.cs",
+              "RelativeToolTip": "EjemploABM\\FormProducto.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAlwDEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Form1.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Form1.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "EjemploABM\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.677Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Index.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.cs [Dise\u00F1o]",
+              "RelativeToolTip": "EjemploABM\\Index.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.659Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FormVenta.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVenta.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.cs",
+              "RelativeToolTip": "EjemploABM\\FormVenta.cs",
+              "ViewState": "AQIAAK8BAAAAAAAAAAAAAM8BAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FormProducto.cs [Design]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormProducto.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Productos_UC.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "RelativeToolTip": "EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "ViewState": "AQIAAH0AAAAAAAAAAAAAADAAAABaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2026-10-22T00:33:29.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Productos_UC.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Productos_UC.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Productos_UC.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Productos_UC.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2026-10-22T00:33:29.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "FormSetearUrls.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSetearUrls.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.cs",
+              "RelativeToolTip": "EjemploABM\\FormSetearUrls.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAswCcAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FormSetearUrls.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSetearUrls.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Index.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.cs",
+              "RelativeToolTip": "EjemploABM\\Index.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAawH0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DB_Controller.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\DB_Controller.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Controladores\\DB_Controller.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Controladores\\DB_Controller.cs",
+              "RelativeToolTip": "EjemploABM\\Controladores\\DB_Controller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FormVerProd.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVerProd.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVerProd.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVerProd.cs",
+              "RelativeToolTip": "EjemploABM\\FormVerProd.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwCsAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Program.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Program.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Program.cs",
+              "RelativeToolTip": "EjemploABM\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "FormEliminarProd.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarProd.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarProd.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarProd.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminarProd.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAADgvyYAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "FormEliminarProd.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarProd.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarProd.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarProd.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarProd.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "FormVerProd.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVerProd.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVerProd.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVerProd.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVerProd.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FormSubcategorias.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSubcategorias.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.cs",
+              "RelativeToolTip": "EjemploABM\\FormSubcategorias.cs",
+              "ViewState": "AQIAALkAAAAAAAAAAAAowMkAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "FormSubcategorias.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSubcategorias.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormSubcategorias.Designer.cs",
+              "ViewState": "AQIAALUAAAAAAAAAAAAswMQAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "FormSubcategorias.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSubcategorias.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSubcategorias.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Index.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Index.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\Index.Designer.cs",
+              "ViewState": "AgIAACoBAAAAAAAAAAAswDkBAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "FormSetearUrls.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormSetearUrls.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormSetearUrls.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormSetearUrls.Designer.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAswF0AAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "FormUsuarios.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormUsuarios.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormUsuarios.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormUsuarios.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormUsuarios.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Form1.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Form1.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Form1.cs",
+              "RelativeToolTip": "EjemploABM\\Form1.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAgwEEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Venta_UC.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Venta_UC.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Venta_UC.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Venta_UC.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Venta_UC.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2026-10-22T00:33:29.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Producto.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Modelo\\Producto.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Producto.cs",
+              "RelativeToolTip": "EjemploABM\\Modelo\\Producto.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAmwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.681Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Subcategoria_UC.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "RelativeToolTip": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2026-10-22T00:33:29.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Subcategoria_UC.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.Designer.cs",
+              "ViewState": "AQIAAOIAAAAAAAAAAAAewO8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Subcategoria_UC.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003302|",
+              "WhenOpened": "2026-10-22T00:33:29.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "FormEliminarVendedorCat.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarVendedorCat.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarVendedorCat.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarVendedorCat.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarVendedorCat.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "FormEliminarVendedorCat.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarVendedorCat.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarVendedorCat.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarVendedorCat.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminarVendedorCat.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "FormEliminarAdminCat.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarAdminCat.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarAdminCat.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarAdminCat.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarAdminCat.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "FormEliminarCat.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarCat.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarCat.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarCat.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarCat.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "FormDesactivacionLogica.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormDesactivacionLogica.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormDesactivacionLogica.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormDesactivacionLogica.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormDesactivacionLogica.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Cliente.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Modelo\\Cliente.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Cliente.cs",
+              "RelativeToolTip": "EjemploABM\\Modelo\\Cliente.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAA5wCAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "FormEliminarSub.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarSub.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\Users\\Usuario\\Documents\\GitHub\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Usuario.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\Modelo\\Usuario.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Modelo\\Usuario.cs",
+              "RelativeToolTip": "EjemploABM\\Modelo\\Usuario.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAA0wCYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-22T00:33:29.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "FormVenta.resx",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.resx",
+              "RelativeDocumentMoniker": "EjemploABM\\FormVenta.resx",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormVenta.resx",
+              "RelativeToolTip": "EjemploABM\\FormVenta.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "FormUsuarios.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormUsuarios.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormUsuarios.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormUsuarios.cs",
+              "RelativeToolTip": "EjemploABM\\FormUsuarios.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAQwCEAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "FormProducto.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormProducto.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormProducto.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormProducto.Designer.cs",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAowH0AAABcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "FormEliminarCat.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarCat.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarCat.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarCat.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminarCat.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAA7wE0AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "FormEliminarSub.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarSub.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminarSub.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAYwDMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-10-22T00:33:29.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "FormEliminarSub.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminarSub.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminarSub.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminarSub.Designer.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAAABYAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Subcategoria_UC.resx",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.resx",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.resx",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.resx",
+              "RelativeToolTip": "EjemploABM\\ControlesDeUsuario\\Subcategoria_UC.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "FormEliminar.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminar.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\FormEliminar.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormEliminar.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\FormEliminar.Designer.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAWwGMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Usuarios_UC.Designer.cs",
+              "DocumentMoniker": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Usuarios_UC.Designer.cs",
+              "RelativeDocumentMoniker": "EjemploABM\\ControlesDeUsuario\\Usuarios_UC.Designer.cs",
+              "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\ControlesDeUsuario\\Usuarios_UC.Designer.cs",
+              "RelativeToolTip": "EjemploABM\\ControlesDeUsuario\\Usuarios_UC.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-10-22T00:33:29.698Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

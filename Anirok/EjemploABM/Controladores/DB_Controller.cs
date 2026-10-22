@@ -16,13 +16,22 @@ namespace EjemploABM.Controladores
 
         public static void initialize()
         {
-            var builder = new SqlConnectionStringBuilder();
+            connectionString = Environment.GetEnvironmentVariable("ANIROK_DB_CONNECTION");
 
-            builder.DataSource = @"(localdb)\local"; //NOMBRE DEL SERVIDOR
-            builder.InitialCatalog = "anirok2"; //NOMBRE DE LA BASE DE DATOS
-            builder.IntegratedSecurity = true; //TIENE O NO SEGURIDAD INTEGRADA CON WINDOWS
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                var builder = new SqlConnectionStringBuilder
+                {
+                    DataSource = "localhost,1433",
+                    InitialCatalog = "anirok2",
+                    UserID = "sa",
+                    Password = "Anirok_dev_2026!",
+                    TrustServerCertificate = true
+                };
 
-            connectionString = builder.ToString();
+                connectionString = builder.ToString();
+            }
+
             connection = new SqlConnection(connectionString);
 
             Trace.WriteLine("Conexion a la DB: " + connection);

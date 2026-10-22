@@ -38,21 +38,17 @@ namespace EjemploABM
             txt_talle.Text= prod.Talle.ToString();
             txt_stock.Text= prod.Stock.ToString();
 
-            string nombreImagen = (prod.Id.ToString() + ".jpg");
-
-            // Construir la ruta completa de la imagen
-            string rutaImagen = Path.Combine(Program.URLimg, nombreImagen);
-            Console.WriteLine(rutaImagen);
-
-            // Verificar si el archivo de la imagen existe antes de asignarlo
-            if (File.Exists(rutaImagen))
+            if (!string.IsNullOrWhiteSpace(Program.URLimg))
             {
-                // Asignar la imagen al PictureBox
-                pictureBoxVer.Image = Image.FromFile(rutaImagen);
-            }
-            else
-            {
-                MessageBox.Show("La imagen no se encuentra en la ruta especificada.");
+                string nombreImagen = prod.Id + ".jpg";
+                string rutaImagen = Path.Combine(Program.URLimg, nombreImagen);
+
+                // La imagen es opcional: los datos del producto se muestran aunque
+                // la carpeta todavía no se haya configurado o el archivo no exista.
+                if (File.Exists(rutaImagen))
+                {
+                    pictureBoxVer.Image = Image.FromFile(rutaImagen);
+                }
             }
 
         }

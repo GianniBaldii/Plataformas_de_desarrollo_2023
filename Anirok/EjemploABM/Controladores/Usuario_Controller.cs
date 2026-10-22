@@ -22,7 +22,7 @@ namespace EjemploABM.Controladores
             Usuario user = null;
 
             // Consulta para autenticar al usuario
-            string query = "SELECT * FROM dbo.usuario WHERE nombre = @usr AND contraseña = @pass;";
+            string query = "SELECT * FROM dbo.usuario WHERE (nombre = @usr OR mail = @usr) AND contraseña = @pass;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@usr", usr);

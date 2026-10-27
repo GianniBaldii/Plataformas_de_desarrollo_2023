@@ -12,6 +12,7 @@ namespace EjemploABM.Modelo
         public int Cantidad { get; set; }
         public int VentaId { get; set; }
         public int ProductoId { get; set; }
+        public double PrecioUnitario { get; set; }
 
         public Venta Venta { get; set; }
         
@@ -22,12 +23,13 @@ namespace EjemploABM.Modelo
             // Constructor vacío
         }
 
-        public DetalleVenta(int id, int cantidad, int ventaId, int productoId)
+        public DetalleVenta(int id, int cantidad, int ventaId, int productoId, double precioUnitario)
         {
             Id = id;
             Cantidad = cantidad;
             VentaId = ventaId;
             ProductoId = productoId;
+            PrecioUnitario = precioUnitario;
         }
     }
 }

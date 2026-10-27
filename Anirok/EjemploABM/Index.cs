@@ -94,8 +94,7 @@ namespace EjemploABM
             Form1 form = new Form1();
             form.Show();
             Program.logueado = null;
-            Program.URLimg = null;
-            Program.URLpdf = null;
+            Program.URLimg = EjemploABM.Servicios.ImagenProductoService.RutaBase;
         }
 
         private void guna2Button5_Click(object sender, EventArgs e)
@@ -132,11 +131,5 @@ namespace EjemploABM
             addUserControl(venta);
         }
 
-        private void buttonurls_Click(object sender, EventArgs e)
-        {
-            
-            FormSetearUrls form = new FormSetearUrls();
-            form.Show();
-        }
     }
 }

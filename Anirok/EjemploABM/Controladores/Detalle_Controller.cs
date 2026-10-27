@@ -13,18 +13,15 @@ namespace EjemploABM.Controladores
     {
         public static bool CrearDetalleVenta(DetalleVenta detalleVenta)
         {
-            string query = "INSERT INTO dbo.detalle_venta VALUES" +
-                           "(@id, " +
-                           "@cantidad, " +
-                           "@ventaId, " +
-                           "@productoId" +
-                           ");";
+            string query = "INSERT INTO dbo.detalle_venta (id, cantidad, venta_id, producto_id, precio_unitario) " +
+                           "VALUES (@id, @cantidad, @ventaId, @productoId, @precioUnitario);";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", obtenerMaxId()+1);
             cmd.Parameters.AddWithValue("@cantidad", detalleVenta.Cantidad);
             cmd.Parameters.AddWithValue("@ventaId", detalleVenta.VentaId);
             cmd.Parameters.AddWithValue("@productoId", detalleVenta.ProductoId);
+            cmd.Parameters.AddWithValue("@precioUnitario", detalleVenta.PrecioUnitario);
 
             try
             {
@@ -42,7 +39,7 @@ namespace EjemploABM.Controladores
         public static List<DetalleVenta> ObtenerDetallesVenta()
         {
             List<DetalleVenta> listaDetallesVenta = new List<DetalleVenta>();
-            string query = "SELECT * FROM dbo.detalle_venta;";
+            string query = "SELECT id, cantidad, venta_id, producto_id, precio_unitario FROM dbo.detalle_venta;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
 
@@ -58,7 +55,8 @@ namespace EjemploABM.Controladores
                         Id = reader.GetInt32(0),
                         Cantidad = reader.GetInt32(1),
                         VentaId = reader.GetInt32(2),
-                        ProductoId = reader.GetInt32(3)
+                        ProductoId = reader.GetInt32(3),
+                        PrecioUnitario = Convert.ToDouble(reader.GetValue(4))
                     };
 
                     listaDetallesVenta.Add(detalleVenta);
@@ -106,7 +104,7 @@ namespace EjemploABM.Controladores
         public static DetalleVenta ObtenerDetalleVentaPorId(int id)
         {
             DetalleVenta detalleVenta = new DetalleVenta();
-            string query = "SELECT * FROM dbo.detalle_venta WHERE id = @id;";
+            string query = "SELECT id, cantidad, venta_id, producto_id, precio_unitario FROM dbo.detalle_venta WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", id);
@@ -123,7 +121,8 @@ namespace EjemploABM.Controladores
                         Id = reader.GetInt32(0),
                         Cantidad = reader.GetInt32(1),
                         VentaId = reader.GetInt32(2),
-                        ProductoId = reader.GetInt32(3)
+                        ProductoId = reader.GetInt32(3),
+                        PrecioUnitario = Convert.ToDouble(reader.GetValue(4))
                     };
 
                     Trace.WriteLine("DetalleVenta encontrada, ID: " + reader.GetInt32(0));
@@ -144,8 +143,9 @@ namespace EjemploABM.Controladores
         {
             string query = "UPDATE dbo.detalle_venta SET " +
                            "cantidad = @cantidad, " +
-                           "ventaId = @ventaId, " +
-                           "productoId = @productoId " +
+                           "venta_id = @ventaId, " +
+                           "producto_id = @productoId, " +
+                           "precio_unitario = @precioUnitario " +
                            "WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
@@ -153,6 +153,7 @@ namespace EjemploABM.Controladores
             cmd.Parameters.AddWithValue("@cantidad", detalleVenta.Cantidad);
             cmd.Parameters.AddWithValue("@ventaId", detalleVenta.VentaId);
             cmd.Parameters.AddWithValue("@productoId", detalleVenta.ProductoId);
+            cmd.Parameters.AddWithValue("@precioUnitario", detalleVenta.PrecioUnitario);
 
             try
             {

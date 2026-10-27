@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EjemploABM.Modelo;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -14,7 +15,6 @@ namespace EjemploABM
 
         public static Usuario logueado;
         public static string URLimg;
-        public static string URLpdf;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -25,6 +25,7 @@ namespace EjemploABM
             Application.SetCompatibleTextRenderingDefault(false);
 
             DB_Controller.initialize();
+            URLimg = ImagenProductoService.RutaBase;
 
             if (validateConnection())
             {

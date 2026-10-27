@@ -1,0 +1,23 @@
+@model AnirokWeb.Models.ContactoViewModel
+@{
+    ViewBag.Title = "Contacto";
+}
+<main class="container py-5">
+    <div class="row justify-content-center"><section class="col-lg-8">
+        <h1>Contacto</h1><p>Dejanos tu consulta. El mensaje se muestra en esta página para simular el envío.</p>
+        @if (Model.Enviado)
+        {
+            <div class="alert alert-success"><h2>Consulta recibida</h2><p><b>@Model.Asunto</b> · @Model.Email</p><p>@Model.Mensaje</p></div>
+        }
+        else
+        {
+            <form method="post" action="@Url.Action("Contact", "Home")">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">@Html.LabelFor(m => m.Asunto, new { @class = "form-label" })@Html.TextBoxFor(m => m.Asunto, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Asunto, "", new { @class = "text-danger" })</div>
+                <div class="mb-3">@Html.LabelFor(m => m.Email, new { @class = "form-label" })@Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</div>
+                <div class="mb-3">@Html.LabelFor(m => m.Mensaje, new { @class = "form-label" })@Html.TextAreaFor(m => m.Mensaje, 6, 30, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Mensaje, "", new { @class = "text-danger" })</div>
+                <button class="btn btn-primary" type="submit">Enviar consulta</button>
+            </form>
+        }
+    </section></div>
+</main>

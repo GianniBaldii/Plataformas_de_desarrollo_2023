@@ -1,0 +1,13 @@
+﻿
+@model List<AnirokWeb.Models.Categoria>
+
+<h2>Lista de Categorías</h2>
+
+<ul>
+    @foreach (var categoria in Model)
+    {
+        <li>@categoria.Nombre - (@categoria.Esta_activo)</li>
+    }
+</ul>
+
+

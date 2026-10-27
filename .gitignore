@@ -1,0 +1,8 @@
+.vs/
+.dotnet-home/
+.nuget-packages/
+tmp/
+**/bin/
+**/obj/
+*.user
+Anirok/packages/

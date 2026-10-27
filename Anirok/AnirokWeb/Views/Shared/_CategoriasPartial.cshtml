@@ -1,0 +1,11 @@
+﻿@model IEnumerable<AnirokWeb.Models.Categoria>
+
+<ul class="navbar-nav">
+    @foreach (var categoria in Model)
+    {
+        <li class="nav-item w-100 justify-content-around">
+            <a class="nav-link text-white text-nowrap px-3" href="@Url.Action("Categoria", "Producto", new { nombreCategoria = categoria.Nombre })">
+            @categoria.Nombre</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,9 @@
+@model AnirokWeb.Models.ComprobanteViewModel
+@{
+    ViewBag.Title = "Compra realizada";
+}
+<main class="container py-5 text-center">
+    <div class="alert alert-success"><h1>¡Compra realizada!</h1><p>Venta #@Model.VentaId. El stock fue actualizado correctamente.</p></div>
+    <a class="btn btn-green" href="@Url.Action("Comprobante", "Carrito", new { id = Model.VentaId })">Descargar comprobante PDF</a>
+    <a class="btn btn-black" href="@Url.Action("Index", "Home")">Volver a la tienda</a>
+</main>

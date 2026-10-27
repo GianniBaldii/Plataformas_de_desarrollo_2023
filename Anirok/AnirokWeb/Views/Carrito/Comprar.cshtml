@@ -1,0 +1,27 @@
+@model AnirokWeb.Models.CompraViewModel
+@{
+    ViewBag.Title = "Finalizar compra";
+}
+<main class="container py-5">
+    <div class="row">
+        <section class="col-md-7">
+            <h1>Finalizar compra</h1>
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <form method="post" action="@Url.Action("Comprar", "Carrito")">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.MetodoPago, new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.MetodoPago, new SelectList(new[] { "Tarjeta", "Efectivo", "Transferencia" }), new { @class = "form-select" })
+                </div>
+                <button class="btn btn-green" type="submit">Confirmar compra</button>
+            </form>
+        </section>
+        <aside class="col-md-5">
+            <div class="card p-4">
+                <h2>Resumen</h2>
+                @foreach (var linea in Model.Carrito.Lineas) { <p>@linea.Cantidad × @linea.Producto.Nombre <b class="float-end">@linea.Subtotal.ToString("C")</b></p> }
+                <hr /><h3>Total <span class="float-end">@Model.Carrito.Total.ToString("C")</span></h3>
+            </div>
+        </aside>
+    </div>
+</main>

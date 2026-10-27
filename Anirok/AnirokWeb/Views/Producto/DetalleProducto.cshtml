@@ -1,0 +1,67 @@
+﻿@model AnirokWeb.Models.Producto
+
+@{
+    ViewBag.Title = ViewBag.Title ?? "Detalle del Producto";  // Si no hay título, usar un valor predeterminado
+}
+
+
+<style>
+    .column-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Ajusta la altura del contenedor */
+    }
+
+        .column-img img {
+            width: 80%; /* Ajusta el ancho de la imagen */
+            height: 80%; /* Ajusta la altura de la imagen */
+            object-fit: contain; /* Centra y mantiene la proporción */
+        }
+</style>
+
+<main>
+    <section class="mb-4" aria-labelledby="aspnetTitle">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="column-img">
+                    <img src="@Url.Content("~/Content/Images/" + Model.Img)" alt="@Model.Nombre">
+
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3 d-flex justify-content-center align-items-center">
+                <div class="container d-flex flex-column">
+
+                    <h1 class="card-title mb-3">@Model.Nombre</h1>
+
+                    <h3 class="card-text mb-3">$@Model.Precio</h3>
+
+                    <a class="card-text mb-3">Ver medios de pago</a>
+
+                    <div class="d-flex justify-content-between">
+
+                        <!-- Formulario para añadir al carrito -->
+                        <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productoId" value="@Model.Id" />
+                            <label for="cantidad">Cantidad:</label>
+                            <input class="mb-4" type="number" id="cantidad" name="cantidad" inputmode="numeric" min="1" value="1">
+                            <button type="submit"  class="btn btn-secondary d-flex justify-content-center align-items-center p-4">
+                                <i class="fa-solid fa-cart-plus fa-xl"></i>
+                            </button>
+                        </form>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+

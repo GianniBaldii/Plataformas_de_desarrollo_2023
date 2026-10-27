@@ -1,0 +1,40 @@
+@model AnirokWeb.Models.CarritoViewModel
+@{
+    ViewBag.Title = "Tu Carrito";
+}
+<main class="container py-4">
+    <h1 class="mt-4">Tu carrito</h1>
+    @if (TempData["SuccessMessage"] != null) { <div class="alert alert-success">@TempData["SuccessMessage"]</div> }
+    @if (!Model.Lineas.Any())
+    {
+        <div class="alert alert-info">Tu carrito está vacío.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th></th></tr></thead>
+                <tbody>
+                @foreach (var linea in Model.Lineas)
+                {
+                    <tr>
+                        <td><img src="@Url.Content("~/Content/Images/" + linea.Producto.Img)" alt="@linea.Producto.Nombre" style="width:90px;height:90px;object-fit:contain" /> <b>@linea.Producto.Nombre</b></td>
+                        <td>@linea.Producto.Precio.ToString("C")</td>
+                        <td>
+                            <form method="post" action="@Url.Action("Actualizar", "Carrito")" class="d-flex gap-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productoId" value="@linea.Producto.Id" />
+                                <input class="form-control" style="width:85px" type="number" name="cantidad" min="0" value="@linea.Cantidad" />
+                                <button class="btn btn-black" type="submit">Actualizar</button>
+                            </form>
+                        </td>
+                        <td><b>@linea.Subtotal.ToString("C")</b></td>
+                        <td><form method="post" action="@Url.Action("EliminarDelCarrito", "Carrito")">@Html.AntiForgeryToken()<input type="hidden" name="productoId" value="@linea.Producto.Id" /><button class="btn-nav nav-link circle-icon" type="submit"><i class="fas fa-trash"></i></button></form></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div class="text-end mb-5"><h2>Total: @Model.Total.ToString("C")</h2><a class="btn btn-green" href="@Url.Action("Comprar", "Carrito")">Realizar compra</a></div>
+    }
+</main>

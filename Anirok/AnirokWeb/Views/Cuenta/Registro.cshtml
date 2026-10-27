@@ -1,0 +1,22 @@
+@model AnirokWeb.Models.RegistroViewModel
+@{
+    ViewBag.Title = "Crear cuenta";
+}
+<main class="container py-5">
+    <div class="row justify-content-center"><section class="col-lg-8">
+        <h1>Crear cuenta</h1>
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <form method="post" action="@Url.Action("Registro", "Cuenta")" class="row g-3">
+            @Html.AntiForgeryToken()
+            <div class="col-md-6">@Html.LabelFor(m => m.Nombre, new { @class = "form-label" })@Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Apellido, new { @class = "form-label" })@Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Apellido, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Mail, new { @class = "form-label" })@Html.TextBoxFor(m => m.Mail, new { @class = "form-control", type = "email" })@Html.ValidationMessageFor(m => m.Mail, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Telefono, new { @class = "form-label" })@Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Direccion, new { @class = "form-label" })@Html.TextBoxFor(m => m.Direccion, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Dni, new { @class = "form-label" })@Html.TextBoxFor(m => m.Dni, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Dni, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.Contrasena, new { @class = "form-label" })@Html.PasswordFor(m => m.Contrasena, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Contrasena, "", new { @class = "text-danger" })</div>
+            <div class="col-md-6">@Html.LabelFor(m => m.ConfirmarContrasena, new { @class = "form-label" })@Html.PasswordFor(m => m.ConfirmarContrasena, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.ConfirmarContrasena, "", new { @class = "text-danger" })</div>
+            <div class="col-12"><button class="btn btn-primary" type="submit">Crear cuenta</button></div>
+        </form>
+    </section></div>
+</main>

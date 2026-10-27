@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Agrega el enlace al icono Favicon -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--  CDN de Font Awesome -->
+    <script src="https://kit.fontawesome.com/5ecef25f55.js" crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <!-- Sección izquierda  -->
+            <div class="navbar-left d-flex align-items-center">
+                <form class="form-inline d-flex" method="get" action="@Url.Action("Buscar", "Producto")">
+                    <input class="form-inline align-items-center my-auto search-bar" name="buscar" type="search" placeholder="Buscar..." aria-label="Buscar">
+                    <button class="m-2 btn-search" type="submit"><i class="m-2 fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+
+            <!-- Sección central con el logo -->
+            <a class="navbar-brand mx-auto" href="@Url.Action("Index", "Home")">
+                <img src="../../Content/Images/logo_anirok.png" alt="Logo de la aplicación" style="max-height: 70px;" />
+            </a>
+
+            <!-- Sección derecha con el botón del carrito -->
+            <div class="navbar-right">
+                <ul class="navbar-nav d-flex align-items-center">
+                    <li class="nav-item m-3">
+                        <a class="btn-nav nav-link circle-icon"href="@Url.Action("Index", "Carrito")">
+                            <i class="m-2 fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        @if (Session["UsuarioId"] != null)
+                        {
+                            <!-- Botón para cerrar sesión -->
+                            <form method="post" action="@Url.Action("Logout", "Cuenta")">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-nav nav-link circle-icon"><i class="m-2 fa-solid fa-unlock-keyhole"></i></button>
+                            </form>
+                        }
+                        else
+                        {
+                            <!-- Botón para iniciar sesión -->
+                            <a href="@Url.Action("Login", "Cuenta")" class="btn-nav nav-link circle-icon">
+                                <i class="m-2 fa-solid fa-lock"></i>
+                            </a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-black bg-dark">
+        <!-- Contenido de la barra principal... -->
+        <!-- Enlaces de forma dinamica - _CategoriasPartial -->
+        <div class="collapse navbar-collapse justify-content-center align-content-between" id="navbarNav">
+            @Html.Action("Categorias", "Producto")
+            <a class="nav-link text-white px-3" href="@Url.Action("Contact", "Home")">Contacto</a>
+
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+     </div>
+  <div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Contactanos</h3>
+                    <ul>
+                        <li><p><i class="m-2 fa-solid fa-phone"></i>47715792</p></li>
+                        <li><p><i class="m-2 fa-solid fa-envelope"></i>anirok-atencion@anirok.com</p></li>
+<li> <p><i class="m-2 fa-solid fa-location-dot"></i>Av. Corrientes 1234</p>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Metodos de Pago</h3>
+                    <ul>
+                        <li> <i class="mr-2 fa-brands fa-cc-visa"></i></li>
+                        <li>   <i class="mr-2 fa-brands fa-cc-mastercard"></i></li>
+                        <li><i class="mr-2 fa-brands fa-cc-paypal"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                </div>
+                <div class="col item social"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-regular fa-envelope"></i></a></div>
+            </div>
+           
+        </div>
+    </footer>
+</div>
+
+   
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

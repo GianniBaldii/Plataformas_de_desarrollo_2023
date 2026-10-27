@@ -1,0 +1,112 @@
+﻿
+@model List<AnirokWeb.Models.Producto>
+
+@{
+    ViewBag.Title = "Tu Carrito";
+}
+<main>
+    <section aria-labelledby="aspnetTitle">
+        <section class="row" aria-labelledby="aspnetTitle">
+            <h1 class="mt-4">Tu Carrito</h1>
+
+        </section>
+
+        @if (Model.Count == 0)
+        {
+            <p>Tu carrito está vacío.</p>
+        }
+        else
+        {
+            <div class="container mt-5">
+                <div class="text-end">
+                    <button class="btn btn-green m-4">Realizar Compra</button>
+                    <h2 class="text-end fw-bold">Total (S/Envío): <span id="total">$@Model.Sum(p => p.Precio)</span></h2>
+                </div>
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col"></th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var producto in Model)
+                        {
+                            <tr>
+                                <td style="width: 20%;">
+                                    <img src="@Url.Content("~/Content/Images/" + producto.Img)" alt="@producto.Nombre" class="img-fluid" />
+                                </td>
+                                <td class="align-middle">
+                                    <p class="prod-title m-2 fw-bold">@producto.Nombre</p>
+                                    <p class="m-2 fw-bold">Precio: <span class="price-font">$@producto.Precio</span></p>
+                                    <div class="input-group">
+                                        <!-- Input para ingresar la cantidad -->
+                                        <label class="m-2 fw-bold" for="cantidad">Cantidad:</label>
+                                        <input class="mb-4" type="number" id="cantidad" name="cantidad" inputmode="numeric" pattern="[0-9]*" min="1" value="1">
+                                    </div>
+                                </td>
+                                
+                                <td class="text-start align-middle">
+                                    <p class="m-2 fw-bold">Subtotal: <span class="price-font subtotal">$@producto.Precio</span></p>
+                                </td>
+
+                                <td class="text-start align-middle">
+                                    <!-- Eliminar producto del carrito -->
+                                    <form method="post" action="@Url.Action("EliminarDelCarrito", "Carrito")">
+                                        <input type="hidden" name="productoId" value="@producto.Id" />
+                                        <button type="submit" class="btn-nav nav-link circle-icon">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center mb-4">
+                    <button class="btn btn-green">Realizar Compra</button>
+                </div>
+
+            </div>
+
+        }
+
+    </section>
+
+    <!-- Event listener para actualizar cantidad de x producto -->
+    @section Scripts {
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Selecciona todos los inputs de cantidad
+            let quantityInputs = document.querySelectorAll("input[name='cantidad']");
+
+            quantityInputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    let row = this.closest("tr"); // Encuentra la fila del producto
+                    let price = parseFloat(row.querySelector(".price-font").textContent.replace("$", "")); // Obtiene el precio del producto
+                    let quantity = parseInt(this.value) || 1; // Obtiene la cantidad (si es inválida, usa 1)
+                    let subtotal = price * quantity; // Calcula el subtotal
+
+                    row.querySelector(".subtotal").textContent = `$${subtotal.toFixed(2)}`; // Actualiza el subtotal
+
+                    updateTotal(); // Actualiza el total general
+                });
+            });
+
+            function updateTotal() {
+                let total = 0;
+                document.querySelectorAll(".subtotal").forEach(sub => {
+                    total += parseFloat(sub.textContent.replace("$", ""));
+                });
+                document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+            }
+        });
+        </script>
+    }
+
+</main>
+
+

@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|c:\\proyectos\\plataformas_de_desarrollo_2023\\anirok\\ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\index.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -11,11 +11,11 @@
       "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|c:\\proyectos\\plataformas_de_desarrollo_2023\\anirok\\ejemploabm\\formcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\formcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\formcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|c:\\proyectos\\plataformas_de_desarrollo_2023\\anirok\\ejemploabm\\controladores\\detalle_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\ejemploabm\\controladores\\detalle_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E595C55-1764-4CD9-AC5C-711890B4F1D4}|EjemploABM\\EjemploABM.csproj|solutionrelative:ejemploabm\\controladores\\detalle_controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -229,8 +229,7 @@
               "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\FormCategorias.cs [Dise\u00F1o]",
               "RelativeToolTip": "EjemploABM\\FormCategorias.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:35.483Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2026-10-22T00:33:35.483Z"
             },
             {
               "$type": "Document",
@@ -266,8 +265,7 @@
               "RelativeToolTip": "EjemploABM\\Controladores\\Detalle_Controller.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAzwBcAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:29.643Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-22T00:33:29.643Z"
             },
             {
               "$type": "Document",
@@ -325,8 +323,7 @@
               "ToolTip": "C:\\proyectos\\Plataformas_de_desarrollo_2023\\Anirok\\EjemploABM\\Form1.cs [Dise\u00F1o]",
               "RelativeToolTip": "EjemploABM\\Form1.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:29.677Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2026-10-22T00:33:29.677Z"
             },
             {
               "$type": "Document",
@@ -419,8 +416,7 @@
               "RelativeToolTip": "EjemploABM\\Index.cs",
               "ViewState": "AgIAAHAAAAAAAAAAAAAawH0AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:29.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-22T00:33:29.658Z"
             },
             {
               "$type": "Document",
@@ -537,8 +533,7 @@
               "RelativeToolTip": "EjemploABM\\Index.Designer.cs",
               "ViewState": "AgIAACoBAAAAAAAAAAAswDkBAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:29.674Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-22T00:33:29.674Z"
             },
             {
               "$type": "Document",
@@ -573,8 +568,7 @@
               "RelativeToolTip": "EjemploABM\\Form1.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAgwEEAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T00:33:29.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-22T00:33:29.68Z"
             },
             {
               "$type": "Document",

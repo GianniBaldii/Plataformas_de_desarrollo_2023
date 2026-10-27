@@ -349,7 +349,6 @@ C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploA
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.ControlesDeUsuario.Usuarios_UC.resources
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.ControlesDeUsuario.Ventas_UC.resources
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.Form1.resources
-C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.FormSetearUrls.resources
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.FormVentaCantidad.resources
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.FormVenta.resources
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\obj\Debug\EjemploABM.FormEliminarProd.resources

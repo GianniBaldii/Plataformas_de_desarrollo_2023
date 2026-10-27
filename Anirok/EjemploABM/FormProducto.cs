@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Resources.ResXFileRef;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -25,6 +26,8 @@ namespace EjemploABM
         string situacion;
         int id_editar;
         string nombrefoto;
+        string rutaImagenSeleccionada;
+        string imagenAnterior;
 
         public FormProducto()
         {
@@ -40,6 +43,7 @@ namespace EjemploABM
             CargarCategoriasEnComboBoxCrear();
             comboBoxCat.SelectedIndexChanged += ComboBoxCat_SelectedIndexChanged;
             situacion = "creacion";
+            guna2PictureBox1.Image = ImagenProductoService.Cargar(null);
         }
 
         public FormProducto(Producto prod)
@@ -47,7 +51,7 @@ namespace EjemploABM
             InitializeComponent();
 
             id_editar = prod.Id;
-            btn_cargar_img.Hide();
+            btn_cargar_img.Show();
 
             // Asigna los valores del producto a los controles correspondientes
             txt_nombre.Text = prod.Nombre;
@@ -56,7 +60,8 @@ namespace EjemploABM
             txt_codigo.Text = prod.codigo;
             txt_cantidad.Text = prod.Stock.ToString();
             txt_proveedor.Text = prod.Proveedor;
-            nombrefoto = @"\" + prod.Img;
+            nombrefoto = prod.Img;
+            imagenAnterior = prod.Img;
 
             // Selecciona la categoría y subcategoría correspondientes en los ComboBox
             comboBoxTalle.Items.Clear();
@@ -75,9 +80,7 @@ namespace EjemploABM
             // Selecciona el talle correspondiente en el ComboBox
             comboBoxTalle.SelectedItem = prod.Talle;
 
-            string filePath = Program.URLimg + nombrefoto;
-
-            guna2PictureBox1.Image = Image.FromFile(filePath);
+            guna2PictureBox1.Image = ImagenProductoService.Cargar(nombrefoto);
 
             label2.Text = "Editar Producto";
 
@@ -90,7 +93,7 @@ namespace EjemploABM
         {
             OpenFileDialog ofd = new OpenFileDialog();
 
-            ofd.Filter = "*JPG(*.JPG)|*.jpg";
+            ofd.Filter = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -100,9 +103,17 @@ namespace EjemploABM
                     guna2PictureBox1.Image.Dispose();
                 }
 
-                // Cargar la nueva imagen
-                File = Image.FromFile(ofd.FileName);
-                guna2PictureBox1.Image = File;
+                try
+                {
+                    rutaImagenSeleccionada = ofd.FileName;
+                    File = ImagenProductoService.CargarDesdeRuta(rutaImagenSeleccionada);
+                    guna2PictureBox1.Image = File;
+                }
+                catch (Exception ex)
+                {
+                    rutaImagenSeleccionada = null;
+                    MessageBox.Show(ex.Message, "Imagen no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -149,27 +160,21 @@ namespace EjemploABM
                 int cantidad;
                 if (int.TryParse(txt_cantidad.Text, out cantidad))
                 {
+                    if (precio <= 0 || cantidad < 0)
+                    {
+                        MessageBox.Show("El precio debe ser mayor a cero y el stock no puede ser negativo.", "Valores no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    string imagenImportada = null;
+                    bool actualizacionGuardada = false;
                     try
                     {
-                        // Actualizar la información del producto
-                        string nuevoNombreFoto = nombrefoto; // Por defecto, mantiene el nombre existente
-
-                        if (File != null) // Si se selecciona una nueva imagen
+                        string nuevoNombreFoto = nombrefoto;
+                        bool imagenNueva = !string.IsNullOrWhiteSpace(rutaImagenSeleccionada);
+                        if (imagenNueva)
                         {
-                            // Guardar la nueva imagen con un nuevo nombre
-                            nuevoNombreFoto = Producto_Controller.obtenerMaxId() + ".jpg";
-
-                            // Guardar la nueva imagen en el directorio de destino
-                            string filePath = @"C:\Users\Usuario\Documents\GitHub\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\Recursos\img\" + nuevoNombreFoto;
-
-                            // Asegurarse de que el directorio de destino exista
-                            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-                            }
-
-                            // Guardar la nueva imagen en el directorio de destino
-                            File.Save(filePath);
+                            nuevoNombreFoto = ImagenProductoService.Importar(rutaImagenSeleccionada, id_editar);
+                            imagenImportada = nuevoNombreFoto;
                         }
 
                         Producto productoActualizado = new Producto(id_editar, txt_nombre.Text, txt_descripcion.Text, precio, txt_codigo.Text, nuevoNombreFoto, txt_proveedor.Text, subId, catId, talle, cantidad);
@@ -177,16 +182,22 @@ namespace EjemploABM
                         // Intentar actualizar el producto
                         if (Producto_Controller.editarProducto(productoActualizado))
                         {
+                            actualizacionGuardada = true;
+                            if (imagenNueva && !string.Equals(imagenAnterior, nuevoNombreFoto, StringComparison.OrdinalIgnoreCase) && Producto_Controller.ContarProductosConImagen(imagenAnterior) == 0)
+                                ImagenProductoService.Eliminar(imagenAnterior);
                             this.DialogResult = DialogResult.OK;
                             MessageBox.Show("Producto actualizado con éxito.");
                         }
                         else
                         {
+                            if (imagenNueva) ImagenProductoService.Eliminar(nuevoNombreFoto);
                             MessageBox.Show("Error al actualizar el producto.");
                         }
                     }
                     catch (Exception ex)
                     {
+                        if (!actualizacionGuardada && !string.IsNullOrWhiteSpace(imagenImportada))
+                            ImagenProductoService.Eliminar(imagenImportada);
                         MessageBox.Show($"Error al actualizar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -237,38 +248,42 @@ namespace EjemploABM
                 int cantidad;
                 if (int.TryParse(txt_cantidad.Text, out cantidad))
                 {
+                    if (precio <= 0 || cantidad < 0)
+                    {
+                        MessageBox.Show("El precio debe ser mayor a cero y el stock no puede ser negativo.", "Valores no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    string imagenImportada = null;
+                    bool productoCreado = false;
                     try
                     {
-                        // Asignar el nombre de la foto antes de intentar crear el producto
-                        int nombreProdStr = Producto_Controller.obtenerMaxId();
-                        string nombrefoto = (nombreProdStr + 1).ToString() + ".jpg";
+                        if (string.IsNullOrWhiteSpace(rutaImagenSeleccionada))
+                        {
+                            MessageBox.Show("Seleccioná una imagen para el producto.", "Imagen requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        int nuevoProductoId = Producto_Controller.obtenerMaxId() + 1;
+                        string nombrefoto = ImagenProductoService.Importar(rutaImagenSeleccionada, nuevoProductoId);
+                        imagenImportada = nombrefoto;
 
                         // Intentar crear el producto
                         if (Producto_Controller.crearProducto(new Producto(0, txt_nombre.Text, txt_descripcion.Text, precio, txt_codigo.Text, nombrefoto, txt_proveedor.Text, subId, catId, talle, cantidad)))
                         {
+                            productoCreado = true;
                             this.DialogResult = DialogResult.OK;
-
-                            // Guardar la imagen solo si el producto se ha creado con éxito
-                            string filePath = Program.URLimg + nombrefoto;
-
-                            // Asegurarse de que el directorio de destino exista
-                            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-                            {
-                                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-                            }
-
-                            // Guardar la imagen en el directorio de destino
-                            File.Save(filePath);
-
                             MessageBox.Show("Producto y imagen guardados con éxito.");
                         }
                         else
                         {
+                            ImagenProductoService.Eliminar(nombrefoto);
                             MessageBox.Show("Error al crear el producto.");
                         }
                     }
                     catch (Exception ex)
                     {
+                        if (!productoCreado && !string.IsNullOrWhiteSpace(imagenImportada))
+                            ImagenProductoService.Eliminar(imagenImportada);
                         MessageBox.Show($"Error al crear el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }

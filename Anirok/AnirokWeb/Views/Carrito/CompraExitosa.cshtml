@@ -1,4 +1,9 @@
 @model AnirokWeb.Models.ComprobanteViewModel
+
+@if (TempData["WarningMessage"] != null)
+{
+    <div class="alert alert-warning">@TempData["WarningMessage"]</div>
+}
 @{
     ViewBag.Title = "Compra realizada";
 }

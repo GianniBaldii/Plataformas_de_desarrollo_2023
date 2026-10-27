@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 
 namespace EjemploABM
@@ -38,18 +39,7 @@ namespace EjemploABM
             txt_talle.Text= prod.Talle.ToString();
             txt_stock.Text= prod.Stock.ToString();
 
-            if (!string.IsNullOrWhiteSpace(Program.URLimg))
-            {
-                string nombreImagen = prod.Id + ".jpg";
-                string rutaImagen = Path.Combine(Program.URLimg, nombreImagen);
-
-                // La imagen es opcional: los datos del producto se muestran aunque
-                // la carpeta todavía no se haya configurado o el archivo no exista.
-                if (File.Exists(rutaImagen))
-                {
-                    pictureBoxVer.Image = Image.FromFile(rutaImagen);
-                }
-            }
+            pictureBoxVer.Image = ImagenProductoService.Cargar(prod.Img);
 
         }
 

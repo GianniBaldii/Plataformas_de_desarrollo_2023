@@ -34,10 +34,14 @@ Usuarios de prueba:
 - Administrador: `Gianni` / `gianni123`
 - Vendedor: `Victoria` / `vic345`
 
-En el primer ingreso la aplicación avisa que faltan las carpetas de imágenes y PDF. Se configuran desde el botón **Setear URL** usando estas carpetas del proyecto:
+Las imágenes de productos se administran automáticamente en `storage/productos`. Desktop copia allí cada imagen seleccionada y SQL Server guarda únicamente su nombre relativo.
 
-- `Anirok/EjemploABM/Recursos/img`
-- `Anirok/EjemploABM/Recursos/pdf_ventas`
+Los comprobantes se generan automáticamente en `storage/comprobantes/<año>/<mes>/venta-<id>.pdf`. Desktop y Web usan la misma carpeta y toman el precio histórico guardado en cada detalle de venta. Ya no hace falta configurar rutas manualmente.
+
+Opcionalmente, estas variables permiten ubicar el almacenamiento fuera del repositorio:
+
+- `ANIROK_STORAGE_PATH`: carpeta central de imágenes.
+- `ANIROK_COMPROBANTES_PATH`: carpeta central de comprobantes PDF.
 
 Para detener la base sin borrar sus datos:
 

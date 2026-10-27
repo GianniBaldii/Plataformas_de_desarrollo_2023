@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls.WebParts;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.Controladores
 {
@@ -63,40 +64,8 @@ namespace EjemploABM.Controladores
                 {
                     Program.logueado = user;
 
-                    // Consulta para obtener la URL de la imagen del usuario
-                    string imgQuery = "SELECT urlimg FROM dbo.usuario_urls WHERE usuario_id = @userId;";
-                    SqlCommand imgCmd = new SqlCommand(imgQuery, DB_Controller.connection);
-                    imgCmd.Parameters.AddWithValue("@userId", user.Id);
-
-                    SqlDataReader imgReader = imgCmd.ExecuteReader();
-
-                    if (imgReader.Read())
-                    {
-                        Program.URLimg = imgReader.IsDBNull(0) ? null : imgReader.GetString(0);
-                    }
-
-                    imgReader.Close();
-
-                    // Consulta para obtener la URL del PDF del usuario
-                    string pdfQuery = "SELECT urlpdf FROM dbo.usuario_urls WHERE usuario_id = @userId;";
-                    SqlCommand pdfCmd = new SqlCommand(pdfQuery, DB_Controller.connection);
-                    pdfCmd.Parameters.AddWithValue("@userId", user.Id);
-
-                    SqlDataReader pdfReader = pdfCmd.ExecuteReader();
-
-                    if (pdfReader.Read())
-                    {
-                        Program.URLpdf = pdfReader.IsDBNull(0) ? null : pdfReader.GetString(0);
-                    }
-
-                    pdfReader.Close();
+                    Program.URLimg = ImagenProductoService.RutaBase;
                     DB_Controller.connection.Close();
-
-                    // Verifica si alguna de las URLs no está configurada
-                    if (string.IsNullOrEmpty(Program.URLimg) || string.IsNullOrEmpty(Program.URLpdf))
-                    {
-                        MessageBox.Show("Una o ambas URLs no están configuradas. Por favor, configúrelas utilizando el botón 'Setear URL'.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
 
                     return true;
                 }
@@ -353,64 +322,6 @@ public static bool existeContraseña(string contraseña)
             }
         }
 
-        public static bool ActualizarUrls(int usuarioId, string urlImg, string urlPdf)
-        {
-            // Validar URLs
-            if (!IsValidUrl(urlImg) || !IsValidUrl(urlPdf))
-            {
-                throw new ArgumentException("Las URLs ingresadas no son válidas.");
-            }
-
-            string updateQuery = @"
-            IF EXISTS (SELECT 1 FROM dbo.usuario_urls WHERE usuario_id = @userId)
-            BEGIN
-                UPDATE dbo.usuario_urls
-                SET urlimg = @urlImg, urlpdf = @urlPdf
-                WHERE usuario_id = @userId;
-            END
-            ELSE
-            BEGIN
-                INSERT INTO dbo.usuario_urls (urlimg, urlpdf, usuario_id)
-                VALUES (@urlImg, @urlPdf, @userId);
-            END"
-            ;
-
-
-
-            SqlCommand cmd = new SqlCommand(updateQuery, DB_Controller.connection);
-            {
-                    cmd.Parameters.AddWithValue("@userId", usuarioId);
-                    cmd.Parameters.AddWithValue("@urlImg", string.IsNullOrEmpty(urlImg) ? (object)DBNull.Value : urlImg);
-                    cmd.Parameters.AddWithValue("@urlPdf", string.IsNullOrEmpty(urlPdf) ? (object)DBNull.Value : urlPdf);
-
-                    try
-                    {
-                    DB_Controller.connection.Open();
-                        cmd.ExecuteNonQuery();
-                        return true;
-                    
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Error al guardar las URLs: " + ex.Message);
-                    }
-                }
-        }
-
-
-
-        // Función para validar si una URL es válida
-        private static bool IsValidUrl(string url)
-    {
-        if (string.IsNullOrWhiteSpace(url))
-        {
-            return false;
-        }
-
-       
-        return true;
     }
-}
-
 }
 

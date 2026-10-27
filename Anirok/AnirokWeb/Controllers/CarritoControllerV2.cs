@@ -74,8 +74,17 @@ namespace AnirokWeb.Controllers
             try
             {
                 var service = new CompraService(_context.Database.Connection.ConnectionString);
-                var ventaId = service.CrearVenta(Convert.ToInt32(Session["UsuarioId"]), ObtenerCarrito(), model.MetodoPago);
+                var usuarioId = Convert.ToInt32(Session["UsuarioId"]);
+                var ventaId = service.CrearVenta(usuarioId, ObtenerCarrito(), model.MetodoPago);
                 Session.Remove(CarritoKey);
+                try
+                {
+                    service.GuardarPdf(service.ObtenerComprobante(ventaId, usuarioId));
+                }
+                catch (Exception)
+                {
+                    TempData["WarningMessage"] = "La compra se registró correctamente, pero el comprobante deberá regenerarse al descargarlo.";
+                }
                 return RedirectToAction("CompraExitosa", new { id = ventaId });
             }
             catch (InvalidOperationException ex)
@@ -99,7 +108,7 @@ namespace AnirokWeb.Controllers
             var service = new CompraService(_context.Database.Connection.ConnectionString);
             var comprobante = service.ObtenerComprobante(id, Convert.ToInt32(Session["UsuarioId"]));
             if (comprobante == null) return HttpNotFound();
-            return File(service.CrearPdf(comprobante), "application/pdf", "Anirok-venta-" + id + ".pdf");
+            return File(service.ObtenerOCrearPdf(comprobante), "application/pdf", "Anirok-venta-" + id + ".pdf");
         }
 
         private List<CarritoItem> ObtenerCarrito()

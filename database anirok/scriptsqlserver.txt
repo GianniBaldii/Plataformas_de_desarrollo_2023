@@ -83,17 +83,9 @@ CREATE TABLE detalle_venta (
   cantidad INT,
   venta_id INT,
   producto_id INT,
+  precio_unitario REAL NOT NULL,
   FOREIGN KEY (venta_id) REFERENCES venta(id),
   FOREIGN KEY (producto_id) REFERENCES producto(id)
-);
-
--- Rutas configurables por usuario para imágenes y comprobantes PDF.
-CREATE TABLE usuario_urls (
-  id INT IDENTITY(1,1) PRIMARY KEY,
-  urlimg NVARCHAR(MAX) NULL,
-  urlpdf NVARCHAR(MAX) NULL,
-  usuario_id INT NOT NULL UNIQUE,
-  FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
 
 INSERT INTO dbo.categoria (id, nombre, esta_activo) VALUES (1, 'Mochilas', 'Activa');
@@ -190,6 +182,3 @@ INSERT INTO dbo.producto (id, nombre, descripción, precio, codigo, img, prooved
 INSERT INTO dbo.usuario (id, nombre, apellido, mail, telefono, direccion, dni, contraseña, rol) VALUES (1, 'Gianni', 'Baldizzone', 'gianni@gmail.com', '1145678907', 'Acoyte 420', '44891361', 'gianni123', 1);
 INSERT INTO usuario (id, nombre, apellido, mail, telefono, direccion, dni, contraseña, rol) VALUES (2, 'Victoria', 'Troiano', 'vic@gmail.com', '1123456789', 'Billinghurst 234', '44567432', 'vic345', 2);
 
-INSERT INTO dbo.usuario_urls (urlimg, urlpdf, usuario_id) VALUES
-(NULL, NULL, 1),
-(NULL, NULL, 2);

@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using EjemploABM.Controladores;
 using EjemploABM.Modelo;
-
-using iTextSharp.text;
-using System.IO;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
-using Microsoft.Extensions.Logging;
+using EjemploABM.Servicios;
 
 
 namespace EjemploABM
@@ -439,13 +433,15 @@ namespace EjemploABM
                 };
 
                 Venta_Controller.CrearVenta(nuevaVenta);
+                int ventaId = Venta_Controller.obtenerMaxId();
                 foreach (Producto producto in productosEnCarrito)
                 {
                     DetalleVenta detalleVenta = new DetalleVenta
                     {
                         Cantidad = producto.CantidadSeleccionada,
-                        VentaId = Venta_Controller.obtenerMaxId(),
-                        ProductoId = producto.Id
+                        VentaId = ventaId,
+                        ProductoId = producto.Id,
+                        PrecioUnitario = producto.Precio
                     };
 
                     Detalle_Controller.CrearDetalleVenta(detalleVenta);
@@ -455,7 +451,7 @@ namespace EjemploABM
                 }
                 //falla porque falta el campo ID en la BD
 
-                GenerarPDFCliente(Cliente_Controller.buscarPorDni(dni), productosEnCarrito);
+                ComprobantePdfService.GenerarDesdeVenta(ventaId);
                 MessageBox.Show("La venta se ha generado y el PDF se ha creado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
@@ -468,6 +464,7 @@ namespace EjemploABM
 
 
 
+#if false // Implementación histórica reemplazada por ComprobantePdfService.
         private static void GenerarPDFCliente(Cliente cliente, List<Producto> productosEnCarrito)
         {
             try
@@ -584,6 +581,7 @@ namespace EjemploABM
             }
         }
 
+#endif
         private void btn_noeliminar_Click_1(object sender, EventArgs e)
         {
             try

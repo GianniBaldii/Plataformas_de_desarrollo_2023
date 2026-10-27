@@ -232,6 +232,25 @@ namespace EjemploABM.Controladores
 
         }
 
+        public static int ContarProductosConImagen(string nombreImagen)
+        {
+            const string query = "SELECT COUNT(*) FROM dbo.producto WHERE img = @img;";
+            using (var cmd = new SqlCommand(query, DB_Controller.connection))
+            {
+                cmd.Parameters.AddWithValue("@img", nombreImagen);
+                try
+                {
+                    DB_Controller.connection.Open();
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                finally
+                {
+                    if (DB_Controller.connection.State != System.Data.ConnectionState.Closed)
+                        DB_Controller.connection.Close();
+                }
+            }
+        }
+
 
         public static bool CambiarCategoriaDeProductos(int idAnteriorCategoria, int idCategoriaPosterior)
         {

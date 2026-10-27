@@ -10,12 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
     public partial class FormEliminarProd : Form
     {
         int id_eliminar;
+        string imagenEliminar;
 
 
 
@@ -32,22 +34,9 @@ namespace EjemploABM
         {
             InitializeComponent();
             id_eliminar = prod_eliminar.Id;
+            imagenEliminar = prod_eliminar.Img;
             txt_id_prod.Text = id_eliminar.ToString();
-            string nombreImagen = (prod_eliminar.Id.ToString() + ".jpg");
-
-            // Construir la ruta completa de la imagen
-            string rutaImagen = Path.Combine(Program.URLimg, nombreImagen);
-
-            // Verificar si el archivo de la imagen existe antes de asignarlo
-            if (File.Exists(rutaImagen))
-            {
-                // Asignar la imagen al PictureBox
-                pictureBoxEliminar.Image = Image.FromFile(rutaImagen);
-            }
-            else
-            {
-                MessageBox.Show("La imagen no se encuentra en la ruta especificada.");
-            }
+            pictureBoxEliminar.Image = ImagenProductoService.Cargar(imagenEliminar);
         }
 
         private void btn_sieliminar_Click(object sender, EventArgs e)
@@ -72,25 +61,13 @@ namespace EjemploABM
             // Realiza la eliminación de la categoría aquí...
             if (Producto_Controller.eliminarProducto(id_eliminar))
             {
-                // Elimina el archivo correspondiente al producto
-                string rutaArchivo = ObtenerRutaArchivo(id_eliminar);
-                if (File.Exists(rutaArchivo))
-                {
-                    File.Delete(rutaArchivo);
-                }
+                if (Producto_Controller.ContarProductosConImagen(imagenEliminar) == 0)
+                    ImagenProductoService.Eliminar(imagenEliminar);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
 
-        private string ObtenerRutaArchivo(int id)
-        {
-            // Suponiendo que el archivo tiene la extensión .jpg y está en una carpeta específica
-            string nombreArchivo = $"{id}.jpg";
-            string rutaCarpeta = Program.URLimg;
-            string rutaCompleta = Path.Combine(rutaCarpeta, nombreArchivo);
-            return rutaCompleta;
-        }
     }
 }

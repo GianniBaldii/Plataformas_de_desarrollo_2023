@@ -311,7 +311,7 @@ namespace EjemploABM
             this.buttonurls.Size = new System.Drawing.Size(180, 112);
             this.buttonurls.TabIndex = 26;
             this.buttonurls.Text = "SETEO URL";
-            this.buttonurls.Click += new System.EventHandler(this.buttonurls_Click);
+            this.buttonurls.Visible = false;
             // 
             // Index
             // 

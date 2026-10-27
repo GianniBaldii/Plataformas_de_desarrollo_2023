@@ -66,12 +66,13 @@ namespace AnirokWeb.Services
 
                         foreach (var producto in productos)
                         {
-                            using (var command = new SqlCommand("INSERT INTO detalle_venta (id, cantidad, venta_id, producto_id) VALUES (@id, @cantidad, @venta, @producto); UPDATE producto SET stock = stock - @cantidad WHERE id = @producto", connection, transaction))
+                            using (var command = new SqlCommand("INSERT INTO detalle_venta (id, cantidad, venta_id, producto_id, precio_unitario) VALUES (@id, @cantidad, @venta, @producto, @precio); UPDATE producto SET stock = stock - @cantidad WHERE id = @producto", connection, transaction))
                             {
                                 command.Parameters.AddWithValue("@id", detalleId++);
                                 command.Parameters.AddWithValue("@cantidad", producto.Item2);
                                 command.Parameters.AddWithValue("@venta", ventaId);
                                 command.Parameters.AddWithValue("@producto", producto.Item1);
+                                command.Parameters.AddWithValue("@precio", producto.Item3);
                                 command.ExecuteNonQuery();
                             }
                         }
@@ -104,7 +105,7 @@ namespace AnirokWeb.Services
                         comprobante = new ComprobanteViewModel { VentaId = reader.GetInt32(0), Fecha = reader.GetDateTime(1), Cliente = reader.GetString(2), MetodoPago = reader.GetString(3), Total = Convert.ToDouble(reader.GetValue(4)) };
                     }
                 }
-                using (var command = new SqlCommand("SELECT p.nombre, d.cantidad, p.precio FROM detalle_venta d INNER JOIN producto p ON p.id = d.producto_id WHERE d.venta_id = @venta ORDER BY d.id", connection))
+                using (var command = new SqlCommand("SELECT p.nombre, d.cantidad, d.precio_unitario FROM detalle_venta d INNER JOIN producto p ON p.id = d.producto_id WHERE d.venta_id = @venta ORDER BY d.id", connection))
                 {
                     command.Parameters.AddWithValue("@venta", ventaId);
                     using (var reader = command.ExecuteReader())
@@ -135,6 +136,43 @@ namespace AnirokWeb.Services
                 document.Close();
                 return output.ToArray();
             }
+        }
+
+        public string GuardarPdf(ComprobanteViewModel comprobante)
+        {
+            if (comprobante == null) throw new ArgumentNullException("comprobante");
+            string carpeta = Path.Combine(ResolverRutaComprobantes(), comprobante.Fecha.ToString("yyyy"), comprobante.Fecha.ToString("MM"));
+            Directory.CreateDirectory(carpeta);
+            string ruta = Path.Combine(carpeta, "venta-" + comprobante.VentaId + ".pdf");
+            File.WriteAllBytes(ruta, CrearPdf(comprobante));
+            return ruta;
+        }
+
+        public byte[] ObtenerOCrearPdf(ComprobanteViewModel comprobante)
+        {
+            string carpeta = Path.Combine(ResolverRutaComprobantes(), comprobante.Fecha.ToString("yyyy"), comprobante.Fecha.ToString("MM"));
+            string ruta = Path.Combine(carpeta, "venta-" + comprobante.VentaId + ".pdf");
+            if (!File.Exists(ruta)) GuardarPdf(comprobante);
+            return File.ReadAllBytes(ruta);
+        }
+
+        private static string ResolverRutaComprobantes()
+        {
+            string configurada = Environment.GetEnvironmentVariable("ANIROK_COMPROBANTES_PATH");
+            if (!string.IsNullOrWhiteSpace(configurada)) return Path.GetFullPath(configurada);
+
+            foreach (string inicio in new[] { AppDomain.CurrentDomain.BaseDirectory, Environment.CurrentDirectory })
+            {
+                var carpeta = new DirectoryInfo(inicio);
+                while (carpeta != null)
+                {
+                    if (File.Exists(Path.Combine(carpeta.FullName, "docker-compose.yml")))
+                        return Path.Combine(carpeta.FullName, "storage", "comprobantes");
+                    carpeta = carpeta.Parent;
+                }
+            }
+
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Anirok", "storage", "comprobantes");
         }
 
         private static Dictionary<string, string> ObtenerUsuario(int id, SqlConnection connection, SqlTransaction transaction)

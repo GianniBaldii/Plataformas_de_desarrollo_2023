@@ -22,15 +22,27 @@ namespace AnirokWeb.Controllers
         {
             var producto = _context.Productos.FirstOrDefault(p => p.Id == productoId);
             if (producto == null) return HttpNotFound();
+            if (producto.Stock <= 0)
+            {
+                TempData["ErrorMessage"] = "El producto seleccionado no tiene stock.";
+                return RedirectToAction("Index");
+            }
             var carrito = ObtenerCarrito();
             var item = carrito.FirstOrDefault(x => x.ProductoId == productoId);
+            var cantidadSolicitada = Math.Max(1, cantidad);
+            var cantidadActual = item == null ? 0 : item.Cantidad;
+            if (cantidadActual + cantidadSolicitada > producto.Stock)
+            {
+                TempData["ErrorMessage"] = "Sólo quedan " + producto.Stock + " unidades de " + producto.Nombre + ".";
+                return RedirectToAction("Index");
+            }
             if (item == null)
             {
-                carrito.Add(new CarritoItem { ProductoId = productoId, Cantidad = Math.Max(1, cantidad) });
+                carrito.Add(new CarritoItem { ProductoId = productoId, Cantidad = cantidadSolicitada });
             }
             else
             {
-                item.Cantidad += Math.Max(1, cantidad);
+                item.Cantidad += cantidadSolicitada;
             }
             Session[CarritoKey] = carrito;
             TempData["SuccessMessage"] = "Producto añadido al carrito.";
@@ -41,6 +53,13 @@ namespace AnirokWeb.Controllers
         public ActionResult Actualizar(int productoId, int cantidad)
         {
             var carrito = ObtenerCarrito();
+            var producto = _context.Productos.FirstOrDefault(p => p.Id == productoId);
+            if (producto == null) return HttpNotFound();
+            if (cantidad > producto.Stock)
+            {
+                TempData["ErrorMessage"] = "Sólo quedan " + producto.Stock + " unidades de " + producto.Nombre + ".";
+                return RedirectToAction("Index");
+            }
             carrito.RemoveAll(x => x.ProductoId == productoId);
             if (cantidad > 0) carrito.Add(new CarritoItem { ProductoId = productoId, Cantidad = Math.Min(cantidad, 99) });
             Session[CarritoKey] = carrito;

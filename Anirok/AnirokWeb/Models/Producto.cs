@@ -14,13 +14,19 @@ namespace AnirokWeb.Models
         [Column("descripción")]
         public string Descripcion { get; set; }
         public double Precio { get; set; }
+        public string Codigo { get; set; }
         public string Img { get; set; }
+        [Column("proovedor")]
+        public string Proveedor { get; set; }
+        public string Talle { get; set; }
+        public int Stock { get; set; }
 
         [Column("categoria_id"), ForeignKey("Categoria")]
         public int CategoriaId { get; set; }  // Clave foránea a la tabla de Categoría
 
         // Virtual para uso de lazy loading
         public virtual Categoria Categoria { get; set; } 
+        public virtual ICollection<DetalleVenta> DetallesVenta { get; set; }
     }
 
 }

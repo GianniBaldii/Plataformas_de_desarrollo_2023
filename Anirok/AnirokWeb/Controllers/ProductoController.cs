@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;  // Para usar Include
+using AnirokWeb.Services;
 
 namespace AnirokWeb.Controllers
 {
@@ -26,17 +27,10 @@ namespace AnirokWeb.Controllers
 
             // Consultamos los productos directamente desde la base de datos usando Entity Framework
             var productosCategoria = _context.Productos
+                                    .Include(p => p.Categoria)
                                     .Where(p => p.CategoriaId == categoria.Id)
-                                    .ToList()
-                                    .Select(p => new Producto
-                                    {
-                                        Id = p.Id,
-                                        Nombre = p.Nombre,
-                                        Descripcion = p.Descripcion,
-                                        Img = p.Img,
-                                        Precio = p.Precio, 
-                                        CategoriaId = p.CategoriaId
-                                    }).ToList();
+                                    .OrderBy(p => p.Nombre)
+                                    .ToList();
 
 
             // Imprimir en la consola los productos para verificar
@@ -89,7 +83,7 @@ namespace AnirokWeb.Controllers
         public ActionResult Ver(int id)
         {
             // Obtener el producto de la base de datos usando su ID
-            var producto = _context.Productos.FirstOrDefault(p => p.Id == id);
+            var producto = _context.Productos.Include(p => p.Categoria).FirstOrDefault(p => p.Id == id);
 
             if (producto == null)
             {
@@ -104,11 +98,23 @@ namespace AnirokWeb.Controllers
         {
             var texto = (buscar ?? "").Trim();
             var productos = _context.Productos
+                .Include(p => p.Categoria)
                 .Where(p => texto == "" || p.Nombre.Contains(texto) || p.Descripcion.Contains(texto))
                 .OrderBy(p => p.Nombre)
                 .ToList();
             ViewBag.Categoria = texto == "" ? "Todos los productos" : "Resultados para: " + texto;
             return View("Categoria", productos);
+        }
+
+        [OutputCache(Duration = 300, VaryByParam = "nombre")]
+        public ActionResult Imagen(string nombre)
+        {
+            string ruta;
+            string tipoContenido;
+            if (ProductoImagenService.IntentarObtener(nombre, out ruta, out tipoContenido))
+                return File(ruta, tipoContenido);
+
+            return File(ProductoImagenService.CrearPlaceholder(), "image/svg+xml");
         }
 
         protected override void Dispose(bool disposing)

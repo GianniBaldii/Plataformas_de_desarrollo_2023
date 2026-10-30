@@ -37,7 +37,7 @@
                         {
                             <tr>
                                 <td style="width: 20%;">
-                                    <img src="@Url.Content("~/Content/Images/" + producto.Img)" alt="@producto.Nombre" class="img-fluid" />
+                                    <img src="@Url.Action("Imagen", "Producto", new { nombre = producto.Img })" alt="@producto.Nombre" class="img-fluid" />
                                 </td>
                                 <td class="align-middle">
                                     <p class="prod-title m-2 fw-bold">@producto.Nombre</p>

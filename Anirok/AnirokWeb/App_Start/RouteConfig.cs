@@ -13,6 +13,12 @@ namespace AnirokWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "ImagenProducto",
+                url: "Producto/Imagen",
+                defaults: new { controller = "Producto", action = "Imagen" }
+            );
+
             // Nueva ruta para manejar las categorías de productos
             routes.MapRoute(
                 name: "Categoria",

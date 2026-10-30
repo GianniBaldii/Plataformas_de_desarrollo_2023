@@ -44,7 +44,6 @@ namespace EjemploABM
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.buttonurls = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
@@ -293,26 +292,6 @@ namespace EjemploABM
             this.guna2CirclePictureBox1.TabIndex = 25;
             this.guna2CirclePictureBox1.TabStop = false;
             // 
-            // buttonurls
-            // 
-            this.buttonurls.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.buttonurls.BorderRadius = 15;
-            this.buttonurls.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.buttonurls.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.buttonurls.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.buttonurls.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.buttonurls.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.buttonurls.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.buttonurls.ForeColor = System.Drawing.Color.White;
-            this.buttonurls.ImageSize = new System.Drawing.Size(40, 40);
-            this.buttonurls.Location = new System.Drawing.Point(395, 46);
-            this.buttonurls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonurls.Name = "buttonurls";
-            this.buttonurls.Size = new System.Drawing.Size(180, 112);
-            this.buttonurls.TabIndex = 26;
-            this.buttonurls.Text = "SETEO URL";
-            this.buttonurls.Visible = false;
-            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -320,7 +299,6 @@ namespace EjemploABM
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1636, 864);
-            this.Controls.Add(this.buttonurls);
             this.Controls.Add(this.guna2CirclePictureBox1);
             this.Controls.Add(this.guna2PictureBox2);
             this.Controls.Add(this.guna2PictureBox1);
@@ -367,6 +345,5 @@ namespace EjemploABM
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2Button buttonurls;
     }
 }

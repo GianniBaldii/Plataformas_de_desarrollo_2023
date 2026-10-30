@@ -63,21 +63,19 @@ namespace EjemploABM.Controladores
                 if (user != null)
                 {
                     Program.logueado = user;
-
                     Program.URLimg = ImagenProductoService.RutaBase;
-                    DB_Controller.connection.Close();
-
                     return true;
                 }
-                else
-                {
-                    DB_Controller.connection.Close();
-                    return false;
-                }
+                return false;
             }
             catch (Exception ex)
             {
                 throw new Exception("Hay un error en la query: " + ex.Message);
+            }
+            finally
+            {
+                if (DB_Controller.connection != null && DB_Controller.connection.State != System.Data.ConnectionState.Closed)
+                    DB_Controller.connection.Close();
             }
         }
 
@@ -144,7 +142,7 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    MaxId = reader.GetInt32(0);
+                    if (!reader.IsDBNull(0)) MaxId = reader.GetInt32(0);
                 }
 
                 reader.Close();

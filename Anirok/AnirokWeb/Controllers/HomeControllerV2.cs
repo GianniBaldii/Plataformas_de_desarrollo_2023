@@ -1,6 +1,7 @@
 using AnirokWeb.Models;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AnirokWeb.Controllers
 {
@@ -10,7 +11,13 @@ namespace AnirokWeb.Controllers
 
         public ActionResult Index()
         {
-            return View(_context.Productos.OrderBy(p => p.Id).Take(8).ToList());
+            var productos = _context.Productos
+                .Include(p => p.Categoria)
+                .Where(p => p.Stock > 0)
+                .OrderBy(p => p.Id)
+                .Take(8)
+                .ToList();
+            return View(productos);
         }
 
         public ActionResult About()

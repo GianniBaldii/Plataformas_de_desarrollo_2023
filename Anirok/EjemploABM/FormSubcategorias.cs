@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
 {
@@ -112,7 +113,7 @@ namespace EjemploABM.ControlesDeUsuario
 
         private void crear()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || combo_tipo.SelectedItem == null || ComboBoxCat.SelectedItem == null || ComboBoxCat.SelectedItem == "")
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione una categoria antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -129,24 +130,17 @@ namespace EjemploABM.ControlesDeUsuario
                 tipo = "Desactivada";
             }
 
-            int catId = (int)ComboBoxCat.SelectedValue;
-            if (catId == null || catId==0)
-            {
-                MessageBox.Show("ID categoria: " + catId, "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            }
+            int catId;
+            if (!int.TryParse(Convert.ToString(ComboBoxCat.SelectedValue), out catId) || catId <= 0) return;
             
             Subcategoria sub = new Subcategoria(0, txt_nombre.Text,catId ,tipo.ToString());
 
-            if (Subcategoria_Controller.crearSubcategoria(sub))
-            {
-                this.DialogResult = DialogResult.OK;
-            }
+            EjecutarOperacion(() => Subcategoria_Controller.crearSubcategoria(sub), "crear la subcategoría");
         }
 
         private void editar()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || combo_tipo.SelectedItem == null || ComboBoxCat.SelectedItem == null)
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione una categoría antes de editar la subcategoría.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -163,7 +157,12 @@ namespace EjemploABM.ControlesDeUsuario
             }
 
             // Obtén el ID de la categoría seleccionada del ComboBoxCat
-            int catId = (int)ComboBoxCat.SelectedValue;
+            int catId;
+            if (!int.TryParse(Convert.ToString(ComboBoxCat.SelectedValue), out catId) || catId <= 0)
+            {
+                MessageBox.Show("La categoría seleccionada no es válida.", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             // Crea una instancia de Subcategoria con el ID correcto y las propiedades modificadas
             Subcategoria subcategoria = new Subcategoria
@@ -175,9 +174,34 @@ namespace EjemploABM.ControlesDeUsuario
             };
 
             // Llama al controlador para editar la subcategoría
-            if (Subcategoria_Controller.editarSubcategoria(subcategoria))
+            EjecutarOperacion(() => Subcategoria_Controller.editarSubcategoria(subcategoria), "editar la subcategoría");
+        }
+
+        private bool ValidarCampos()
+        {
+            if (!ValidacionEntrada.Nombre(txt_nombre.Text) || txt_nombre.Text.Trim().Length > 80)
             {
-                this.DialogResult = DialogResult.OK;
+                MessageBox.Show("El nombre debe tener entre 2 y 80 caracteres.", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (combo_tipo.SelectedItem == null || ComboBoxCat.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccioná estado y categoría.", "Datos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private void EjecutarOperacion(Func<bool> operacion, string accion)
+        {
+            try
+            {
+                if (operacion()) DialogResult = DialogResult.OK;
+                else MessageBox.Show("No se pudo " + accion + ".", "Operación no realizada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo " + accion + ":\n" + ValidacionEntrada.LimpiarError(ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

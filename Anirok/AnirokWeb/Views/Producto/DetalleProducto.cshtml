@@ -1,65 +1,48 @@
 ﻿@model AnirokWeb.Models.Producto
 
+@using System.Globalization
 @{
-    ViewBag.Title = ViewBag.Title ?? "Detalle del Producto";  // Si no hay título, usar un valor predeterminado
+    ViewBag.Title = ViewBag.Title ?? "Detalle del producto";
+    var cultura = CultureInfo.GetCultureInfo("es-AR");
 }
 
+<main class="product-detail">
+    <nav class="product-breadcrumb" aria-label="Navegación">
+        <a href="@Url.Action("Index", "Home")">Inicio</a>
+        <span>/</span>
+        <span>@(Model.Categoria == null ? "Productos" : Model.Categoria.Nombre)</span>
+    </nav>
 
-<style>
-    .column-img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%; /* Ajusta la altura del contenedor */
-    }
+    <section class="product-detail__panel" aria-labelledby="producto-titulo">
+        <div class="product-detail__media">
+            <img src="@Url.Action("Imagen", "Producto", new { nombre = Model.Img })" alt="@Model.Nombre" />
+        </div>
 
-        .column-img img {
-            width: 80%; /* Ajusta el ancho de la imagen */
-            height: 80%; /* Ajusta la altura de la imagen */
-            object-fit: contain; /* Centra y mantiene la proporción */
-        }
-</style>
+        <div class="product-detail__content">
+            <span class="product-category">@(Model.Categoria == null ? "Producto" : Model.Categoria.Nombre)</span>
+            <h1 id="producto-titulo">@Model.Nombre</h1>
+            <p class="product-detail__price">@Model.Precio.ToString("C0", cultura)</p>
+            <p class="product-detail__description">@Model.Descripcion</p>
 
-<main>
-    <section class="mb-4" aria-labelledby="aspnetTitle">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="column-img">
-                    <img src="@Url.Content("~/Content/Images/" + Model.Img)" alt="@Model.Nombre">
+            <dl class="product-facts">
+                <div><dt>Código</dt><dd>@(string.IsNullOrWhiteSpace(Model.Codigo) ? "Sin especificar" : Model.Codigo)</dd></div>
+                <div><dt>Proveedor</dt><dd>@(string.IsNullOrWhiteSpace(Model.Proveedor) ? "Sin especificar" : Model.Proveedor)</dd></div>
+                <div><dt>Talle</dt><dd>@(string.IsNullOrWhiteSpace(Model.Talle) ? "No aplica" : Model.Talle)</dd></div>
+                <div><dt>Disponibilidad</dt><dd>@(Model.Stock > 0 ? Model.Stock + " unidades" : "Sin stock")</dd></div>
+            </dl>
 
-
-
-
-
+            <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")" class="product-detail__purchase">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="productoId" value="@Model.Id" />
+                <div class="quantity-field">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" name="cantidad" inputmode="numeric" min="1" max="@Math.Max(Model.Stock, 1)" value="1" @(Model.Stock <= 0 ? "disabled" : "") />
                 </div>
-            </div>
-
-            <div class="col-md-6 mb-3 d-flex justify-content-center align-items-center">
-                <div class="container d-flex flex-column">
-
-                    <h1 class="card-title mb-3">@Model.Nombre</h1>
-
-                    <h3 class="card-text mb-3">$@Model.Precio</h3>
-
-                    <a class="card-text mb-3">Ver medios de pago</a>
-
-                    <div class="d-flex justify-content-between">
-
-                        <!-- Formulario para añadir al carrito -->
-                        <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="productoId" value="@Model.Id" />
-                            <label for="cantidad">Cantidad:</label>
-                            <input class="mb-4" type="number" id="cantidad" name="cantidad" inputmode="numeric" min="1" value="1">
-                            <button type="submit"  class="btn btn-secondary d-flex justify-content-center align-items-center p-4">
-                                <i class="fa-solid fa-cart-plus fa-xl"></i>
-                            </button>
-                        </form>
-                        
-                    </div>
-
-                </div>
-            </div>
+                <button type="submit" class="product-detail__button" @(Model.Stock <= 0 ? "disabled" : "")>
+                    <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+                    @(Model.Stock > 0 ? "Agregar al carrito" : "Producto sin stock")
+                </button>
+            </form>
         </div>
     </section>
 </main>

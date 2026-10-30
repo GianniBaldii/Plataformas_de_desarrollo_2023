@@ -32,6 +32,7 @@ namespace EjemploABM
         public FormProducto()
         {
             InitializeComponent();
+            PrepararPresentacion();
 
             comboBoxTalle.Items.Clear();
 
@@ -49,6 +50,7 @@ namespace EjemploABM
         public FormProducto(Producto prod)
         {
             InitializeComponent();
+            PrepararPresentacion();
 
             id_editar = prod.Id;
             btn_cargar_img.Show();
@@ -85,6 +87,17 @@ namespace EjemploABM
             label2.Text = "Editar Producto";
 
             situacion = "edicion";
+        }
+
+        private void PrepararPresentacion()
+        {
+            EstiloAplicacion.Aplicar(this);
+            EstiloAplicacion.BotonPrimario(btn_confirmar);
+            EstiloAplicacion.BotonSecundario(btn_cargar_img);
+            Text = "Anirok - Producto";
+            AcceptButton = btn_confirmar;
+            btn_confirmar.Text = "GUARDAR";
+            guna2PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         // SOBRECARGAR EL CONSTRUCTOR PARA INICIAR EL FORM CON LA INFO CARGADA, PARA EDITAR
@@ -126,15 +139,8 @@ namespace EjemploABM
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txt_nombre.Text) ||
-                string.IsNullOrWhiteSpace(txt_descripcion.Text) ||
-                string.IsNullOrWhiteSpace(txt_precio.Text) ||
-                string.IsNullOrWhiteSpace(txt_codigo.Text) ||
-                string.IsNullOrWhiteSpace(txt_cantidad.Text) ||
-                string.IsNullOrWhiteSpace(txt_proveedor.Text) ||
-                comboBoxTalle.SelectedItem == null)
+            if (!ValidarCamposProducto())
             {
-                MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de editar el producto.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -154,17 +160,13 @@ namespace EjemploABM
                 return;
             }
 
-            float precio;
-            if (float.TryParse(txt_precio.Text, out precio))
+            decimal precioDecimal;
+            if (ValidacionEntrada.DecimalPositivo(txt_precio.Text, out precioDecimal) && precioDecimal <= 1000000000m)
             {
+                float precio = (float)precioDecimal;
                 int cantidad;
-                if (int.TryParse(txt_cantidad.Text, out cantidad))
+                if (ValidacionEntrada.EnteroNoNegativo(txt_cantidad.Text, out cantidad))
                 {
-                    if (precio <= 0 || cantidad < 0)
-                    {
-                        MessageBox.Show("El precio debe ser mayor a cero y el stock no puede ser negativo.", "Valores no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
                     string imagenImportada = null;
                     bool actualizacionGuardada = false;
                     try
@@ -201,28 +203,13 @@ namespace EjemploABM
                         MessageBox.Show($"Error al actualizar el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("El valor de la cantidad no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("El valor del precio no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void crear()
         {
-            if (string.IsNullOrWhiteSpace(txt_nombre.Text) ||
-                string.IsNullOrWhiteSpace(txt_descripcion.Text) ||
-                string.IsNullOrWhiteSpace(txt_precio.Text) ||
-                string.IsNullOrWhiteSpace(txt_codigo.Text) ||
-                string.IsNullOrWhiteSpace(txt_cantidad.Text) ||
-                string.IsNullOrWhiteSpace(txt_proveedor.Text) ||
-                comboBoxTalle.SelectedItem == null)
+            if (!ValidarCamposProducto())
             {
-                MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -242,17 +229,13 @@ namespace EjemploABM
                 return;
             }
 
-            float precio;
-            if (float.TryParse(txt_precio.Text, out precio))
+            decimal precioDecimal;
+            if (ValidacionEntrada.DecimalPositivo(txt_precio.Text, out precioDecimal) && precioDecimal <= 1000000000m)
             {
+                float precio = (float)precioDecimal;
                 int cantidad;
-                if (int.TryParse(txt_cantidad.Text, out cantidad))
+                if (ValidacionEntrada.EnteroNoNegativo(txt_cantidad.Text, out cantidad))
                 {
-                    if (precio <= 0 || cantidad < 0)
-                    {
-                        MessageBox.Show("El precio debe ser mayor a cero y el stock no puede ser negativo.", "Valores no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
                     string imagenImportada = null;
                     bool productoCreado = false;
                     try
@@ -287,15 +270,34 @@ namespace EjemploABM
                         MessageBox.Show($"Error al crear el producto: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("El valor de la cantidad no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
-            else
-            {
-                MessageBox.Show("El valor del precio no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        }
+
+        private bool ValidarCamposProducto()
+        {
+            if (!ValidacionEntrada.Nombre(txt_nombre.Text) || txt_nombre.Text.Trim().Length > 100)
+                return MostrarValidacion("El nombre debe tener entre 2 y 100 caracteres.");
+            if (!ValidacionEntrada.Requerido(txt_descripcion.Text) || txt_descripcion.Text.Trim().Length > 500)
+                return MostrarValidacion("La descripción es obligatoria y no puede superar 500 caracteres.");
+            decimal precio;
+            if (!ValidacionEntrada.DecimalPositivo(txt_precio.Text, out precio) || precio > 1000000000m)
+                return MostrarValidacion("Ingresá un precio mayor a cero.");
+            if (!ValidacionEntrada.Requerido(txt_codigo.Text) || txt_codigo.Text.Trim().Length > 50)
+                return MostrarValidacion("Ingresá un código de producto válido.");
+            int stock;
+            if (!ValidacionEntrada.EnteroNoNegativo(txt_cantidad.Text, out stock))
+                return MostrarValidacion("El stock debe ser un número entero igual o mayor a cero.");
+            if (!ValidacionEntrada.Requerido(txt_proveedor.Text) || txt_proveedor.Text.Trim().Length > 100)
+                return MostrarValidacion("Ingresá un proveedor válido.");
+            if (comboBoxCat.SelectedItem == null || comboBoxSub.SelectedItem == null || comboBoxTalle.SelectedItem == null)
+                return MostrarValidacion("Seleccioná categoría, subcategoría y talle.");
+            return true;
+        }
+
+        private bool MostrarValidacion(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return false;
         }
 
         private void MostrarDetallesProducto(Producto producto)

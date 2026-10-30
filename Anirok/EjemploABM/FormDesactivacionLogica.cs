@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -31,18 +32,22 @@ namespace EjemploABM
 
         private void btn_confirmar_Click(object sender, EventArgs e)
         {
-            Categoria_Controller.DesactivarCategoria(id_editar);
-            int catId = (int)ComboBoxCat.SelectedValue;
-            MessageBox.Show("El valor utilizados son: "+ catId + id_editar);
-
             try
             {
-                Producto_Controller.CambiarCategoriaDeProductos(id_editar, catId);
+                int catId;
+                if (!int.TryParse(Convert.ToString(ComboBoxCat.SelectedValue), out catId) || catId <= 0)
+                {
+                    MessageBox.Show("Seleccioná una categoría de destino válida.", "Datos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                Categoria_Controller.DesactivarCategoria(id_editar);
+                Producto_Controller.CambiarCategoriaDeProductos(id_editar, catId);
+                DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cambiar la categoría de los productos: " + ex.Message);
+                MessageBox.Show("No se pudo desactivar la categoría y mover sus productos:\n" + ValidacionEntrada.LimpiarError(ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

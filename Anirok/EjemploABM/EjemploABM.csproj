@@ -311,6 +311,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Servicios\ImagenProductoService.cs" />
     <Compile Include="Servicios\ComprobantePdfService.cs" />
+    <Compile Include="Servicios\EstiloAplicacion.cs" />
+    <Compile Include="Servicios\VentaService.cs" />
+    <Compile Include="Servicios\ValidacionEntrada.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlesDeUsuario\Categorias_UC.resx">
       <DependentUpon>Categorias_UC.cs</DependentUpon>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -78,7 +79,7 @@ namespace EjemploABM
 
         private void crear()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || combo_tipo.SelectedItem == null)
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -96,14 +97,11 @@ namespace EjemploABM
 
             Categoria cat = new Categoria(0, txt_nombre.Text, tipo.ToString());
 
-            if (Categoria_Controller.crearCategoria(cat))
-            {
-                this.DialogResult = DialogResult.OK;
-            }
+            EjecutarOperacion(() => Categoria_Controller.crearCategoria(cat), "crear la categoría");
         }
         private void editar()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || combo_tipo.SelectedItem == null)
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -122,9 +120,34 @@ namespace EjemploABM
 
             Categoria cat = new Categoria(id_editar, txt_nombre.Text, tipo.ToString());
 
-            if (Categoria_Controller.editarCategoria(cat))
+            EjecutarOperacion(() => Categoria_Controller.editarCategoria(cat), "editar la categoría");
+        }
+
+        private bool ValidarCampos()
+        {
+            if (!ValidacionEntrada.Nombre(txt_nombre.Text) || txt_nombre.Text.Trim().Length > 80)
             {
-                this.DialogResult = DialogResult.OK;
+                MessageBox.Show("El nombre debe tener entre 2 y 80 caracteres.", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (combo_tipo.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccioná el estado de la categoría.", "Datos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private void EjecutarOperacion(Func<bool> operacion, string accion)
+        {
+            try
+            {
+                if (operacion()) DialogResult = DialogResult.OK;
+                else MessageBox.Show("No se pudo " + accion + ".", "Operación no realizada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo " + accion + ":\n" + ValidacionEntrada.LimpiarError(ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

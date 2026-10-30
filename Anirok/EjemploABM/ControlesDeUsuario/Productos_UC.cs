@@ -24,6 +24,7 @@ namespace EjemploABM.ControlesDeUsuario
 
         private void TxtBusqueda_TextChanged(object sender, EventArgs e)
         {
+            paginaActual = 1;
             FiltrarProductosPorNombre(txtBusqueda.Text);
         }
 
@@ -48,7 +49,7 @@ namespace EjemploABM.ControlesDeUsuario
 
                     guna2DataGridView1.Rows[rowIndex].Cells[0].Value = prod.Id.ToString();
                     guna2DataGridView1.Rows[rowIndex].Cells[1].Value = prod.Nombre.ToString();
-                    guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString();
+                    guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString("C0");
 
 
                     guna2DataGridView1.Rows[rowIndex].Cells[3].Value = "Ver";
@@ -56,7 +57,7 @@ namespace EjemploABM.ControlesDeUsuario
                     guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Eliminar";
                 }
 
-                lblPaginaActual.Text = $"Página {paginaActual} de {totalDePaginasFiltradas}";
+                lblPaginaActual.Text = totalDePaginasFiltradas == 0 ? "Sin resultados" : $"Página {paginaActual} de {totalDePaginasFiltradas}";
             }
         }
 
@@ -77,7 +78,7 @@ namespace EjemploABM.ControlesDeUsuario
 
                 guna2DataGridView1.Rows[rowIndex].Cells[0].Value = prod.Id.ToString();
                 guna2DataGridView1.Rows[rowIndex].Cells[1].Value = prod.Nombre.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString("C0");
               
 
                 guna2DataGridView1.Rows[rowIndex].Cells[3].Value = "Ver";
@@ -85,7 +86,7 @@ namespace EjemploABM.ControlesDeUsuario
                 guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Eliminar";
             }
 
-            lblPaginaActual.Text = $"Página {paginaActual} de {totalDePaginas}";
+            lblPaginaActual.Text = totalDePaginas == 0 ? "Sin productos" : $"Página {paginaActual} de {totalDePaginas}";
         }
 
         private void btn_anterior_Click(object sender, EventArgs e)
@@ -120,6 +121,7 @@ namespace EjemploABM.ControlesDeUsuario
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             Trace.WriteLine("estoy andando");
             Debug.WriteLine("Celda seleccionada: " + e.ColumnIndex + ", " + e.RowIndex);
 

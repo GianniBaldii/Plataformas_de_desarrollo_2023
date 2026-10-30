@@ -34,7 +34,7 @@ Usuarios de prueba:
 - Administrador: `Gianni` / `gianni123`
 - Vendedor: `Victoria` / `vic345`
 
-Las imágenes de productos se administran automáticamente en `storage/productos`. Desktop copia allí cada imagen seleccionada y SQL Server guarda únicamente su nombre relativo.
+Las imágenes de productos se administran automáticamente en `storage/productos`. Desktop copia allí cada imagen seleccionada, SQL Server guarda únicamente su nombre relativo y la Web las sirve desde esa misma carpeta. `Content/Images` queda reservado para recursos visuales propios de la Web, como el logo y los slides.
 
 Los comprobantes se generan automáticamente en `storage/comprobantes/<año>/<mes>/venta-<id>.pdf`. Desktop y Web usan la misma carpeta y toman el precio histórico guardado en cada detalle de venta. Ya no hace falta configurar rutas manualmente.
 

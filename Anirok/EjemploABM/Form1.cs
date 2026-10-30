@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using EjemploABM.Controladores;
 using MaterialSkin;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -18,26 +19,16 @@ namespace EjemploABM
         public Form1()
         {
             InitializeComponent();
+            EstiloAplicacion.Aplicar(this);
+            Text = "Anirok - Iniciar sesión";
+            AcceptButton = btn_log;
             labelError.Visible = false;
         }
 
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (Usuario_Controller.autenticar(textBox1.Text, textBox2.Text, true))
-            {
-                Index index = new Index();
-                index.Show();
-                this.Hide();
-            }
-            else
-            {
-                // Mostrar mensaje de error
-                textBox1.Text = "";
-                textBox2.Text = "";
-                labelError.Visible = true;
-                labelError.Text = "Usuario o contraseña incorrectos. Intente de nuevo.";
-            }
+            IntentarIniciarSesion();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,22 +53,35 @@ namespace EjemploABM
 
         private void btn_log_Click(object sender, EventArgs e)
         {
+            IntentarIniciarSesion();
+        }
 
-            if (Usuario_Controller.autenticar(textBox1.Text, textBox2.Text, true))
+        private void IntentarIniciarSesion()
+        {
+            string usuario = textBox1.Text.Trim();
+            string contrasena = textBox2.Text;
+
+            if (usuario == "Usuario" || contrasena == "Contraseña" ||
+                string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
+            {
+                labelError.Text = "Ingresá tu usuario y contraseña.";
+                labelError.Visible = true;
+                return;
+            }
+
+            if (Usuario_Controller.autenticar(usuario, contrasena, true))
             {
                 Index index = new Index();
                 index.Show();
-                this.Hide();
-            }
-            else
-            {
-                // Mostrar mensaje de error
-                textBox1.Text = "";
-                textBox2.Text = "";
-                labelError.Visible = true;
-                labelError.Text = "Usuario o contraseña incorrectos. Intente de nuevo.";
+                Hide();
+                return;
             }
 
+            labelError.Text = "Usuario o contraseña incorrectos. Intentá nuevamente.";
+            labelError.Visible = true;
+            textBox2.Clear();
+            textBox2.UseSystemPasswordChar = true;
+            textBox2.Focus();
         }
 
         private void materialLabel1_Click(object sender, EventArgs e)

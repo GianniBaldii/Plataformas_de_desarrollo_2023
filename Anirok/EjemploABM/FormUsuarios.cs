@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EjemploABM.Controladores;
 using EjemploABM.Modelo;
+using EjemploABM.Servicios;
 
 namespace EjemploABM
 {
@@ -45,10 +46,6 @@ namespace EjemploABM
             txt_direccion.Text = usr.Direccion.ToString();
             txt_contraseña.Text = usr.Contraseña.ToString();
             txt_dni.Text = usr.Dni.ToString();
-
-            MessageBox.Show("la contraseña es:" + usr.Contraseña.ToString());
-
-
 
             combo_tipo.Items.Clear();
             combo_tipo.Items.Add("Admin");
@@ -87,7 +84,7 @@ namespace EjemploABM
 
         private void crear()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || string.IsNullOrEmpty(txt_apellido.Text) || string.IsNullOrEmpty(txt_mail.Text) || string.IsNullOrEmpty(txt_telefono.Text) || string.IsNullOrEmpty(txt_direccion.Text) || string.IsNullOrEmpty(txt_dni.Text) || string.IsNullOrEmpty(txt_contraseña.Text) || combo_tipo.SelectedItem == null)
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -109,15 +106,12 @@ namespace EjemploABM
 
             Usuario usr = new Usuario(0, txt_nombre.Text, txt_apellido.Text, txt_mail.Text, txt_telefono.Text, txt_direccion.Text, txt_dni.Text, txt_contraseña.Text, tipo);
 
-            if (Usuario_Controller.crearUsuario(usr))
-            {
-                this.DialogResult = DialogResult.OK;
-            }
+            EjecutarOperacion(() => Usuario_Controller.crearUsuario(usr), "crear el usuario");
         }
 
         private void editar()
         {
-            if (string.IsNullOrEmpty(txt_nombre.Text) || string.IsNullOrEmpty(txt_apellido.Text) || string.IsNullOrEmpty(txt_mail.Text) || string.IsNullOrEmpty(txt_telefono.Text) || string.IsNullOrEmpty(txt_direccion.Text) || string.IsNullOrEmpty(txt_dni.Text) || string.IsNullOrEmpty(txt_contraseña.Text) || combo_tipo.SelectedItem == null)
+            if (!ValidarCampos())
             {
                 MessageBox.Show("Por favor, complete todos los campos y seleccione un rol antes de crear un usuario.", "Campos faltantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -131,9 +125,44 @@ namespace EjemploABM
 
             Usuario usr = new Usuario(id_editar, txt_nombre.Text, txt_apellido.Text, txt_mail.Text, txt_telefono.Text , txt_direccion.Text , txt_dni.Text, txt_contraseña.Text, tipo);
 
-            if (Usuario_Controller.editarUsuario(usr))
+            EjecutarOperacion(() => Usuario_Controller.editarUsuario(usr), "editar el usuario");
+        }
+
+        private bool ValidarCampos()
+        {
+            if (!ValidacionEntrada.Nombre(txt_nombre.Text) || !ValidacionEntrada.Nombre(txt_apellido.Text))
+                return MostrarValidacion("Nombre y apellido deben tener entre 2 y 100 caracteres.");
+            if (!ValidacionEntrada.Email(txt_mail.Text))
+                return MostrarValidacion("Ingresá un correo electrónico válido.");
+            if (!ValidacionEntrada.SoloDigitos(txt_telefono.Text, 6, 20))
+                return MostrarValidacion("El teléfono debe contener entre 6 y 20 dígitos.");
+            if (!ValidacionEntrada.Requerido(txt_direccion.Text) || txt_direccion.Text.Trim().Length > 150)
+                return MostrarValidacion("Ingresá una dirección válida.");
+            if (!ValidacionEntrada.SoloDigitos(txt_dni.Text, 7, 12))
+                return MostrarValidacion("El DNI debe contener entre 7 y 12 dígitos.");
+            if (txt_contraseña.Text.Trim().Length < 6 || txt_contraseña.Text.Length > 100)
+                return MostrarValidacion("La contraseña debe tener entre 6 y 100 caracteres.");
+            if (combo_tipo.SelectedItem == null)
+                return MostrarValidacion("Seleccioná un rol.");
+            return true;
+        }
+
+        private bool MostrarValidacion(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return false;
+        }
+
+        private void EjecutarOperacion(Func<bool> operacion, string accion)
+        {
+            try
             {
-                this.DialogResult = DialogResult.OK;
+                if (operacion()) DialogResult = DialogResult.OK;
+                else MessageBox.Show("No se pudo " + accion + ".", "Operación no realizada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo " + accion + ":\n" + ValidacionEntrada.LimpiarError(ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

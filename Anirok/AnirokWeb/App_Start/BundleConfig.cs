@@ -24,8 +24,7 @@ namespace AnirokWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/CSS/style.css"));
+                      "~/Content/site.css"));
         }
     }
 }

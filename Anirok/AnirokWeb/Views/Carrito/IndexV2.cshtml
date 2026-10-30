@@ -5,6 +5,7 @@
 <main class="container py-4">
     <h1 class="mt-4">Tu carrito</h1>
     @if (TempData["SuccessMessage"] != null) { <div class="alert alert-success">@TempData["SuccessMessage"]</div> }
+    @if (TempData["ErrorMessage"] != null) { <div class="alert alert-danger">@TempData["ErrorMessage"]</div> }
     @if (!Model.Lineas.Any())
     {
         <div class="alert alert-info">Tu carrito está vacío.</div>
@@ -18,7 +19,7 @@
                 @foreach (var linea in Model.Lineas)
                 {
                     <tr>
-                        <td><img src="@Url.Content("~/Content/Images/" + linea.Producto.Img)" alt="@linea.Producto.Nombre" style="width:90px;height:90px;object-fit:contain" /> <b>@linea.Producto.Nombre</b></td>
+                        <td><img src="@Url.Action("Imagen", "Producto", new { nombre = linea.Producto.Img })" alt="@linea.Producto.Nombre" style="width:90px;height:90px;object-fit:contain" /> <b>@linea.Producto.Nombre</b></td>
                         <td>@linea.Producto.Precio.ToString("C")</td>
                         <td>
                             <form method="post" action="@Url.Action("Actualizar", "Carrito")" class="d-flex gap-2">

@@ -77,7 +77,7 @@ namespace EjemploABM.Controladores
         public static int obtenerMaxId()
         {
             int MaxId = 0;
-            string query = "select max(id) from dbo.detalle_venta;";
+            string query = "select isnull(max(id), 0) from dbo.detalle_venta;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
 
@@ -88,7 +88,7 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    MaxId = reader.GetInt32(0);
+                    MaxId = Convert.ToInt32(reader.GetValue(0));
                 }
 
                 reader.Close();

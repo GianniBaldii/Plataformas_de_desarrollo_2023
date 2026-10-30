@@ -59,6 +59,12 @@ namespace EjemploABM
             txt_nombre.Text = prod.Nombre;
             txt_descripcion.Text = prod.Descripcion;
             txt_precio.Text = prod.Precio.ToString();
+            txt_precio.ReadOnly = true;
+            txt_precio.FillColor = Color.FromArgb(242, 242, 242);
+            txt_precio.BorderColor = Color.FromArgb(190, 190, 190);
+            label3.Text = "Precio (consulta):";
+            var ayudaPrecio = new ToolTip();
+            ayudaPrecio.SetToolTip(txt_precio, "El precio se actualiza desde el módulo Precios y costos.");
             txt_codigo.Text = prod.codigo;
             txt_cantidad.Text = prod.Stock.ToString();
             txt_proveedor.Text = prod.Proveedor;

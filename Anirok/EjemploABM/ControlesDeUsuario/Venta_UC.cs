@@ -11,13 +11,14 @@ namespace EjemploABM.ControlesDeUsuario
 {
     public partial class Ventas_UC : UserControl
     {
-        private const int ElementosPorPagina = 10;
+        private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Venta> ventas;
 
         public Ventas_UC()
         {
             InitializeComponent();
+            ListadoVisual.Aplicar(this, guna2DataGridView1, "VENTAS", "Historial de operaciones y comprobantes emitidos", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente);
             EstiloAplicacion.AplicarAControl(this);
             EstiloAplicacion.BotonSecundario(btn_siguiente);
             EstiloAplicacion.BotonSecundario(btn_anterior);

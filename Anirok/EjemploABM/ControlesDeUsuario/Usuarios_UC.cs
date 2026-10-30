@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EjemploABM.Controladores;
 using EjemploABM.Modelo;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
 {
@@ -21,6 +22,7 @@ namespace EjemploABM.ControlesDeUsuario
         public Usuarios_UC()
         {
             InitializeComponent();
+            ListadoVisual.Aplicar(this, guna2DataGridView1, "USUARIOS", "Administración de usuarios y permisos del sistema", btn_add, null, null, null, label1);
             cargarUsuarios();
             
                 

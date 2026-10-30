@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using EjemploABM.ControlesDeUsuario;
 using EjemploABM.Modelo;
 using EjemploABM.Servicios;
+using Guna.UI2.WinForms;
 
 namespace EjemploABM
 {
     public partial class Index : Form
     {
         private bool userScrolled = false;
+        private readonly Guna2Button btnProveedores = new Guna2Button();
         public Index()
         {
             InitializeComponent();
@@ -37,9 +39,13 @@ namespace EjemploABM
             AcomodarMenu();
 
             cerrar__sesion_btn.Text = "CERRAR SESIÓN";
-            guna2Button7.Text = "HISTORIAL";
-            // La opción todavía no tiene una pantalla asociada; evitar mostrar un botón sin acción.
-            guna2Button7.Visible = false;
+            guna2Button7.Text = "PRECIOS Y COSTOS";
+            guna2Button7.Click += guna2Button7_Click;
+            btnProveedores.Text = "VER PROVEEDORES";
+            Controls.Add(btnProveedores);
+            EstiloAplicacion.BotonSecundario(btnProveedores);
+            btnProveedores.Click += (s, e) => addUserControl(new Proveedores_UC());
+            AcomodarMenu();
 
             
             Productos_UC prodsUC = new Productos_UC();
@@ -78,7 +84,9 @@ namespace EjemploABM
             guna2Button5.SetBounds(inicioX + (botonAncho + separacion) * 3, 150, botonAncho, botonAlto);
 
             guna2Button9.SetBounds(inicioX + botonAncho + separacion, 202, botonAncho, botonAlto);
+            guna2Button7.SetBounds(inicioX, 202, botonAncho, botonAlto);
             btn_users.SetBounds(inicioX + (botonAncho + separacion) * 2, 202, botonAncho, botonAlto);
+            btnProveedores.SetBounds(inicioX + (botonAncho + separacion) * 3, 202, botonAncho, botonAlto);
 
             panel1.SetBounds(margen, 270, Math.Max(500, ancho - margen * 2), Math.Max(250, ClientSize.Height - 292));
         }
@@ -181,6 +189,11 @@ namespace EjemploABM
         {
             Ventas_UC venta = new Ventas_UC();
             addUserControl(venta);
+        }
+
+        private void guna2Button7_Click(object sender, EventArgs e)
+        {
+            addUserControl(new PreciosCostos_UC());
         }
 
     }

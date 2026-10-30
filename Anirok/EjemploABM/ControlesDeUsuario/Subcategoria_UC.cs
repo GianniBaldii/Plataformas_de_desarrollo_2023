@@ -4,18 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
 {
     public partial class Subcategoria_UC : UserControl
     {
-        private const int ElementosPorPagina = 7;
+        private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Subcategoria> subcategorias;
 
         public Subcategoria_UC()
         {
             InitializeComponent();
+            ListadoVisual.Aplicar(this, guna2DataGridView1, "SUBCATEGORÍAS", "Clasificación específica dentro de cada categoría", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente, label1);
             CargarSubcategorias();
         }
 

@@ -13,6 +13,10 @@ namespace EjemploABM.Modelo
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public double Precio { get; set; }
+        public double Costo { get; set; }
+        public string CostoMoneda { get; set; }
+        public double CotizacionDolar { get; set; }
+        public double CostoPesos { get; set; }
         public string codigo { get; set; }
         public int Stock { get; set; }
         public string Img { get; set; }

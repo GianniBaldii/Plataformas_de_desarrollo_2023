@@ -5,19 +5,24 @@ using System.Linq;
 using System.Windows.Forms;
 using EjemploABM.Controladores;
 using EjemploABM.Modelo;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
 {
     public partial class Productos_UC : UserControl
     {
         List<Producto> productos;
-        int elementosPorPagina = 7;
+        int elementosPorPagina = 8;
         int paginaActual = 1;
         int totalDePaginas;
 
         public Productos_UC()
         {
             InitializeComponent();
+            ListadoVisual.Aplicar(this, guna2DataGridView1, "PRODUCTOS", "Catálogo y administración de productos", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente, label2);
+            txtBusqueda.PlaceholderText = "Buscar producto...";
+            label1.Location = new System.Drawing.Point(24, 91);
+            txtBusqueda.Location = new System.Drawing.Point(145, 85);
             cargarProductos();
             txtBusqueda.TextChanged += TxtBusqueda_TextChanged;
         }

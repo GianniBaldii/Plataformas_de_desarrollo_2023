@@ -4,18 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
+using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
 {
     public partial class Categorias_UC : UserControl
     {
-        private const int ElementosPorPagina = 10;
+        private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Categoria> categorias;
 
         public Categorias_UC()
         {
             InitializeComponent();
+            ListadoVisual.Aplicar(this, guna2DataGridView1, "CATEGORÍAS", "Organización del catálogo por familias de productos", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente, label1);
             CargarCategorias();
         }
 
@@ -29,8 +31,8 @@ namespace EjemploABM.ControlesDeUsuario
         {
             guna2DataGridView1.Rows.Clear();
 
-            int inicio = (paginaActual - 1) * 7; // Máximo de 7 filas por página
-            int fin = Math.Min(inicio + 7, categorias.Count);
+            int inicio = (paginaActual - 1) * ElementosPorPagina;
+            int fin = Math.Min(inicio + ElementosPorPagina, categorias.Count);
 
             for (int i = inicio; i < fin; i++)
             {
@@ -54,7 +56,7 @@ namespace EjemploABM.ControlesDeUsuario
             // considerando los filtros aplicados a tus datos.
             // Puedes adaptar esta lógica según tus necesidades.
 
-            int totalDePaginasFiltradas = (int)Math.Ceiling((double)categorias.Count / 7); // Ejemplo básico
+            int totalDePaginasFiltradas = (int)Math.Ceiling((double)categorias.Count / ElementosPorPagina);
 
             return totalDePaginasFiltradas;
         }
@@ -128,7 +130,7 @@ namespace EjemploABM.ControlesDeUsuario
 
         private void btn_siguiente_Click(object sender, EventArgs e)
         {
-            int totalPaginas = (int)Math.Ceiling((double)categorias.Count / 7); // Máximo de 7 filas por página
+            int totalPaginas = (int)Math.Ceiling((double)categorias.Count / ElementosPorPagina);
             Debug.WriteLine($"Página actual: {paginaActual}, Total de páginas: {totalPaginas}");
 
             if (paginaActual < totalPaginas)

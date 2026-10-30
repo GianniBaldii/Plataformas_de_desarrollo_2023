@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditarCostoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -175,6 +178,15 @@
     <Compile Include="Controladores\Subcategoria_Controller.cs" />
     <Compile Include="Controladores\DB_Controller.cs" />
     <Compile Include="Controladores\Usuario_Controller.cs" />
+    <Compile Include="Controladores\Proveedor_Controller.cs" />
+    <Compile Include="Servicios\ListadoVisual.cs" />
+    <Compile Include="Modelo\Proveedor.cs" />
+    <Compile Include="EditarProveedorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\Proveedores_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ControlesDeUsuario\Categorias_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -314,6 +326,11 @@
     <Compile Include="Servicios\EstiloAplicacion.cs" />
     <Compile Include="Servicios\VentaService.cs" />
     <Compile Include="Servicios\ValidacionEntrada.cs" />
+    <Compile Include="Servicios\DolarApiService.cs" />
+    <Compile Include="Modelo\CotizacionDolar.cs" />
+    <Compile Include="ControlesDeUsuario\PreciosCostos_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControlesDeUsuario\Categorias_UC.resx">
       <DependentUpon>Categorias_UC.cs</DependentUpon>

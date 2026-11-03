@@ -14,15 +14,8 @@ namespace EjemploABM.Controladores
     {
         public static bool CrearVenta(Venta venta)
         {
-            string query = "INSERT INTO dbo.venta VALUES" +
-                           "(@id, " +
-                           "@precioTotal, " +
-                           "@fecha, " +
-                           "@metodoDePago, " +
-                           "@descuento, " +
-                           "@clienteId, " +
-                           "@usuarioId" +
-                           ");";
+            string query = "INSERT INTO dbo.venta (id, precio_total, fecha, metodo_de_pago, descuento, cliente_id, usuario_id) " +
+                           "VALUES (@id, @precioTotal, @fecha, @metodoDePago, @descuento, @clienteId, @usuarioId);";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", obtenerMaxId()+1);
@@ -75,7 +68,7 @@ namespace EjemploABM.Controladores
         public static List<Venta> ObtenerVentas()
         {
             List<Venta> listaVentas = new List<Venta>();
-            string query = "SELECT * FROM dbo.venta;";
+            string query = "SELECT id, precio_total, fecha, metodo_de_pago, descuento, cliente_id, usuario_id FROM dbo.venta;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
 
@@ -86,20 +79,11 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    Venta venta = new Venta
-                    {
-                        Id = reader.GetInt32(0),
-                        PrecioTotal = reader.GetFloat(1),
-                        Fecha = reader.GetDateTime(2),
-                        MetodoDePago = reader.GetString(3),
-                        Descuento = reader.GetFloat(4),
-                        ClienteId = reader.GetInt32(5),
-                        UsuarioId = reader.GetInt32(6)
-                    };
+                    Venta venta = CrearVentaDesdeReader(reader);
 
                     listaVentas.Add(venta);
 
-                    Trace.WriteLine("Venta encontrada, ID: " + reader.GetInt32(0));
+                    Trace.WriteLine("Venta encontrada, ID: " + venta.Id);
                 }
 
                 reader.Close();
@@ -117,7 +101,7 @@ namespace EjemploABM.Controladores
         public static Venta ObtenerVentaPorId(int id)
         {
             Venta venta = new Venta();
-            string query = "SELECT * FROM dbo.venta WHERE id = @id;";
+            string query = "SELECT id, precio_total, fecha, metodo_de_pago, descuento, cliente_id, usuario_id FROM dbo.venta WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", id);
@@ -129,18 +113,9 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    venta = new Venta
-                    {
-                        Id = reader.GetInt32(0),
-                        PrecioTotal = reader.GetFloat(1),
-                        Fecha = reader.GetDateTime(2),
-                        MetodoDePago = reader.GetString(3),
-                        Descuento = reader.GetFloat(4),
-                        ClienteId = reader.GetInt32(5),
-                        UsuarioId = reader.GetInt32(6)
-                    };
+                    venta = CrearVentaDesdeReader(reader);
 
-                    Trace.WriteLine("Venta encontrada, ID: " + reader.GetInt32(0));
+                    Trace.WriteLine("Venta encontrada, ID: " + venta.Id);
                 }
 
                 reader.Close();
@@ -155,15 +130,44 @@ namespace EjemploABM.Controladores
             return venta;
         }
 
+        private static Venta CrearVentaDesdeReader(SqlDataReader reader)
+        {
+            return new Venta
+            {
+                Id = Entero(reader.GetValue(0)),
+                PrecioTotal = DecimalAFloat(reader.GetValue(1)),
+                Fecha = reader.IsDBNull(2) ? DateTime.MinValue : Convert.ToDateTime(reader.GetValue(2)),
+                MetodoDePago = Texto(reader.GetValue(3)),
+                Descuento = DecimalAFloat(reader.GetValue(4)),
+                ClienteId = Entero(reader.GetValue(5)),
+                UsuarioId = Entero(reader.GetValue(6))
+            };
+        }
+
+        private static string Texto(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? string.Empty : Convert.ToString(valor);
+        }
+
+        private static int Entero(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? 0 : Convert.ToInt32(valor);
+        }
+
+        private static float DecimalAFloat(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? 0f : Convert.ToSingle(valor);
+        }
+
         public static bool EditarVenta(Venta venta)
         {
             string query = "UPDATE dbo.venta SET " +
-                           "precioTotal = @precioTotal, " +
+                           "precio_total = @precioTotal, " +
                            "fecha = @fecha, " +
-                           "metodoDePago = @metodoDePago, " +
+                           "metodo_de_pago = @metodoDePago, " +
                            "descuento = @descuento, " +
-                           "clienteId = @clienteId, " +
-                           "usuarioId = @usuarioId " +
+                           "cliente_id = @clienteId, " +
+                           "usuario_id = @usuarioId " +
                            "WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);

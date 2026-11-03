@@ -71,6 +71,14 @@ namespace EjemploABM
 
             if (Usuario_Controller.autenticar(usuario, contrasena, true))
             {
+                if (Program.logueado == null || (Program.logueado.Rol != 1 && Program.logueado.Rol != 2))
+                {
+                    Program.logueado = null;
+                    labelError.Text = "Esta cuenta es de cliente. El acceso al Desktop está reservado para administración y ventas.";
+                    labelError.Visible = true;
+                    textBox2.Clear();
+                    return;
+                }
                 Index index = new Index();
                 index.Show();
                 Hide();

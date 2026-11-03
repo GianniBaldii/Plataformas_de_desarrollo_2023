@@ -446,3 +446,6 @@ C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\bin\Validation\Sys
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\bin\Validation\System.Runtime.CompilerServices.Unsafe.xml
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\bin\Validation\System.Threading.Tasks.Extensions.xml
 C:\proyectos\Plataformas_de_desarrollo_2023\Anirok\EjemploABM\bin\Validation\System.ValueTuple.xml
+C:\proyectos\Plataformas_de_desarrollo_2023\tmp\desktop-build\EjemploABM.exe.config
+C:\proyectos\Plataformas_de_desarrollo_2023\tmp\desktop-build\EjemploABM.exe
+C:\proyectos\Plataformas_de_desarrollo_2023\tmp\desktop-build\EjemploABM.pdb

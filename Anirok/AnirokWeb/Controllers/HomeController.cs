@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using AnirokWeb.Models;
+using AnirokWeb.Services;
+using System.Linq;
+using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AnirokWeb.Controllers
 {
@@ -14,42 +12,33 @@ namespace AnirokWeb.Controllers
 
         public ActionResult Index()
         {
-            if (TempData["LoginSuccessMessage"] != null)
-            {
-                Debug.WriteLine("LoginSuccessMessage is set.");
-            }
-
-            var productos = _context.Productos.OrderBy(p => p.Id).Take(8).ToList();
+            var productos = _context.Productos
+                .Include(p => p.Categoria)
+                .Where(p => p.Stock > 0)
+                .OrderBy(p => p.Id)
+                .Take(8)
+                .ToList();
             return View(productos);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
+        [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View("Contact", new ContactoViewModel());
         }
 
-        public ActionResult Login()
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactoViewModel model)
         {
-            ViewBag.Message = "Your login page.";
-
-            return View();
-        }
-
-
-        public ActionResult Producto()
-        {
-            ViewBag.Message = "Your prodct page.";
-
-            return View();
+            if (!ModelState.IsValid) return View("Contact", model);
+            ContactoService.Guardar(model, AnirokDbContext.ResolveConnectionString());
+            model.Enviado = true;
+            return View("Contact", model);
         }
 
         protected override void Dispose(bool disposing)
@@ -59,3 +48,5 @@ namespace AnirokWeb.Controllers
         }
     }
 }
+
+

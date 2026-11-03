@@ -1,0 +1,24 @@
+@model IEnumerable<AnirokWeb.Models.CompraResumenViewModel>
+@using System.Globalization
+@{
+    ViewBag.Title = "Mis compras";
+    var ar = CultureInfo.GetCultureInfo("es-AR");
+}
+<main class="tw-mx-auto tw-max-w-5xl tw-px-4 tw-py-10">
+    <p class="tw-text-xs tw-font-black tw-uppercase tw-tracking-[0.25em] tw-text-[#c40000]">Tu cuenta</p>
+    <div class="tw-mb-8 tw-flex tw-flex-wrap tw-items-end tw-justify-between tw-gap-4">
+        <div><h1 class="tw-text-4xl tw-font-black tw-text-gray-900">Mis compras</h1><p class="tw-mt-2 tw-text-gray-500">Consultá tus comprobantes y el detalle de cada operación.</p></div>
+        <a class="tw-rounded-xl tw-bg-[#c40000] tw-px-5 tw-py-3 tw-font-bold tw-text-white" href="@Url.Action("Index", "Home")">Seguir comprando</a>
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="tw-rounded-2xl tw-border tw-border-dashed tw-border-gray-300 tw-p-12 tw-text-center tw-text-gray-500">Todavía no tenés compras registradas.</div>
+    }
+    else
+    {
+        <div class="tw-overflow-hidden tw-rounded-2xl tw-border tw-border-gray-200 tw-bg-white tw-shadow-sm">
+            <table class="tw-min-w-full"><thead class="tw-bg-gray-950 tw-text-left tw-text-sm tw-uppercase tw-text-white"><tr><th class="tw-p-4">Comprobante</th><th class="tw-p-4">Fecha</th><th class="tw-p-4">Pago</th><th class="tw-p-4">Total</th><th class="tw-p-4"></th></tr></thead>
+            <tbody>@foreach (var compra in Model) {<tr class="tw-border-t tw-border-gray-100"><td class="tw-p-4 tw-font-bold">#@compra.Id</td><td class="tw-p-4">@compra.Fecha.ToString("dd/MM/yyyy")</td><td class="tw-p-4">@compra.MetodoPago</td><td class="tw-p-4 tw-font-black">@compra.Total.ToString("C", ar)</td><td class="tw-p-4"><a class="tw-font-bold tw-text-[#c40000]" href="@Url.Action("Comprobante", "Carrito", new { id = compra.Id })">Descargar PDF</a></td></tr>}</tbody></table>
+        </div>
+    }
+</main>

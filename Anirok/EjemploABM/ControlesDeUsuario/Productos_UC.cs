@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using EjemploABM.Controladores;
 using EjemploABM.Modelo;
@@ -15,6 +16,7 @@ namespace EjemploABM.ControlesDeUsuario
         int elementosPorPagina = 8;
         int paginaActual = 1;
         int totalDePaginas;
+        private readonly Dictionary<int, string> nombresCategorias = new Dictionary<int, string>();
 
         public Productos_UC()
         {
@@ -23,6 +25,8 @@ namespace EjemploABM.ControlesDeUsuario
             txtBusqueda.PlaceholderText = "Buscar producto...";
             label1.Location = new System.Drawing.Point(24, 91);
             txtBusqueda.Location = new System.Drawing.Point(145, 85);
+            AgregarColumnasInformativas();
+            ListadoVisual.AplicarAcciones(guna2DataGridView1);
             cargarProductos();
             txtBusqueda.TextChanged += TxtBusqueda_TextChanged;
         }
@@ -57,9 +61,7 @@ namespace EjemploABM.ControlesDeUsuario
                     guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString("C0");
 
 
-                    guna2DataGridView1.Rows[rowIndex].Cells[3].Value = "Ver";
-                    guna2DataGridView1.Rows[rowIndex].Cells[4].Value = "Editar";
-                    guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Eliminar";
+                    CompletarColumnasInformativas(guna2DataGridView1.Rows[rowIndex], prod);
                 }
 
                 lblPaginaActual.Text = totalDePaginasFiltradas == 0 ? "Sin resultados" : $"Página {paginaActual} de {totalDePaginasFiltradas}";
@@ -68,6 +70,8 @@ namespace EjemploABM.ControlesDeUsuario
 
         private void cargarProductos()
         {
+            nombresCategorias.Clear();
+            foreach (var categoria in Categoria_Controller.ObtenerCategorias()) nombresCategorias[categoria.Id] = categoria.Nombre;
             productos = Producto_Controller.obtenerProductos();
 
             totalDePaginas = (int)Math.Ceiling((double)productos.Count / elementosPorPagina);
@@ -86,12 +90,34 @@ namespace EjemploABM.ControlesDeUsuario
                 guna2DataGridView1.Rows[rowIndex].Cells[2].Value = prod.Precio.ToString("C0");
               
 
-                guna2DataGridView1.Rows[rowIndex].Cells[3].Value = "Ver";
-                guna2DataGridView1.Rows[rowIndex].Cells[4].Value = "Editar";
-                guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Eliminar";
+                CompletarColumnasInformativas(guna2DataGridView1.Rows[rowIndex], prod);
             }
 
             lblPaginaActual.Text = totalDePaginas == 0 ? "Sin productos" : $"Página {paginaActual} de {totalDePaginas}";
+        }
+
+        private void AgregarColumnasInformativas()
+        {
+            if (guna2DataGridView1.Columns.Contains("StockActual")) return;
+            guna2DataGridView1.Columns.Insert(3, new DataGridViewTextBoxColumn { Name = "StockActual", HeaderText = "Stock", ReadOnly = true });
+            guna2DataGridView1.Columns.Insert(4, new DataGridViewTextBoxColumn { Name = "CategoriaProducto", HeaderText = "Categoría", ReadOnly = true });
+            guna2DataGridView1.Columns.Insert(5, new DataGridViewTextBoxColumn { Name = "ProveedorProducto", HeaderText = "Proveedor", ReadOnly = true });
+            guna2DataGridView1.Columns.Insert(6, new DataGridViewTextBoxColumn { Name = "EstadoProducto", HeaderText = "Estado", ReadOnly = true });
+            guna2DataGridView1.Columns.Insert(7, new DataGridViewImageColumn { Name = "ImagenProducto", HeaderText = "Imagen", ReadOnly = true, ImageLayout = DataGridViewImageCellLayout.Zoom });
+            guna2DataGridView1.RowTemplate.Height = 52;
+        }
+
+        private void CompletarColumnasInformativas(DataGridViewRow fila, Producto prod)
+        {
+            fila.Cells["StockActual"].Value = prod.Stock;
+            fila.Cells["CategoriaProducto"].Value = nombresCategorias.ContainsKey(prod.CategoriaId) ? nombresCategorias[prod.CategoriaId] : "Sin categoría";
+            fila.Cells["ProveedorProducto"].Value = string.IsNullOrWhiteSpace(prod.Proveedor) ? "Sin proveedor" : prod.Proveedor;
+            fila.Cells["EstadoProducto"].Value = prod.Stock > 0 ? "Disponible" : "Sin stock";
+            fila.Cells["EstadoProducto"].Style.ForeColor = prod.Stock > 0 ? Color.FromArgb(24, 120, 55) : Color.FromArgb(180, 25, 25);
+            fila.Cells["ImagenProducto"].Value = ImagenProductoService.Cargar(prod.Img);
+            fila.Cells["Ver"].Value = "Ver";
+            fila.Cells["Editar"].Value = "Editar";
+            fila.Cells["Eliminar"].Value = "Eliminar";
         }
 
         private void btn_anterior_Click(object sender, EventArgs e)

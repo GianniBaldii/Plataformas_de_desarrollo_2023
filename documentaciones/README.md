@@ -7,6 +7,15 @@ Sistema de ventas con dos aplicaciones conectadas a la misma base SQL Server:
 
 ## Levantar la base con Docker
 
+La forma recomendada es ejecutar desde PowerShell el script de inicio:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\iniciar-proyecto.ps1
+```
+
+El script verifica Docker, ejecuta `docker compose up -d`, espera a que SQL Server quede saludable y abre la solución en Visual Studio con permisos suficientes para IIS Express.
+
 1. Iniciar Docker Desktop usando contenedores Linux.
 2. Desde la raíz del repositorio, ejecutar:
 

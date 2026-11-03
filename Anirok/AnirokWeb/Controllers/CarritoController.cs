@@ -1,156 +1,177 @@
-﻿using AnirokWeb.Models;
+using AnirokWeb.Models;
+using AnirokWeb.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AnirokWeb.Controllers
 {
     public class CarritoController : Controller
     {
-        private AnirokDbContext _context = new AnirokDbContext();
-        // GET: Carrito
+        private const string CarritoKey = "Carrito";
+        private readonly AnirokDbContext _context = new AnirokDbContext();
+
         public ActionResult Index()
         {
-            // Verifica si el usuario está logueado
-            if (Session["UsuarioId"] == null)
-            {
-                // Si no está logueado, redirigir a la vista de login
-                return RedirectToAction("Login", "Cuenta");
-            }
-
-            // Recupera el carrito de la sesión o inicializa una lista vacía si no existe
-            List<Producto> carrito = Session["Carrito"] as List<Producto> ?? new List<Producto>();
-
-            // Si está logueado, mostrar la vista del carrito
-
-            return View(carrito);
+            return View("Index", ArmarCarrito());
         }
 
-        // Acción para añadir un producto al carrito
-        public ActionResult AgregarAlCarrito(int productoId)
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult AgregarAlCarrito(int productoId, int cantidad = 1)
         {
-            //Verificar que el usuario este logueado para añadir al carrito, sino redirige al login
-
-            if (Session["UsuarioId"] == null)
-            {
-                // Si no está logueado, redirige al login
-                TempData["ErrorMessage"] = "Debes iniciar sesión para añadir productos al carrito.";
-                return RedirectToAction("Login", "Cuenta");
-            }
-
-            // Obtiene el producto por su ID
             var producto = _context.Productos.FirstOrDefault(p => p.Id == productoId);
-
-            if (producto != null)
+            if (producto == null) return HttpNotFound();
+            if (producto.Stock <= 0)
             {
-                // Recupera el carrito de la sesión (o crea uno nuevo si no existe)
-                List<Producto> carrito = Session["Carrito"] as List<Producto> ?? new List<Producto>();
-
-                // Agrega el producto al carrito
-                carrito.Add(producto);
-
-                // Guarda el carrito de vuelta en la sesión
-                Session["Carrito"] = carrito;
-
-                TempData["SuccessMessage"] = "Producto añadido al carrito!";
-                Debug.WriteLine($"Producto con ID {productoId} añadido al carrito por el usuario {Session["UsuarioNombre"]}");
+                if (Request.IsAjaxRequest()) return Json(new { ok = false, message = "Este producto está agotado." });
+                TempData["ErrorMessage"] = "El producto seleccionado no tiene stock.";
+                return RedirectToAction("Index");
             }
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        //GET: Carrito | Ver carrito
-        // Acción para mostrar la vista del carrito
-        public ActionResult VerCarrito()
-        {
-            // Recupera el carrito de la sesión
-            List<Producto> carrito = Session["Carrito"] as List<Producto> ?? new List<Producto>();
-
-            return View(carrito);
-        }
-
-        // POST: borrar producto del carrito
-        public ActionResult EliminarDelCarrito(int productoId)
-        {
-            // Recupera el carrito de la sesión
-            List<Producto> carrito = Session["Carrito"] as List<Producto> ?? new List<Producto>();
-
-            //Traer producto de la lista del carrito
-            var producto = carrito.FirstOrDefault(p => p.Id == productoId);
-            if (producto != null)
+            var carrito = ObtenerCarrito();
+            var item = carrito.FirstOrDefault(x => x.ProductoId == productoId);
+            var cantidadSolicitada = Math.Max(1, cantidad);
+            var cantidadActual = item == null ? 0 : item.Cantidad;
+            if (cantidadActual + cantidadSolicitada > producto.Stock)
             {
-                carrito.Remove(producto);
+                if (Request.IsAjaxRequest()) return Json(new { ok = false, message = "Sólo quedan " + producto.Stock + " unidades de " + producto.Nombre + "." });
+                TempData["ErrorMessage"] = "Sólo quedan " + producto.Stock + " unidades de " + producto.Nombre + ".";
+                return RedirectToAction("Index");
             }
-
-            //Guardar en la sesión la lista actualizada
-            Session["Carrito"] = carrito;
-
-            //Redirigir a la vista del carrito
+            if (item == null)
+            {
+                carrito.Add(new CarritoItem { ProductoId = productoId, Cantidad = cantidadSolicitada });
+            }
+            else
+            {
+                item.Cantidad += cantidadSolicitada;
+            }
+            Session[CarritoKey] = carrito;
+            if (Request.IsAjaxRequest()) return Json(new { ok = true, message = producto.Nombre + " agregado al carrito.", count = carrito.Sum(x => x.Cantidad) });
+            TempData["SuccessMessage"] = "Producto añadido al carrito.";
             return RedirectToAction("Index");
         }
 
-
-        // POST: Carrito/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Actualizar(int productoId, int cantidad)
         {
-            try
+            var carrito = ObtenerCarrito();
+            var producto = _context.Productos.FirstOrDefault(p => p.Id == productoId);
+            if (producto == null) return HttpNotFound();
+            if (cantidad > producto.Stock)
             {
-                // TODO: Add insert logic here
-
+                TempData["ErrorMessage"] = "Sólo quedan " + producto.Stock + " unidades de " + producto.Nombre + ".";
                 return RedirectToAction("Index");
             }
-            catch
+            carrito.RemoveAll(x => x.ProductoId == productoId);
+            if (cantidad > 0) carrito.Add(new CarritoItem { ProductoId = productoId, Cantidad = Math.Min(cantidad, 99) });
+            Session[CarritoKey] = carrito;
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult EliminarDelCarrito(int productoId)
+        {
+            var carrito = ObtenerCarrito();
+            carrito.RemoveAll(x => x.ProductoId == productoId);
+            Session[CarritoKey] = carrito;
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Comprar()
+        {
+            if (Session["UsuarioId"] == null)
+                return RedirectToAction("Login", "Cuenta", new { returnUrl = Url.Action("Comprar", "Carrito") });
+            if (!RolesWeb.EsCliente(Session["UsuarioRol"]))
             {
-                return View();
+                TempData["ErrorMessage"] = "Sólo las cuentas de cliente pueden realizar compras desde la Web.";
+                return RedirectToAction("Index", "Home");
             }
+            var carrito = ArmarCarrito();
+            if (!carrito.Lineas.Any()) return RedirectToAction("Index");
+            return View(new CompraViewModel { Carrito = carrito });
         }
 
-        // GET: Carrito/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Comprar(CompraViewModel model)
         {
-            return View();
-        }
-
-        // POST: Carrito/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
+            if (Session["UsuarioId"] == null)
+                return RedirectToAction("Login", "Cuenta", new { returnUrl = Url.Action("Comprar", "Carrito") });
+            if (!RolesWeb.EsCliente(Session["UsuarioRol"]))
+            {
+                TempData["ErrorMessage"] = "Sólo las cuentas de cliente pueden realizar compras desde la Web.";
+                return RedirectToAction("Index", "Home");
+            }
+            model.Carrito = ArmarCarrito();
+            if (!ModelState.IsValid) return View(model);
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var service = new CompraService(AnirokDbContext.ResolveConnectionString());
+                var usuarioId = Convert.ToInt32(Session["UsuarioId"]);
+                var ventaId = service.CrearVenta(usuarioId, ObtenerCarrito(), model.MetodoPago);
+                Session.Remove(CarritoKey);
+                try
+                {
+                    var comprobante = service.ObtenerComprobante(ventaId, usuarioId);
+                    service.GuardarPdf(comprobante);
+                    if (!string.IsNullOrWhiteSpace(comprobante.Email))
+                        EmailService.EnviarComprobante(comprobante.Email, ventaId, service.CrearPdf(comprobante));
+                }
+                catch (Exception)
+                {
+                    TempData["WarningMessage"] = "La compra está confirmada, pero el comprobante no pudo enviarse por correo. Podés descargarlo ahora y reintentarlo desde el historial de envíos.";
+                }
+                return RedirectToAction("CompraExitosa", new { id = ventaId });
             }
-            catch
+            catch (InvalidOperationException ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
             }
         }
 
-        // GET: Carrito/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult CompraExitosa(int id)
         {
-            return View();
+            if (Session["UsuarioId"] == null) return RedirectToAction("Login", "Cuenta");
+            if (!RolesWeb.EsCliente(Session["UsuarioRol"])) return new HttpStatusCodeResult(403);
+            var comprobante = new CompraService(AnirokDbContext.ResolveConnectionString()).ObtenerComprobante(id, Convert.ToInt32(Session["UsuarioId"]));
+            if (comprobante == null) return HttpNotFound();
+            return View(comprobante);
         }
 
-        // POST: Carrito/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Comprobante(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            if (Session["UsuarioId"] == null) return RedirectToAction("Login", "Cuenta");
+            if (!RolesWeb.EsCliente(Session["UsuarioRol"])) return new HttpStatusCodeResult(403);
+            var service = new CompraService(AnirokDbContext.ResolveConnectionString());
+            var comprobante = service.ObtenerComprobante(id, Convert.ToInt32(Session["UsuarioId"]));
+            if (comprobante == null) return HttpNotFound();
+            return File(service.ObtenerOCrearPdf(comprobante), "application/pdf", "Anirok-venta-" + id + ".pdf");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        private List<CarritoItem> ObtenerCarrito()
+        {
+            return Session[CarritoKey] as List<CarritoItem> ?? new List<CarritoItem>();
+        }
+
+        private CarritoViewModel ArmarCarrito()
+        {
+            var carrito = ObtenerCarrito();
+            var ids = carrito.Select(x => x.ProductoId).ToList();
+            var productos = _context.Productos.Where(p => ids.Contains(p.Id)).ToList();
+            return new CarritoViewModel
             {
-                return View();
-            }
+                Lineas = carrito.Join(productos, item => item.ProductoId, producto => producto.Id, (item, producto) => new CarritoLineaViewModel { Producto = producto, Cantidad = item.Cantidad }).ToList()
+            };
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) _context.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
+
+

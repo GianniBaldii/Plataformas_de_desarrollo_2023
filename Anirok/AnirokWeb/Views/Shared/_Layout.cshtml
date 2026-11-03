@@ -9,7 +9,8 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
     @Styles.Render("~/Content/css")
-    <link rel="stylesheet" href="@Url.Content("~/Content/CSS/style.css?v=20261028-1")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/CSS/style.css?v=20261103-footer-images2")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/CSS/tailwind.css?v=20261030-1")" />
     @Scripts.Render("~/bundles/modernizr")
     <!--  CDN de Font Awesome -->
     <script src="https://kit.fontawesome.com/5ecef25f55.js" crossorigin="anonymous"></script>
@@ -20,62 +21,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            <!-- Sección izquierda  -->
-            <div class="navbar-left d-flex align-items-center">
+    <header class="tw-bg-[#b80000] tw-text-white tw-shadow-md">
+    <nav class="tw-bg-[#b80000] tw-text-white">
+        <div class="tw-mx-auto tw-flex tw-max-w-7xl tw-flex-wrap tw-items-center tw-gap-4 tw-px-4 tw-py-3 lg:tw-flex-nowrap">
+            <div class="navbar-left tw-order-3 tw-flex tw-w-full tw-flex-1 tw-items-center lg:tw-order-2">
                 <form class="form-inline d-flex" method="get" action="@Url.Action("Buscar", "Producto")">
-                    <input class="form-inline align-items-center my-auto search-bar" name="buscar" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="m-2 btn-search" type="submit"><i class="m-2 fa-solid fa-magnifying-glass"></i></button>
+                    <input class="tw-w-full tw-rounded-l-xl tw-border-0 tw-px-4 tw-py-3 tw-text-gray-900" name="buscar" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+                    <button class="tw-rounded-r-xl tw-bg-black tw-px-5 tw-py-3" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
-
-            <!-- Sección central con el logo -->
-            <a class="navbar-brand mx-auto" href="@Url.Action("Index", "Home")">
-                <img src="../../Content/Images/logo_anirok.png" alt="Logo de la aplicación" style="max-height: 70px;" />
-            </a>
-
-            <!-- Sección derecha con el botón del carrito -->
-            <div class="navbar-right">
-                <ul class="navbar-nav d-flex align-items-center">
-                    <li class="nav-item m-3">
-                        <a class="btn-nav nav-link circle-icon"href="@Url.Action("Index", "Carrito")">
-                            <i class="m-2 fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </li>
+            <a class="tw-order-1 tw-shrink-0" href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/Content/Images/logo_anirok.png")" alt="Anirok" class="tw-h-14 tw-w-auto tw-rounded-lg tw-bg-white tw-p-1" /></a>
+            <div class="navbar-right tw-order-2 tw-ml-auto">
+                <ul class="navbar-nav tw-flex tw-items-center tw-gap-2">
+                    <li class="nav-item"><a class="cart-nav-link tw-relative tw-flex tw-h-11 tw-w-11 tw-items-center tw-justify-center tw-rounded-full tw-bg-black" href="@Url.Action("Index", "Carrito")"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" aria-label="Cantidad en carrito">@System.Linq.Enumerable.Sum((Session["Carrito"] as System.Collections.Generic.List<AnirokWeb.Models.CarritoItem>) ?? new System.Collections.Generic.List<AnirokWeb.Models.CarritoItem>(), x => x.Cantidad)</span></a></li>
                     <li class="nav-item">
                         @if (Session["UsuarioId"] != null)
                         {
-                            <!-- Botón para cerrar sesión -->
-                            <form method="post" action="@Url.Action("Logout", "Cuenta")">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn-nav nav-link circle-icon"><i class="m-2 fa-solid fa-unlock-keyhole"></i></button>
-                            </form>
+                            <span class="tw-hidden tw-rounded-full tw-bg-white/15 tw-px-3 tw-py-2 tw-text-sm tw-font-bold sm:tw-inline-block">Hola, @Session["UsuarioNombre"]</span>
+                            if (AnirokWeb.Services.RolesWeb.EsCliente(Session["UsuarioRol"]))
+                            {
+                                <a href="@Url.Action("Compras", "Cuenta")" class="tw-hidden tw-rounded-full tw-bg-white/15 tw-px-3 tw-py-2 text-white tw-text-sm tw-font-bold md:tw-inline-block">Mis compras</a>
+                            }
+                            <form method="post" action="@Url.Action("Logout", "Cuenta")" class="tw-m-0">@Html.AntiForgeryToken()<button type="submit" class="tw-flex tw-h-11 tw-items-center tw-gap-2 tw-rounded-full tw-bg-black tw-px-4 tw-font-bold"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="tw-hidden md:tw-inline">Salir</span></button></form>
                         }
-                        else
-                        {
-                            <!-- Botón para iniciar sesión -->
-                            <a href="@Url.Action("Login", "Cuenta")" class="btn-nav nav-link circle-icon">
-                                <i class="m-2 fa-solid fa-lock"></i>
-                            </a>
-                        }
+                        else { <a href="@Url.Action("Login", "Cuenta")" class="tw-flex tw-h-11 tw-items-center tw-gap-2 tw-rounded-full tw-bg-black tw-px-4 tw-font-bold"><i class="fa-solid fa-user"></i><span class="tw-hidden md:tw-inline">Ingresar</span></a> }
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg navbar-black bg-dark">
-        <!-- Contenido de la barra principal... -->
-        <!-- Enlaces de forma dinamica - _CategoriasPartial -->
-        <div class="collapse navbar-collapse justify-content-center align-content-between" id="navbarNav">
-            @Html.Action("Categorias", "Producto")
-            <a class="nav-link text-white px-3" href="@Url.Action("Contact", "Home")">Contacto</a>
-
-        </div>
-    </nav>
+    <nav class="tw-bg-black" aria-label="Categorías"><div class="tw-mx-auto tw-flex tw-max-w-7xl tw-items-center tw-gap-1 tw-overflow-x-auto tw-px-4 tw-py-2">@Html.Action("Categorias", "Producto")<a class="tw-whitespace-nowrap tw-rounded-lg tw-px-3 tw-py-2 tw-text-sm tw-font-bold tw-text-white" href="@Url.Action("Contact", "Home")">Contacto</a></div></nav>
+    </header>
 
 
     <div class="container body-content">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="anirok-flash anirok-flash-success mt-3" role="status"><i class="fa-solid fa-circle-check mr-2"></i>@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="anirok-flash anirok-flash-error mt-3" role="alert"><i class="fa-solid fa-circle-exclamation mr-2"></i>@TempData["ErrorMessage"]</div>
+        }
         @RenderBody()
      </div>
   <div class="footer-dark">
@@ -113,6 +100,30 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        (function () {
+            function showCartNotice(message, ok) {
+                var notice = document.querySelector('.cart-ajax-notice');
+                if (!notice) { notice = document.createElement('div'); notice.className = 'cart-ajax-notice'; document.body.appendChild(notice); }
+                notice.className = 'cart-ajax-notice ' + (ok ? 'is-success' : 'is-error');
+                notice.innerHTML = '<i class="fa-solid ' + (ok ? 'fa-circle-check' : 'fa-circle-exclamation') + '"></i><span>' + message + '</span>' + (ok ? '<a href="/Carrito">Ver carrito</a>' : '');
+                window.clearTimeout(notice._timer); notice._timer = window.setTimeout(function () { notice.classList.remove('is-visible'); }, 4500); notice.classList.add('is-visible');
+            }
+            document.addEventListener('submit', function (event) {
+                var form = event.target.closest('.js-cart-form');
+                if (!form) return;
+                event.preventDefault();
+                var button = form.querySelector('button[type="submit"]');
+                var original = button.innerHTML;
+                button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Agregando</span>';
+                fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                    .then(function (response) { return response.json(); })
+                    .then(function (data) { if (data.ok) { var count = document.querySelector('.cart-count'); if (count) count.textContent = data.count; } showCartNotice(data.message, data.ok); })
+                    .catch(function () { showCartNotice('No se pudo agregar el producto. Intentá nuevamente.', false); })
+                    .finally(function () { button.disabled = false; button.innerHTML = original; });
+            });
+        })();
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

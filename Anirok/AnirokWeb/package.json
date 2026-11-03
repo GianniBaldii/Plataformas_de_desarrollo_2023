@@ -1,0 +1,11 @@
+{
+  "name": "anirok-web-assets",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./Content/CSS/tailwind.input.css -o ./Content/CSS/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./Content/CSS/tailwind.input.css -o ./Content/CSS/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

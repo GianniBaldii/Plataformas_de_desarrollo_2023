@@ -27,6 +27,7 @@ services:
       MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD:-Anirok_dev_2026!}"
     volumes:
       - "./database anirok:/scripts:ro"
+      - "./Anirok/AnirokWeb/Database:/web-migrations:ro"
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
@@ -35,8 +36,21 @@ services:
         else
           /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$$MSSQL_SA_PASSWORD" -C -b -i "/scripts/scriptsqlserver.txt"
         fi
-        /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$$MSSQL_SA_PASSWORD" -C -b -d anirok2 -i "/scripts/migrations.sql"
+        for script in \
+          /scripts/migrations.sql \
+          /scripts/migrations/002_precios_costos_historial.sql \
+          /scripts/migrations/004_proveedores.sql \
+          /scripts/migrations/005_proveedores_por_categoria.sql \
+          /scripts/migrations/006_hash_passwords.sql \
+          /scripts/migrations/007_monetarios_decimal.sql \
+          /scripts/migrations/008_corregir_imagenes_productos.sql \
+          /web-migrations/001_contacto.sql \
+          /web-migrations/002_email_envio.sql; do
+          echo "Aplicando $$script"
+          /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$$MSSQL_SA_PASSWORD" -C -b -d anirok2 -i "$$script"
+        done
     restart: "no"
 
 volumes:
   anirok-sqlserver-data:
+

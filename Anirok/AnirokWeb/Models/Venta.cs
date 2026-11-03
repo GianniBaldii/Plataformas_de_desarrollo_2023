@@ -10,14 +10,14 @@ namespace AnirokWeb.Models
         public int Id { get; set; }
 
         [Column("precio_total")]
-        public double PrecioTotal { get; set; }
+        public decimal PrecioTotal { get; set; }
 
         public DateTime Fecha { get; set; }
 
         [Column("metodo_de_pago")]
         public string MetodoPago { get; set; }
 
-        public double Descuento { get; set; }
+        public decimal Descuento { get; set; }
 
         [Column("cliente_id")]
         public int ClienteId { get; set; }

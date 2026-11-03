@@ -29,11 +29,13 @@ namespace EjemploABM.Servicios
             grilla.SetBounds(24, 150, Math.Max(600, root.Width - 48), Math.Max(250, root.Height - 205));
             grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             EstiloAplicacion.PrepararGrilla(grilla);
+            foreach (DataGridViewColumn columna in grilla.Columns)
+                if (!(columna is DataGridViewButtonColumn) && !(columna is DataGridViewImageColumn)) columna.SortMode = DataGridViewColumnSortMode.Automatic;
             if (agregar != null)
             {
                 agregar.Text = "Agregar";
                 agregar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                agregar.SetBounds(Math.Max(24, root.Width - 190), 80, 166, 36);
+                agregar.SetBounds(Math.Max(24, root.ClientSize.Width - 180), 80, 150, 34);
                 var guna = agregar as Guna2Button;
                 if (guna != null) EstiloAplicacion.BotonPrimario(guna);
                 else { var boton = agregar as Button; if (boton != null) { boton.BackColor = EstiloAplicacion.Rojo; boton.ForeColor = Color.White; boton.FlatStyle = FlatStyle.Flat; } }
@@ -56,12 +58,33 @@ namespace EjemploABM.Servicios
             root.Resize += (s, e) =>
             {
                 grilla.SetBounds(24, 150, Math.Max(600, root.Width - 48), Math.Max(250, root.Height - 205));
-                if (agregar != null) agregar.Left = Math.Max(24, root.Width - 190);
+                if (agregar != null) { agregar.Left = Math.Max(24, root.ClientSize.Width - agregar.Width - 30); agregar.Top = 80; }
                 int y = Math.Max(155, root.Height - 42);
                 if (anterior != null) anterior.Top = y;
                 if (siguiente != null) siguiente.Top = y;
                 if (pagina != null) pagina.Location = new Point(270, y + 7);
             };
+        }
+
+        public static void AplicarAcciones(DataGridView grilla)
+        {
+            ConfigurarAccion(grilla, "Ver", "◉", "Ver detalle");
+            ConfigurarAccion(grilla, "Detalle", "◉", "Ver detalle y factura");
+            ConfigurarAccion(grilla, "Editar", "✎", "Editar registro");
+            ConfigurarAccion(grilla, "Eliminar", "×", "Eliminar registro");
+            ConfigurarAccion(grilla, "Resetear", "↻", "Generar contraseña temporal");
+        }
+
+        private static void ConfigurarAccion(DataGridView grilla, string nombre, string texto, string tooltip)
+        {
+            if (!grilla.Columns.Contains(nombre)) return;
+            var columna = grilla.Columns[nombre] as DataGridViewButtonColumn;
+            if (columna == null) return;
+            columna.Text = texto;
+            columna.UseColumnTextForButtonValue = true;
+            columna.ToolTipText = tooltip;
+            columna.Width = 72;
+            columna.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
     }
 }

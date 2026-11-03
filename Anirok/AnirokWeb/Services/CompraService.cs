@@ -32,8 +32,8 @@ namespace AnirokWeb.Services
                         var clienteId = ObtenerOCrearCliente(usuario, connection, transaction);
                         var ventaId = SiguienteId("venta", connection, transaction);
                         var detalleId = SiguienteId("detalle_venta", connection, transaction);
-                        var total = 0d;
-                        var productos = new List<Tuple<int, int, double>>();
+                        var total = 0m;
+                        var productos = new List<Tuple<int, int, decimal>>();
 
                         foreach (var item in carrito)
                         {
@@ -44,7 +44,7 @@ namespace AnirokWeb.Services
                                 {
                                     if (!reader.Read()) throw new InvalidOperationException("Uno de los productos ya no existe.");
                                     var nombre = reader.GetString(0);
-                                    var precio = Convert.ToDouble(reader.GetValue(1));
+                                    var precio = Convert.ToDecimal(reader.GetValue(1));
                                     var stock = reader.GetInt32(2);
                                     if (item.Cantidad < 1 || stock < item.Cantidad) throw new InvalidOperationException("No hay stock suficiente de " + nombre + ".");
                                     productos.Add(Tuple.Create(item.ProductoId, item.Cantidad, precio));
@@ -95,14 +95,14 @@ namespace AnirokWeb.Services
             {
                 connection.Open();
                 ComprobanteViewModel comprobante;
-                using (var command = new SqlCommand("SELECT v.id, v.fecha, c.nombre + ' ' + c.apellido, v.metodo_de_pago, v.precio_total FROM venta v INNER JOIN cliente c ON c.id = v.cliente_id WHERE v.id = @venta AND v.usuario_id = @usuario", connection))
+                using (var command = new SqlCommand("SELECT v.id, v.fecha, c.nombre + ' ' + c.apellido, c.mail, v.metodo_de_pago, v.precio_total FROM venta v INNER JOIN cliente c ON c.id = v.cliente_id WHERE v.id = @venta AND v.usuario_id = @usuario", connection))
                 {
                     command.Parameters.AddWithValue("@venta", ventaId);
                     command.Parameters.AddWithValue("@usuario", usuarioId);
                     using (var reader = command.ExecuteReader())
                     {
                         if (!reader.Read()) return null;
-                        comprobante = new ComprobanteViewModel { VentaId = reader.GetInt32(0), Fecha = reader.GetDateTime(1), Cliente = reader.GetString(2), MetodoPago = reader.GetString(3), Total = Convert.ToDouble(reader.GetValue(4)) };
+                        comprobante = new ComprobanteViewModel { VentaId = reader.GetInt32(0), Fecha = reader.GetDateTime(1), Cliente = reader.GetString(2), Email = reader.GetString(3), MetodoPago = reader.GetString(4), Total = Convert.ToDecimal(reader.GetValue(5)) };
                     }
                 }
                 using (var command = new SqlCommand("SELECT p.nombre, d.cantidad, d.precio_unitario FROM detalle_venta d INNER JOIN producto p ON p.id = d.producto_id WHERE d.venta_id = @venta ORDER BY d.id", connection))
@@ -110,7 +110,7 @@ namespace AnirokWeb.Services
                     command.Parameters.AddWithValue("@venta", ventaId);
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read()) comprobante.Lineas.Add(new ComprobanteLineaViewModel { Producto = reader.GetString(0), Cantidad = reader.GetInt32(1), PrecioUnitario = Convert.ToDouble(reader.GetValue(2)) });
+                        while (reader.Read()) comprobante.Lineas.Add(new ComprobanteLineaViewModel { Producto = reader.GetString(0), Cantidad = reader.GetInt32(1), PrecioUnitario = Convert.ToDecimal(reader.GetValue(2)) });
                     }
                 }
                 return comprobante;
@@ -121,21 +121,100 @@ namespace AnirokWeb.Services
         {
             using (var output = new MemoryStream())
             {
-                var document = new Document(PageSize.A4, 50, 50, 50, 50);
+                var document = new Document(PageSize.A4, 42, 42, 42, 42);
                 PdfWriter.GetInstance(document, output);
                 document.Open();
-                document.Add(new Paragraph("ANIROK - COMPROBANTE DE COMPRA", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18)));
-                document.Add(new Paragraph("Venta #" + comprobante.VentaId));
-                document.Add(new Paragraph("Fecha: " + comprobante.Fecha.ToString("dd/MM/yyyy")));
-                document.Add(new Paragraph("Cliente: " + comprobante.Cliente));
-                document.Add(new Paragraph("Método de pago: " + comprobante.MetodoPago));
+                var rojo = new BaseColor(198, 0, 0);
+                var gris = new BaseColor(245, 245, 245);
+                var borde = new BaseColor(225, 225, 225);
+                var normal = FontFactory.GetFont(FontFactory.HELVETICA, 9, BaseColor.DARK_GRAY);
+                var etiqueta = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, BaseColor.DARK_GRAY);
+                var titulo = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 17, BaseColor.WHITE);
+                var encabezado = new PdfPTable(new float[] { 1.2f, 3f }) { WidthPercentage = 100 };
+                var logo = ResolverLogo();
+                if (File.Exists(logo))
+                {
+                    var imagen = Image.GetInstance(logo);
+                    imagen.ScaleToFit(115f, 62f);
+                    encabezado.AddCell(new PdfPCell(imagen) { Border = Rectangle.NO_BORDER, Padding = 8, HorizontalAlignment = Element.ALIGN_LEFT });
+                }
+                else encabezado.AddCell(new PdfPCell(new Phrase("ANIROK", titulo)) { Border = Rectangle.NO_BORDER, Padding = 12 });
+                encabezado.AddCell(new PdfPCell(new Phrase("COMPROBANTE DE VENTA\nVenta #" + comprobante.VentaId, titulo)) { BackgroundColor = rojo, Border = Rectangle.NO_BORDER, Padding = 14, VerticalAlignment = Element.ALIGN_MIDDLE });
+                document.Add(encabezado);
                 document.Add(new Paragraph(" "));
-                foreach (var linea in comprobante.Lineas) document.Add(new Paragraph(linea.Cantidad + " x " + linea.Producto + " - " + linea.Subtotal.ToString("C", CultureInfo.GetCultureInfo("es-AR"))));
+
+                var datos = new PdfPTable(2) { WidthPercentage = 100 };
+                datos.AddCell(CeldaDato("Fecha", comprobante.Fecha.ToString("dd/MM/yyyy HH:mm"), etiqueta, normal, gris, borde));
+                datos.AddCell(CeldaDato("Método de pago", comprobante.MetodoPago, etiqueta, normal, gris, borde));
+                datos.AddCell(CeldaDato("Cliente", comprobante.Cliente, etiqueta, normal, BaseColor.WHITE, borde));
+                datos.AddCell(CeldaDato("N° de comprobante", comprobante.VentaId.ToString("000000"), etiqueta, normal, BaseColor.WHITE, borde));
+                document.Add(datos);
                 document.Add(new Paragraph(" "));
-                document.Add(new Paragraph("TOTAL: " + comprobante.Total.ToString("C", CultureInfo.GetCultureInfo("es-AR")), FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14)));
+
+                var tabla = new PdfPTable(new float[] { 4f, 1f, 2f, 2f }) { WidthPercentage = 100 };
+                AgregarEncabezado(tabla, "Producto", rojo);
+                AgregarEncabezado(tabla, "Cant.", rojo);
+                AgregarEncabezado(tabla, "Precio unitario", rojo);
+                AgregarEncabezado(tabla, "Subtotal", rojo);
+                foreach (var linea in comprobante.Lineas)
+                {
+                    AgregarCelda(tabla, linea.Producto, Element.ALIGN_LEFT, normal, borde);
+                    AgregarCelda(tabla, linea.Cantidad.ToString(), Element.ALIGN_CENTER, normal, borde);
+                    AgregarCelda(tabla, linea.PrecioUnitario.ToString("C", CultureInfo.GetCultureInfo("es-AR")), Element.ALIGN_RIGHT, normal, borde);
+                    AgregarCelda(tabla, linea.Subtotal.ToString("C", CultureInfo.GetCultureInfo("es-AR")), Element.ALIGN_RIGHT, normal, borde);
+                }
+                document.Add(tabla);
+                document.Add(new Paragraph(" "));
+                var resumen = new PdfPTable(new float[] { 2.5f, 1.5f }) { WidthPercentage = 42, HorizontalAlignment = Element.ALIGN_RIGHT };
+                AgregarResumen(resumen, "Subtotal", comprobante.Total.ToString("C", CultureInfo.GetCultureInfo("es-AR")), normal, gris);
+                AgregarResumen(resumen, "TOTAL", comprobante.Total.ToString("C", CultureInfo.GetCultureInfo("es-AR")), FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 13, rojo), new BaseColor(255, 235, 235));
+                document.Add(resumen);
+                document.Add(new Paragraph(" "));
+                var pie = new Paragraph("Gracias por tu compra · Anirok Mangas & More", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 9, BaseColor.GRAY));
+                pie.Alignment = Element.ALIGN_CENTER;
+                document.Add(pie);
                 document.Close();
                 return output.ToArray();
             }
+        }
+
+        private static PdfPCell CeldaDato(string etiqueta, string valor, Font fuenteEtiqueta, Font fuenteNormal, BaseColor fondo, BaseColor borde)
+        {
+            var celda = new PdfPCell { BackgroundColor = fondo, BorderColor = borde, Padding = 7 };
+            celda.AddElement(new Phrase(etiqueta + ": ", fuenteEtiqueta));
+            celda.AddElement(new Phrase(valor ?? "-", fuenteNormal));
+            return celda;
+        }
+
+        private static void AgregarEncabezado(PdfPTable tabla, string texto, BaseColor fondo)
+        {
+            tabla.AddCell(new PdfPCell(new Phrase(texto, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, BaseColor.WHITE))) { BackgroundColor = fondo, Padding = 7, BorderColor = fondo });
+        }
+
+        private static void AgregarCelda(PdfPTable tabla, string texto, int alineacion, Font fuente, BaseColor borde)
+        {
+            tabla.AddCell(new PdfPCell(new Phrase(texto ?? "", fuente)) { HorizontalAlignment = alineacion, Padding = 7, BorderColor = borde });
+        }
+
+        private static void AgregarResumen(PdfPTable tabla, string etiqueta, string valor, Font fuente, BaseColor fondo)
+        {
+            tabla.AddCell(new PdfPCell(new Phrase(etiqueta, fuente)) { BackgroundColor = fondo, BorderColor = BaseColor.WHITE, Padding = 7, HorizontalAlignment = Element.ALIGN_RIGHT });
+            tabla.AddCell(new PdfPCell(new Phrase(valor, fuente)) { BackgroundColor = fondo, BorderColor = BaseColor.WHITE, Padding = 7, HorizontalAlignment = Element.ALIGN_RIGHT });
+        }
+
+        private static string ResolverLogo()
+        {
+            foreach (var inicio in new[] { AppDomain.CurrentDomain.BaseDirectory, Environment.CurrentDirectory })
+            {
+                var carpeta = new DirectoryInfo(inicio);
+                while (carpeta != null)
+                {
+                    var candidato = Path.Combine(carpeta.FullName, "Anirok", "AnirokWeb", "Content", "Images", "logo_anirok.png");
+                    if (File.Exists(candidato)) return candidato;
+                    carpeta = carpeta.Parent;
+                }
+            }
+            return string.Empty;
         }
 
         public string GuardarPdf(ComprobanteViewModel comprobante)
@@ -150,9 +229,11 @@ namespace AnirokWeb.Services
 
         public byte[] ObtenerOCrearPdf(ComprobanteViewModel comprobante)
         {
+            // Regenera el comprobante para que las ventas existentes también
+            // adopten el formato visual unificado con Desktop.
+            GuardarPdf(comprobante);
             string carpeta = Path.Combine(ResolverRutaComprobantes(), comprobante.Fecha.ToString("yyyy"), comprobante.Fecha.ToString("MM"));
             string ruta = Path.Combine(carpeta, "venta-" + comprobante.VentaId + ".pdf");
-            if (!File.Exists(ruta)) GuardarPdf(comprobante);
             return File.ReadAllBytes(ruta);
         }
 

@@ -1,14 +1,24 @@
 @model AnirokWeb.Models.ComprobanteViewModel
-
-@if (TempData["WarningMessage"] != null)
-{
-    <div class="alert alert-warning">@TempData["WarningMessage"]</div>
-}
 @{
     ViewBag.Title = "Compra realizada";
 }
-<main class="container py-5 text-center">
-    <div class="alert alert-success"><h1>¡Compra realizada!</h1><p>Venta #@Model.VentaId. El stock fue actualizado correctamente.</p></div>
-    <a class="btn btn-green" href="@Url.Action("Comprobante", "Carrito", new { id = Model.VentaId })">Descargar comprobante PDF</a>
-    <a class="btn btn-black" href="@Url.Action("Index", "Home")">Volver a la tienda</a>
+<main class="container py-5 purchase-result-page">
+    <section class="purchase-result-card">
+        <div class="purchase-result-icon"><i class="fa-solid fa-check"></i></div>
+        <p class="section-heading__eyebrow">Operación confirmada</p>
+        <h1>¡Compra realizada!</h1>
+        <p class="purchase-result-copy">Tu venta <strong>#@Model.VentaId</strong> fue registrada y el stock se actualizó correctamente.</p>
+        @if (TempData["WarningMessage"] != null)
+        {
+            <div class="purchase-mail-warning" role="status"><i class="fa-solid fa-envelope-circle-exclamation"></i><div><strong>Comprobante pendiente de envío</strong><span>@TempData["WarningMessage"]</span></div></div>
+        }
+        else
+        {
+            <div class="purchase-mail-success"><i class="fa-solid fa-envelope-circle-check"></i>El comprobante fue enviado al correo de tu cuenta.</div>
+        }
+        <div class="purchase-result-actions">
+            <a class="purchase-primary-action" href="@Url.Action("Comprobante", "Carrito", new { id = Model.VentaId })"><i class="fa-solid fa-file-pdf"></i>Descargar comprobante</a>
+            <a class="purchase-secondary-action" href="@Url.Action("Index", "Home")">Volver a la tienda</a>
+        </div>
+    </section>
 </main>

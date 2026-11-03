@@ -21,13 +21,14 @@
         <p class="product-card__description">@Model.Descripcion</p>
         <p class="product-card__price">@Model.Precio.ToString("C0", CultureInfo.GetCultureInfo("es-AR"))</p>
         <div class="product-actions">
-            <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")" class="product-actions__form">
+            <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")" class="product-actions__form js-cart-form">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="productoId" value="@Model.Id" />
-                <button type="submit" class="product-action product-action--cart" @(Model.Stock <= 0 ? "disabled" : "")>
-                    <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
-                    <span>Agregar</span>
-                </button>
+                <div class="product-quick-add">
+                    <label class="sr-only" for="cantidad-@Model.Id">Cantidad de @Model.Nombre</label>
+                    <input id="cantidad-@Model.Id" name="cantidad" type="number" min="1" max="@Math.Max(Model.Stock, 1)" value="1" @(Model.Stock <= 0 ? "disabled" : "") />
+                    <button type="submit" class="product-action product-action--cart" @(Model.Stock <= 0 ? "disabled" : "")><i class="fa-solid fa-cart-plus" aria-hidden="true"></i><span>Agregar</span></button>
+                </div>
             </form>
             <a href="@Url.Action("Ver", "Producto", new { id = Model.Id })" class="product-action product-action--detail">
                 <i class="fa-solid fa-eye" aria-hidden="true"></i>

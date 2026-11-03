@@ -57,13 +57,13 @@ namespace AnirokWeb.Models
     {
         public Producto Producto { get; set; }
         public int Cantidad { get; set; }
-        public double Subtotal { get { return Producto.Precio * Cantidad; } }
+        public decimal Subtotal { get { return Producto.Precio * Cantidad; } }
     }
 
     public class CarritoViewModel
     {
         public List<CarritoLineaViewModel> Lineas { get; set; } = new List<CarritoLineaViewModel>();
-        public double Total { get { return Lineas.Sum(x => x.Subtotal); } }
+        public decimal Total { get { return Lineas.Sum(x => x.Subtotal); } }
     }
 
     public class CompraViewModel
@@ -78,8 +78,9 @@ namespace AnirokWeb.Models
         public int VentaId { get; set; }
         public DateTime Fecha { get; set; }
         public string Cliente { get; set; }
+        public string Email { get; set; }
         public string MetodoPago { get; set; }
-        public double Total { get; set; }
+        public decimal Total { get; set; }
         public List<ComprobanteLineaViewModel> Lineas { get; set; } = new List<ComprobanteLineaViewModel>();
     }
 
@@ -87,7 +88,16 @@ namespace AnirokWeb.Models
     {
         public string Producto { get; set; }
         public int Cantidad { get; set; }
-        public double PrecioUnitario { get; set; }
-        public double Subtotal { get { return PrecioUnitario * Cantidad; } }
+        public decimal PrecioUnitario { get; set; }
+        public decimal Subtotal { get { return PrecioUnitario * Cantidad; } }
+    }
+
+    public class CompraResumenViewModel
+    {
+        public int Id { get; set; }
+        public DateTime Fecha { get; set; }
+        public decimal Total { get; set; }
+        public decimal Descuento { get; set; }
+        public string MetodoPago { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using EjemploABM.Servicios;
+using Guna.UI2.WinForms;
+using System.Linq;
 
 namespace EjemploABM.ControlesDeUsuario
 {
@@ -14,11 +16,14 @@ namespace EjemploABM.ControlesDeUsuario
         private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Venta> ventas;
+        private readonly Guna2TextBox txtBuscar = new Guna2TextBox();
 
         public Ventas_UC()
         {
             InitializeComponent();
             ListadoVisual.Aplicar(this, guna2DataGridView1, "VENTAS", "Historial de operaciones y comprobantes emitidos", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente);
+            ListadoVisual.AplicarAcciones(guna2DataGridView1);
+            txtBuscar.PlaceholderText = "Buscar venta por método o número..."; txtBuscar.Location = new System.Drawing.Point(24, 84); txtBuscar.Size = new System.Drawing.Size(300, 30); txtBuscar.TextChanged += (s,e) => { paginaActual = 1; ActualizarVista(); }; Controls.Add(txtBuscar); EstiloAplicacion.AplicarAControl(txtBuscar);
             EstiloAplicacion.AplicarAControl(this);
             EstiloAplicacion.BotonSecundario(btn_siguiente);
             EstiloAplicacion.BotonSecundario(btn_anterior);
@@ -51,23 +56,24 @@ namespace EjemploABM.ControlesDeUsuario
             guna2DataGridView1.Rows.Clear();
 
             if (ventas == null) ventas = new List<Venta>();
+            var filtradas = ventas.Where(v => string.IsNullOrWhiteSpace(txtBuscar.Text) || v.Id.ToString().Contains(txtBuscar.Text.Trim()) || v.MetodoDePago.IndexOf(txtBuscar.Text.Trim(), StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             int inicio = (paginaActual - 1) * ElementosPorPagina;
-            int fin = Math.Min(inicio + ElementosPorPagina, ventas.Count);
+            int fin = Math.Min(inicio + ElementosPorPagina, filtradas.Count);
 
             for (int i = inicio; i < fin; i++)
             {
                 int rowIndex = guna2DataGridView1.Rows.Add();
 
-                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = ventas[i].Id.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = ventas[i].PrecioTotal.ToString("C0");
-                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = ventas[i].Fecha.ToString("dd/MM/yyyy");
-                guna2DataGridView1.Rows[rowIndex].Cells[3].Value = ventas[i].MetodoDePago.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[4].Value = ventas[i].Descuento.ToString("C0");
+                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = filtradas[i].Id.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = filtradas[i].PrecioTotal.ToString("C0");
+                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = filtradas[i].Fecha.ToString("dd/MM/yyyy");
+                guna2DataGridView1.Rows[rowIndex].Cells[3].Value = filtradas[i].MetodoDePago.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[4].Value = filtradas[i].Descuento.ToString("C0");
                 
                 guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Ver detalle";
             }
 
-            int totalDePaginasFiltradas = CalcularTotalDePaginasFiltradas();
+            int totalDePaginasFiltradas = filtradas.Count == 0 ? 0 : (int)Math.Ceiling((double)filtradas.Count / ElementosPorPagina);
             lblPaginaActual.Text = totalDePaginasFiltradas == 0 ? "Sin ventas" : $"Página {paginaActual} de {totalDePaginasFiltradas}";
         }
 

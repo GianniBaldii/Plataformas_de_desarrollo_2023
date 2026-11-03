@@ -1,19 +1,23 @@
-﻿@{
-    ViewBag.Title = "Contact";
+@model AnirokWeb.Models.ContactoViewModel
+@{
+    ViewBag.Title = "Contacto";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
-
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+<main class="container py-5">
+    <div class="row justify-content-center"><section class="col-lg-8">
+        <h1>Contacto</h1><p>Dejanos tu consulta y te respondemos a la brevedad.</p>
+        @if (Model.Enviado)
+        {
+            <div class="alert alert-success"><h2>Consulta recibida</h2><p>Guardamos tu mensaje correctamente. Te vamos a responder a <b>@Model.Email</b>.</p><a class="btn btn-black" href="@Url.Action("Index", "Home")">Volver a la tienda</a></div>
+        }
+        else
+        {
+            <form method="post" action="@Url.Action("Contact", "Home")">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">@Html.LabelFor(m => m.Asunto, new { @class = "form-label" })@Html.TextBoxFor(m => m.Asunto, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Asunto, "", new { @class = "text-danger" })</div>
+                <div class="mb-3">@Html.LabelFor(m => m.Email, new { @class = "form-label" })@Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</div>
+                <div class="mb-3">@Html.LabelFor(m => m.Mensaje, new { @class = "form-label" })@Html.TextAreaFor(m => m.Mensaje, 6, 30, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Mensaje, "", new { @class = "text-danger" })</div>
+                <button class="btn btn-primary" type="submit">Enviar consulta</button>
+            </form>
+        }
+    </section></div>
 </main>

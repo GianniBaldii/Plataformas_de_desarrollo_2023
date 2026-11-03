@@ -15,19 +15,9 @@ namespace EjemploABM.Controladores
         {
             //Darlo de alta en la BBDD
 
-            string query = "INSERT INTO dbo.producto VALUES" +
-   "(@id, " +
-   "@nombre, " +
-   "@descripcion, " +
-   "@precio, " +
-   "@codigo, " +
-   "@img, " +
-   "@proovedor, " +
-   "@subcategoria_id, " +
-   "@categoria_id, " +
-   "@talle, " +
-   "@stock" +  // Sin coma aquí
-   ");";
+            string query = "INSERT INTO dbo.producto " +
+                "(id, nombre, descripción, precio, codigo, img, proovedor, subcategoria_id, categoria_id, talle, stock) " +
+                "VALUES (@id, @nombre, @descripcion, @precio, @codigo, @img, @proovedor, @subcategoria_id, @categoria_id, @talle, @stock);";
 
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
@@ -108,9 +98,12 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    list.Add(new Producto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDouble(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetInt32(7), reader.GetInt32(8), reader.GetString(9), reader.GetInt32(10) ));
-
-                    Trace.WriteLine("Producto encontrada, nombre: " + reader.GetString(1));
+                    // Los campos monetarios fueron migrados a DECIMAL y algunos
+                    // datos históricos pueden venir NULL. GetDouble/GetString
+                    // fallan cuando el tipo SQL no coincide exactamente.
+                    var producto = CrearProductoDesdeReader(reader);
+                    list.Add(producto);
+                    Trace.WriteLine("Producto encontrado, nombre: " + producto.Nombre);
                 }
 
                 reader.Close();
@@ -131,7 +124,10 @@ namespace EjemploABM.Controladores
         public static Producto obtenerPorId(int id)
         {
             Producto sub = new Producto();
-            string query = "select * from dbo.producto where id = @id;";
+            // Mantener el mismo orden y conjunto de columnas que el listado.
+            // Evita que nuevas columnas (costo, moneda, cotización) desplacen
+            // los índices cuando se usa SELECT *.
+            string query = "SELECT id, nombre, descripción, precio, codigo, img, proovedor, subcategoria_id, categoria_id, talle, stock FROM dbo.producto WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", id);
@@ -143,8 +139,8 @@ namespace EjemploABM.Controladores
 
                 while (reader.Read())
                 {
-                    sub = new Producto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDouble(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetInt32(7), reader.GetInt32(8), reader.GetString(9), reader.GetInt32(10));
-                    Trace.WriteLine("Prod encontrada, nombre: " + reader.GetString(1));
+                    sub = CrearProductoDesdeReader(reader);
+                    Trace.WriteLine("Producto encontrado, nombre: " + sub.Nombre);
                 }
 
                 reader.Close();
@@ -157,6 +153,37 @@ namespace EjemploABM.Controladores
             }
 
             return sub;
+        }
+
+        private static Producto CrearProductoDesdeReader(SqlDataReader reader)
+        {
+            return new Producto(
+                Convert.ToInt32(reader.GetValue(0)),
+                Texto(reader.GetValue(1)),
+                Texto(reader.GetValue(2)),
+                Numero(reader.GetValue(3)),
+                Texto(reader.GetValue(4)),
+                Texto(reader.GetValue(5)),
+                Texto(reader.GetValue(6)),
+                Entero(reader.GetValue(7)),
+                Entero(reader.GetValue(8)),
+                Texto(reader.GetValue(9)),
+                Entero(reader.GetValue(10)));
+        }
+
+        private static string Texto(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? string.Empty : Convert.ToString(valor);
+        }
+
+        private static double Numero(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? 0d : Convert.ToDouble(valor);
+        }
+
+        private static int Entero(object valor)
+        {
+            return valor == null || valor == DBNull.Value ? 0 : Convert.ToInt32(valor);
         }
 
 

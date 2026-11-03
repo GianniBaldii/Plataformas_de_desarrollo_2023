@@ -26,6 +26,8 @@ namespace EjemploABM.Modelo
         public string Proveedor { get; set; }
 
         public int CategoriaId { get; set; }
+        public string CategoriaNombre { get; set; }
+        public string SubcategoriaNombre { get; set; }
 
         public int SubcategoriaId { get; set; }
 

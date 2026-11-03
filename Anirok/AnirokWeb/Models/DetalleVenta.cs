@@ -15,12 +15,12 @@ namespace AnirokWeb.Models
         public int ProductoId { get; set; }
 
         [Column("precio_unitario")]
-        public double PrecioUnitario { get; set; }
+        public decimal PrecioUnitario { get; set; }
 
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
 
         [NotMapped]
-        public double Subtotal { get { return Cantidad * PrecioUnitario; } }
+        public decimal Subtotal { get { return Cantidad * PrecioUnitario; } }
     }
 }

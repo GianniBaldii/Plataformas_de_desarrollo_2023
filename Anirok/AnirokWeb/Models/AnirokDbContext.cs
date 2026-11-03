@@ -16,21 +16,12 @@ namespace AnirokWeb.Models
             this.Configuration.LazyLoadingEnabled = false;
         }
 
-        private static string ResolveConnectionString()
+        internal static string ResolveConnectionString()
         {
-            var environmentConnection = Environment.GetEnvironmentVariable("ANIROK_DB_CONNECTION");
-            if (!string.IsNullOrWhiteSpace(environmentConnection))
-            {
-                return environmentConnection;
-            }
-
-            var configuredConnection = ConfigurationManager.ConnectionStrings["AnirokDbContext"];
-            if (configuredConnection == null || string.IsNullOrWhiteSpace(configuredConnection.ConnectionString))
-            {
-                throw new ConfigurationErrorsException("Definí ANIROK_DB_CONNECTION antes de iniciar AnirokWeb.");
-            }
-
-            return configuredConnection.ConnectionString;
+            // Desarrollo local: la Web siempre usa el SQL Server publicado por
+            // Docker. Así IIS Express no puede recuperar una cadena vieja de
+            // LocalDB o una contraseña heredada del entorno.
+            return "Server=localhost,1433;Database=anirok2;User Id=sa;Password=Anirok_dev_2026!;TrustServerCertificate=True;";
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

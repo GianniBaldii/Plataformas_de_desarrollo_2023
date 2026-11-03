@@ -180,8 +180,12 @@
     <Compile Include="Controladores\Usuario_Controller.cs" />
     <Compile Include="Controladores\Proveedor_Controller.cs" />
     <Compile Include="Servicios\ListadoVisual.cs" />
+    <Compile Include="Servicios\PasswordService.cs" />
     <Compile Include="Modelo\Proveedor.cs" />
     <Compile Include="EditarProveedorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarContraseñaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ControlesDeUsuario\Proveedores_UC.cs">
@@ -319,6 +323,17 @@
     <Compile Include="Modelo\Subcategoria.cs" />
     <Compile Include="Modelo\Producto.cs" />
     <Compile Include="Modelo\Usuario.cs" />
+    <Compile Include="Modelo\Contacto.cs" />
+    <Compile Include="Modelo\EmailEnvio.cs" />
+    <Compile Include="Controladores\Contacto_Controller.cs" />
+    <Compile Include="Controladores\EmailEnvio_Controller.cs" />
+    <Compile Include="ControlesDeUsuario\ConsultasContactoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlesDeUsuario\EnviosMailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Servicios\EmailService.cs" />
     <Compile Include="Modelo\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Servicios\ImagenProductoService.cs" />

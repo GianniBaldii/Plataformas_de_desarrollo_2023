@@ -44,7 +44,8 @@ namespace EjemploABM
             txt_mail.Text = usr.Mail.ToString();
             txt_telefono.Text = usr.Telefono.ToString();
             txt_direccion.Text = usr.Direccion.ToString();
-            txt_contraseña.Text = usr.Contraseña.ToString();
+            txt_contraseña.Text = "";
+            txt_contraseña.PlaceholderText = "Dejar vacío para conservar la actual";
             txt_dni.Text = usr.Dni.ToString();
 
             combo_tipo.Items.Clear();
@@ -140,7 +141,7 @@ namespace EjemploABM
                 return MostrarValidacion("Ingresá una dirección válida.");
             if (!ValidacionEntrada.SoloDigitos(txt_dni.Text, 7, 12))
                 return MostrarValidacion("El DNI debe contener entre 7 y 12 dígitos.");
-            if (txt_contraseña.Text.Trim().Length < 6 || txt_contraseña.Text.Length > 100)
+            if (!(situacion == "edicion" && string.IsNullOrWhiteSpace(txt_contraseña.Text)) && (txt_contraseña.Text.Trim().Length < 6 || txt_contraseña.Text.Length > 100))
                 return MostrarValidacion("La contraseña debe tener entre 6 y 100 caracteres.");
             if (combo_tipo.SelectedItem == null)
                 return MostrarValidacion("Seleccioná un rol.");

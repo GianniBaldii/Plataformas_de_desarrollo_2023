@@ -23,19 +23,10 @@ namespace EjemploABM.Controladores
             Usuario user = null;
 
             // Consulta para autenticar al usuario
-            string query = "SELECT * FROM dbo.usuario WHERE (nombre = @usr OR mail = @usr) AND contraseña = @pass;";
+            string query = "SELECT id, nombre, apellido, mail, telefono, direccion, dni, contraseña, rol FROM dbo.usuario WHERE (nombre = @usr OR mail = @usr);";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@usr", usr);
-
-            if (hasheado)
-            {
-                cmd.Parameters.AddWithValue("@pass", pass);
-            }
-            else
-            {
-                // cmd.Parameters.AddWithValue("@pass", hc.PassHash(pass));
-            }
 
             try
             {
@@ -45,6 +36,7 @@ namespace EjemploABM.Controladores
                 while (reader.Read())
                 {
                     Trace.WriteLine("Usr encontrado, nombre: " + reader.GetString(1));
+                    if (!PasswordService.Verificar(pass, reader.GetString(7))) continue;
                     user = new Usuario(
                         reader.GetInt32(0),
                         reader.GetString(1),
@@ -106,7 +98,7 @@ namespace EjemploABM.Controladores
             cmd.Parameters.AddWithValue("@telefono", usr.Telefono);
             cmd.Parameters.AddWithValue("@direccion", usr.Direccion);
             cmd.Parameters.AddWithValue("@dni", usr.Dni);
-            cmd.Parameters.AddWithValue("@contraseña", usr.Contraseña);
+            cmd.Parameters.AddWithValue("@contraseña", PasswordService.Hash(usr.Contraseña));
             cmd.Parameters.AddWithValue("@rol", usr.Rol);
 
 
@@ -161,7 +153,7 @@ namespace EjemploABM.Controladores
         public static List<Usuario> obtenerTodos()
         {
             List<Usuario> list = new List<Usuario>();
-            string query = "select * from dbo.usuario;";
+            string query = "SELECT id, nombre, apellido, mail, telefono, direccion, dni, contraseña, rol FROM dbo.usuario;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
 
@@ -196,7 +188,7 @@ namespace EjemploABM.Controladores
         public static Usuario obtenerPorId(int id)
         {
             Usuario usr = new Usuario();
-            string query = "select * from dbo.usuario where id = @id;";
+            string query = "SELECT id, nombre, apellido, mail, telefono, direccion, dni, contraseña, rol FROM dbo.usuario WHERE id = @id;";
 
             SqlCommand cmd = new SqlCommand(query, DB_Controller.connection);
             cmd.Parameters.AddWithValue("@id", id);
@@ -239,7 +231,7 @@ namespace EjemploABM.Controladores
                 "telefono = @telefono, " +
                 "direccion = @direccion," +
                 " dni = @dni, " +
-                "contraseña = @contraseña," +
+                "contraseña = CASE WHEN @contraseña = '' THEN contraseña ELSE @contraseña END," +
                 " rol = @rol " +
                 "WHERE id = @id;";
 
@@ -251,7 +243,7 @@ namespace EjemploABM.Controladores
             cmd.Parameters.AddWithValue("@telefono", usr.Telefono);
             cmd.Parameters.AddWithValue("@direccion", usr.Direccion);
             cmd.Parameters.AddWithValue("@dni", usr.Dni);
-            cmd.Parameters.AddWithValue("@contraseña", usr.Contraseña);
+            cmd.Parameters.AddWithValue("@contraseña", string.IsNullOrWhiteSpace(usr.Contraseña) ? string.Empty : PasswordService.Hash(usr.Contraseña));
             cmd.Parameters.AddWithValue("@rol", usr.Rol);
 
             try
@@ -295,9 +287,44 @@ namespace EjemploABM.Controladores
 
 
         // validar repeticion de la contraseña
+        public static string ResetearContraseña(int id)
+        {
+            string temporal = PasswordService.GenerarTemporal();
+            using (var command = new SqlCommand("UPDATE dbo.usuario SET contraseña=@contraseña WHERE id=@id", DB_Controller.connection))
+            {
+                command.Parameters.AddWithValue("@contraseña", PasswordService.Hash(temporal));
+                command.Parameters.AddWithValue("@id", id);
+                try
+                {
+                    DB_Controller.connection.Open();
+                    command.ExecuteNonQuery();
+                    return temporal;
+                }
+                finally
+                {
+                    if (DB_Controller.connection.State != System.Data.ConnectionState.Closed) DB_Controller.connection.Close();
+                }
+            }
+        }
 
+        public static bool CambiarContraseña(int id, string nuevaContraseña)
+        {
+            using (var command = new SqlCommand("UPDATE dbo.usuario SET contraseña=@contraseña WHERE id=@id", DB_Controller.connection))
+            {
+                command.Parameters.AddWithValue("@contraseña", PasswordService.Hash(nuevaContraseña));
+                command.Parameters.AddWithValue("@id", id);
+                try
+                {
+                    DB_Controller.connection.Open();
+                    return command.ExecuteNonQuery() > 0;
+                }
+                finally
+                {
+                    if (DB_Controller.connection.State != System.Data.ConnectionState.Closed) DB_Controller.connection.Close();
+                }
+            }
+        }
 
-        
 public static bool existeContraseña(string contraseña)
         {
             string query = "SELECT COUNT(*) FROM dbo.usuario WHERE contraseña = @contraseña;";

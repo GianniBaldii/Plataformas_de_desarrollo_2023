@@ -13,7 +13,7 @@ namespace AnirokWeb.Models
         public string Nombre { get; set; }
         [Column("descripción")]
         public string Descripcion { get; set; }
-        public double Precio { get; set; }
+        public decimal Precio { get; set; }
         public string Codigo { get; set; }
         public string Img { get; set; }
         [Column("proovedor")]

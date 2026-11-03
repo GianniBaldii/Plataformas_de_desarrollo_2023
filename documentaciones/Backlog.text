@@ -1,0 +1,17 @@
+Backlog:
+
+
+-Administrador: El administrador va a tener la posibilidad tanto de eliminar categorias/subcategorias como tambien la posibilidad de desactivarlas.
+Al desactivar una categoria te da dos opciones,la de remplazar la categoria de ese conjunto de productos por otra o la opcion de desactivar tambien los productos. Una vez este la categoria desactivada no aparecera al crear productoso subcategorias como una opción.
+
+
+
+-Vendedor:El vendedor unicamente puede desactivar categorias. Al desactivar una categoria te da dos opciones,la de remplazar la categoria de ese conjunto de productos por otra o la opcion de desactivar tambien los productos. Una vez este la categoria desactivada no aparecera al crear productoso subcategorias como una opción.
+
+
+
+
+
+***Agregar un metodo para mostrar unicamente las categorias y subcategorias activadas.***
+
+***Agregar un metodo para mostrar unicamente los productos con categoria diferente a desactivados*** los productos que posean una subcategoria y este desactivada, no van aparecer al igual que como funciona con las categorias desactivadas

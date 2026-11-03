@@ -40,6 +40,8 @@ namespace EjemploABM
 
             cerrar__sesion_btn.Text = "CERRAR SESIÓN";
             guna2Button7.Text = "PRECIOS Y COSTOS";
+            guna2Button7.ImageOffset = new Point(-2, 0);
+            guna2Button7.ImageSize = new Size(26, 26);
             guna2Button7.Click += guna2Button7_Click;
             btnProveedores.Text = "VER PROVEEDORES";
             Controls.Add(btnProveedores);
@@ -52,10 +54,16 @@ namespace EjemploABM
             addUserControl(prodsUC);
             
             lb_nombre_logueado.Text = Program.logueado == null ? "Usuario" : Program.logueado.Nombre;
-            if (Program.logueado == null || Program.logueado.Rol != 1)
-            {
-                btn_users.Hide();
-            }
+            var esAdmin = Program.logueado != null && Program.logueado.Rol == 1;
+            var esVendedor = Program.logueado != null && Program.logueado.Rol == 2;
+            btn_users.Visible = esAdmin;
+            guna2Button7.Visible = esAdmin;
+            btnProveedores.Visible = esAdmin;
+            btn_cats.Visible = esAdmin || esVendedor;
+            guna2Button5.Visible = esAdmin || esVendedor;
+            guna2Button8.Visible = esAdmin || esVendedor;
+            guna2Button9.Visible = esAdmin || esVendedor;
+            btn_prods.Visible = esAdmin || esVendedor;
 
 
         }
@@ -64,31 +72,33 @@ namespace EjemploABM
         {
             int ancho = ClientSize.Width;
             int margen = 32;
-            int botonAncho = 190;
-            int botonAlto = 42;
-            int separacion = 14;
+            int botonAncho = 172;
+            int botonAlto = 36;
+            int separacion = 10;
             int cantidadColumnas = 4;
             int grupoAncho = cantidadColumnas * botonAncho + (cantidadColumnas - 1) * separacion;
             int inicioX = Math.Max(margen, (ancho - grupoAncho) / 2);
 
-            cerrar__sesion_btn.SetBounds(margen, 24, 150, 52);
-            cerrar__sesion_btn.ImageSize = new Size(30, 30);
+            cerrar__sesion_btn.SetBounds(margen, 16, 138, 44);
+            cerrar__sesion_btn.ImageSize = new Size(26, 26);
 
-            guna2CirclePictureBox1.SetBounds(Math.Max(margen, (ancho - 160) / 2), 12, 160, 108);
-            label1.Location = new Point(Math.Max(margen, ancho - 300), 34);
-            lb_nombre_logueado.Location = new Point(Math.Max(margen, ancho - 150), 32);
+            guna2CirclePictureBox1.SetBounds(Math.Max(margen, (ancho - 112) / 2), 8, 112, 76);
+            label1.Location = new Point(Math.Max(margen, ancho - 430), 24);
+            lb_nombre_logueado.Location = new Point(Math.Max(margen, ancho - 285), 22);
+            guna2PictureBox2.SetBounds(Math.Max(0, ancho - 92), 0, 46, 43);
+            guna2PictureBox1.SetBounds(Math.Max(0, ancho - 46), 0, 46, 43);
 
-            guna2Button8.SetBounds(inicioX, 150, botonAncho, botonAlto);
-            btn_prods.SetBounds(inicioX + botonAncho + separacion, 150, botonAncho, botonAlto);
-            btn_cats.SetBounds(inicioX + (botonAncho + separacion) * 2, 150, botonAncho, botonAlto);
-            guna2Button5.SetBounds(inicioX + (botonAncho + separacion) * 3, 150, botonAncho, botonAlto);
+            guna2Button8.SetBounds(inicioX, 96, botonAncho, botonAlto);
+            btn_prods.SetBounds(inicioX + botonAncho + separacion, 96, botonAncho, botonAlto);
+            btn_cats.SetBounds(inicioX + (botonAncho + separacion) * 2, 96, botonAncho, botonAlto);
+            guna2Button5.SetBounds(inicioX + (botonAncho + separacion) * 3, 96, botonAncho, botonAlto);
 
-            guna2Button9.SetBounds(inicioX + botonAncho + separacion, 202, botonAncho, botonAlto);
-            guna2Button7.SetBounds(inicioX, 202, botonAncho, botonAlto);
-            btn_users.SetBounds(inicioX + (botonAncho + separacion) * 2, 202, botonAncho, botonAlto);
-            btnProveedores.SetBounds(inicioX + (botonAncho + separacion) * 3, 202, botonAncho, botonAlto);
+            guna2Button9.SetBounds(inicioX + botonAncho + separacion, 140, botonAncho, botonAlto);
+            guna2Button7.SetBounds(inicioX, 140, botonAncho, botonAlto);
+            btn_users.SetBounds(inicioX + (botonAncho + separacion) * 2, 140, botonAncho, botonAlto);
+            btnProveedores.SetBounds(inicioX + (botonAncho + separacion) * 3, 140, botonAncho, botonAlto);
 
-            panel1.SetBounds(margen, 270, Math.Max(500, ancho - margen * 2), Math.Max(250, ClientSize.Height - 292));
+            panel1.SetBounds(margen, 196, Math.Max(500, ancho - margen * 2), Math.Max(250, ClientSize.Height - 218));
         }
 
         //BOTONES

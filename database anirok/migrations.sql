@@ -2,12 +2,33 @@ SET QUOTED_IDENTIFIER ON;
 SET ANSI_NULLS ON;
 GO
 
+-- Los índices filtrados exigían SET QUOTED_IDENTIFIER ON en cada conexión.
+-- Entity Framework no lo garantiza al insertar, por eso se usan índices
+-- únicos normales y se mantiene la compatibilidad con los datos actuales.
+IF EXISTS (
+    SELECT 1 FROM sys.indexes
+    WHERE name = N'UX_usuario_nombre'
+      AND object_id = OBJECT_ID(N'dbo.usuario')
+      AND filter_definition IS NOT NULL
+)
+    DROP INDEX UX_usuario_nombre ON dbo.usuario;
+GO
+
+IF EXISTS (
+    SELECT 1 FROM sys.indexes
+    WHERE name = N'UX_usuario_mail'
+      AND object_id = OBJECT_ID(N'dbo.usuario')
+      AND filter_definition IS NOT NULL
+)
+    DROP INDEX UX_usuario_mail ON dbo.usuario;
+GO
+
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UX_usuario_nombre' AND object_id = OBJECT_ID(N'dbo.usuario'))
-    CREATE UNIQUE INDEX UX_usuario_nombre ON dbo.usuario(nombre) WHERE nombre IS NOT NULL;
+    CREATE UNIQUE INDEX UX_usuario_nombre ON dbo.usuario(nombre);
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'UX_usuario_mail' AND object_id = OBJECT_ID(N'dbo.usuario'))
-    CREATE UNIQUE INDEX UX_usuario_mail ON dbo.usuario(mail) WHERE mail IS NOT NULL;
+    CREATE UNIQUE INDEX UX_usuario_mail ON dbo.usuario(mail);
 GO
 
 IF COL_LENGTH(N'dbo.detalle_venta', N'precio_unitario') IS NULL

@@ -2,26 +2,76 @@
 @{
     ViewBag.Title = "Finalizar compra";
 }
-<main class="container py-5">
-    <div class="row">
+<main class="container py-5 checkout-page">
+    <div class="checkout-header"><p class="section-heading__eyebrow">Último paso</p><h1>Confirmá tu compra</h1><p>Revisá el resumen y elegí cómo vas a pagar.</p></div>
+    <div class="row g-4 align-items-start">
         <section class="col-md-7">
-            <h1>Finalizar compra</h1>
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-            <form method="post" action="@Url.Action("Comprar", "Carrito")">
+            <form method="post" action="@Url.Action("Comprar", "Carrito")" id="checkoutForm">
                 @Html.AntiForgeryToken()
-                <div class="mb-3">
-                    @Html.LabelFor(m => m.MetodoPago, new { @class = "form-label" })
-                    @Html.DropDownListFor(m => m.MetodoPago, new SelectList(new[] { "Tarjeta", "Efectivo", "Transferencia" }), new { @class = "form-select" })
+                <div class="payment-panel">
+                    <h2>Medio de pago</h2>
+                    <p class="payment-help">Seleccioná una opción para continuar.</p>
+                    <div class="payment-options">
+                        <label class="payment-option"><input type="radio" name="MetodoPago" value="Efectivo" checked /><span><i class="fa-solid fa-money-bill-wave"></i><b>Efectivo</b><small>Pago en el local</small></span></label>
+                        <label class="payment-option"><input type="radio" name="MetodoPago" value="Transferencia" /><span><i class="fa-solid fa-building-columns"></i><b>Transferencia</b><small>Te mostramos los datos al confirmar</small></span></label>
+                        <label class="payment-option"><input type="radio" name="MetodoPago" value="Tarjeta" /><span><i class="fa-regular fa-credit-card"></i><b>Tarjeta</b><small>Coordinamos el pago</small></span></label>
+                    </div>
                 </div>
-                <button class="btn btn-green" type="submit">Confirmar compra</button>
+                <button class="checkout-submit" type="submit" id="confirmPurchase">
+                    <i class="fa-solid fa-lock me-2"></i>Confirmar compra segura
+                </button>
             </form>
         </section>
         <aside class="col-md-5">
-            <div class="card p-4">
-                <h2>Resumen</h2>
-                @foreach (var linea in Model.Carrito.Lineas) { <p>@linea.Cantidad × @linea.Producto.Nombre <b class="float-end">@linea.Subtotal.ToString("C")</b></p> }
-                <hr /><h3>Total <span class="float-end">@Model.Carrito.Total.ToString("C")</span></h3>
+            <div class="checkout-summary">
+                <h2>Resumen de compra</h2>
+                <div class="checkout-lines">@foreach (var linea in Model.Carrito.Lineas) { <div><span>@linea.Cantidad × @linea.Producto.Nombre</span><b>@linea.Subtotal.ToString("C")</b></div> }</div>
+                <div class="checkout-total"><span>Total</span><strong>@Model.Carrito.Total.ToString("C")</strong></div>
+                <p class="checkout-safe"><i class="fa-solid fa-shield-halved"></i> Stock validado antes de confirmar</p>
             </div>
         </aside>
     </div>
 </main>
+
+<div id="purchaseOverlay" class="purchase-overlay" aria-hidden="true">
+    <div class="purchase-overlay__card" role="status" aria-live="polite">
+        <div class="purchase-spinner"></div>
+        <h2>Estamos procesando tu compra</h2>
+        <p>Verificamos el stock y generamos tu comprobante.</p>
+        <div class="purchase-progress"><span></span></div>
+        <small>No cierres esta ventana</small>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        .purchase-overlay { display:none; position:fixed; z-index:2000; inset:0; align-items:center; justify-content:center; background:rgba(0,0,0,.72); }
+        .purchase-overlay.is-visible { display:flex; }
+        .purchase-overlay__card { width:min(92vw,460px); padding:2.5rem 2rem; border-radius:18px; background:#fff; text-align:center; box-shadow:0 18px 55px rgba(0,0,0,.35); }
+        .purchase-overlay__card h2 { margin:1rem 0 .5rem; font-size:1.5rem; }
+        .purchase-overlay__card p { color:#666; margin-bottom:1.4rem; }
+        .purchase-spinner { width:56px; height:56px; margin:auto; border:5px solid #eee; border-top-color:#d40000; border-radius:50%; animation:purchase-spin .85s linear infinite; }
+        .purchase-progress { height:7px; overflow:hidden; border-radius:999px; background:#eee; }
+        .purchase-progress span { display:block; width:0; height:100%; background:#d40000; animation:purchase-progress 4.5s ease-in-out forwards; }
+        .purchase-overlay small { display:block; color:#999; margin-top:1rem; }
+        @@keyframes purchase-spin { to { transform:rotate(360deg); } }
+        @@keyframes purchase-progress { from { width:0; } to { width:100%; } }
+    </style>
+    <script>
+        (function () {
+            var form = document.getElementById('checkoutForm');
+            var overlay = document.getElementById('purchaseOverlay');
+            var button = document.getElementById('confirmPurchase');
+            if (!form || !overlay) return;
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) return;
+                event.preventDefault();
+                overlay.classList.add('is-visible');
+                overlay.setAttribute('aria-hidden', 'false');
+                if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Procesando...'; }
+                window.setTimeout(function () { form.submit(); }, 4500);
+            });
+        })();
+    </script>
+}

@@ -1,112 +1,40 @@
-﻿
-@model List<AnirokWeb.Models.Producto>
-
+@model AnirokWeb.Models.CarritoViewModel
+@using System.Globalization
 @{
-    ViewBag.Title = "Tu Carrito";
+    ViewBag.Title = "Tu carrito | Anirok";
+    var cultura = CultureInfo.GetCultureInfo("es-AR");
 }
-<main>
-    <section aria-labelledby="aspnetTitle">
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 class="mt-4">Tu Carrito</h1>
-
+<main class="cart-fallback container py-4">
+    <div class="tw-mb-8 tw-flex tw-flex-wrap tw-items-end tw-justify-between tw-gap-4">
+        <div><p class="tw-mb-2 tw-text-xs tw-font-black tw-uppercase tw-tracking-[.2em] tw-text-[#b80000]">Tu selección</p><h1 class="!tw-m-0 tw-text-4xl tw-font-black tw-normal-case tw-tracking-tight sm:tw-text-5xl">Carrito</h1><p class="tw-mt-2 tw-text-gray-500">Revisá cantidades antes de confirmar tu compra.</p></div>
+        <a href="@Url.Action("Index", "Home")" class="tw-font-bold tw-text-[#b80000] hover:tw-underline"><i class="fa-solid fa-arrow-left tw-mr-2"></i>Seguir comprando</a>
+    </div>
+    @if (!Model.Lineas.Any())
+    {
+        <section class="tw-rounded-3xl tw-border tw-border-dashed tw-border-gray-300 tw-bg-white tw-px-6 tw-py-20 tw-text-center tw-shadow-sm">
+            <div class="tw-mx-auto tw-mb-5 tw-flex tw-h-20 tw-w-20 tw-items-center tw-justify-center tw-rounded-full tw-bg-red-50 tw-text-3xl tw-text-[#b80000]"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h2 class="tw-mb-2 tw-text-2xl tw-font-black">Tu carrito está vacío</h2><p class="tw-mb-7 tw-text-gray-500">Encontrá algo que te guste y lo vas a ver aparecer acá.</p>
+            <a class="tw-inline-flex tw-items-center tw-rounded-xl tw-bg-[#b80000] tw-px-6 tw-py-3 tw-font-black tw-text-white tw-shadow-lg hover:tw-bg-black" href="@Url.Action("Index", "Home")">Explorar productos</a>
         </section>
-
-        @if (Model.Count == 0)
-        {
-            <p>Tu carrito está vacío.</p>
-        }
-        else
-        {
-            <div class="container mt-5">
-                <div class="text-end">
-                    <button class="btn btn-green m-4">Realizar Compra</button>
-                    <h2 class="text-end fw-bold">Total (S/Envío): <span id="total">$@Model.Sum(p => p.Precio)</span></h2>
-                </div>
-
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col"></th>
-                            <th scope="col">Subtotal</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var producto in Model)
-                        {
-                            <tr>
-                                <td style="width: 20%;">
-                                    <img src="@Url.Action("Imagen", "Producto", new { nombre = producto.Img })" alt="@producto.Nombre" class="img-fluid" />
-                                </td>
-                                <td class="align-middle">
-                                    <p class="prod-title m-2 fw-bold">@producto.Nombre</p>
-                                    <p class="m-2 fw-bold">Precio: <span class="price-font">$@producto.Precio</span></p>
-                                    <div class="input-group">
-                                        <!-- Input para ingresar la cantidad -->
-                                        <label class="m-2 fw-bold" for="cantidad">Cantidad:</label>
-                                        <input class="mb-4" type="number" id="cantidad" name="cantidad" inputmode="numeric" pattern="[0-9]*" min="1" value="1">
-                                    </div>
-                                </td>
-                                
-                                <td class="text-start align-middle">
-                                    <p class="m-2 fw-bold">Subtotal: <span class="price-font subtotal">$@producto.Precio</span></p>
-                                </td>
-
-                                <td class="text-start align-middle">
-                                    <!-- Eliminar producto del carrito -->
-                                    <form method="post" action="@Url.Action("EliminarDelCarrito", "Carrito")">
-                                        <input type="hidden" name="productoId" value="@producto.Id" />
-                                        <button type="submit" class="btn-nav nav-link circle-icon">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <div class="text-center mb-4">
-                    <button class="btn btn-green">Realizar Compra</button>
-                </div>
-
-            </div>
-
-        }
-
-    </section>
-
-    <!-- Event listener para actualizar cantidad de x producto -->
-    @section Scripts {
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Selecciona todos los inputs de cantidad
-            let quantityInputs = document.querySelectorAll("input[name='cantidad']");
-
-            quantityInputs.forEach(input => {
-                input.addEventListener("input", function () {
-                    let row = this.closest("tr"); // Encuentra la fila del producto
-                    let price = parseFloat(row.querySelector(".price-font").textContent.replace("$", "")); // Obtiene el precio del producto
-                    let quantity = parseInt(this.value) || 1; // Obtiene la cantidad (si es inválida, usa 1)
-                    let subtotal = price * quantity; // Calcula el subtotal
-
-                    row.querySelector(".subtotal").textContent = `$${subtotal.toFixed(2)}`; // Actualiza el subtotal
-
-                    updateTotal(); // Actualiza el total general
-                });
-            });
-
-            function updateTotal() {
-                let total = 0;
-                document.querySelectorAll(".subtotal").forEach(sub => {
-                    total += parseFloat(sub.textContent.replace("$", ""));
-                });
-                document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-            }
-        });
-        </script>
     }
-
+    else
+    {
+        <div class="tw-grid tw-items-start tw-gap-6 lg:tw-grid-cols-[1fr_350px]">
+            <section class="tw-space-y-4" aria-label="Productos del carrito">
+                @foreach (var linea in Model.Lineas)
+                {
+                    <article class="cart-line tw-flex tw-flex-wrap tw-items-center tw-gap-4 tw-rounded-2xl tw-border tw-border-gray-200 tw-bg-white tw-p-4 tw-shadow-sm sm:tw-flex-nowrap">
+                        <img src="@Url.Action("Imagen", "Producto", new { nombre = linea.Producto.Img })" alt="@linea.Producto.Nombre" class="tw-h-24 tw-w-24 tw-rounded-xl tw-bg-gray-50 tw-object-contain sm:tw-h-28 sm:tw-w-28" />
+                        <div class="tw-min-w-0 tw-flex-1"><p class="tw-mb-1 tw-text-xs tw-font-black tw-uppercase tw-tracking-wider tw-text-[#b80000]">@(linea.Producto.Categoria == null ? "Producto" : linea.Producto.Categoria.Nombre)</p><h2 class="tw-mb-1 tw-truncate tw-text-lg tw-font-black">@linea.Producto.Nombre</h2><p class="tw-text-sm tw-text-gray-500">@linea.Producto.Precio.ToString("C0", cultura) por unidad</p></div>
+                        <form method="post" action="@Url.Action("Actualizar", "Carrito")" class="tw-flex tw-items-center tw-gap-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productoId" value="@linea.Producto.Id" /><label class="tw-sr-only" for="cantidad-cart-@linea.Producto.Id">Cantidad</label><input id="cantidad-cart-@linea.Producto.Id" class="tw-h-10 tw-w-16 tw-rounded-lg tw-border tw-border-gray-300 tw-px-2 tw-text-center tw-font-bold focus:tw-border-[#b80000] focus:tw-outline-none" type="number" name="cantidad" min="0" max="@linea.Producto.Stock" value="@linea.Cantidad" /><button class="tw-h-10 tw-rounded-lg tw-border tw-border-gray-300 tw-px-3 tw-text-sm tw-font-bold hover:tw-border-black" type="submit" title="Actualizar cantidad"><i class="fa-solid fa-rotate"></i><span class="tw-sr-only">Actualizar</span></button>
+                        </form>
+                        <div class="tw-w-28 tw-text-right"><p class="tw-text-lg tw-font-black">@linea.Subtotal.ToString("C0", cultura)</p><form method="post" action="@Url.Action("EliminarDelCarrito", "Carrito")" class="tw-mt-1">@Html.AntiForgeryToken()<input type="hidden" name="productoId" value="@linea.Producto.Id" /><button class="tw-text-xs tw-font-bold tw-text-gray-500 hover:tw-text-red-700" type="submit"><i class="fa-regular fa-trash-can tw-mr-1"></i>Quitar</button></form></div>
+                    </article>
+                }
+            </section>
+            <aside class="tw-sticky tw-top-4 tw-rounded-2xl tw-bg-gray-950 tw-p-6 tw-text-white tw-shadow-xl"><h2 class="tw-mb-5 tw-text-xl tw-font-black">Resumen de compra</h2><div class="tw-flex tw-justify-between tw-border-b tw-border-white/15 tw-pb-4 tw-text-sm tw-text-gray-300"><span>Productos</span><span>@Model.Lineas.Sum(x => x.Cantidad) unidades</span></div><div class="tw-mt-5 tw-flex tw-items-end tw-justify-between"><span class="tw-text-gray-300">Total</span><strong class="tw-text-3xl">@Model.Total.ToString("C0", cultura)</strong></div><a class="tw-mt-6 tw-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 tw-rounded-xl tw-bg-[#d40000] tw-px-4 tw-py-3 tw-font-black tw-text-white hover:tw-bg-red-700" href="@Url.Action("Comprar", "Carrito")"><i class="fa-solid fa-lock"></i>Finalizar compra</a><p class="tw-mt-4 tw-text-center tw-text-xs tw-text-gray-400"><i class="fa-solid fa-shield-halved tw-mr-1"></i>Compra segura y stock validado</p></aside>
+        </div>
+    }
 </main>
-
-

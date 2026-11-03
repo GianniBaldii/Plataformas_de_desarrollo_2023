@@ -3,8 +3,9 @@
     ViewBag.Title = "Crear cuenta";
 }
 <main class="container py-5">
-    <div class="row justify-content-center"><section class="col-lg-8">
-        <h1>Crear cuenta</h1>
+    <div class="tw-rounded-3xl tw-border tw-border-gray-200 tw-bg-white tw-p-6 tw-shadow-xl sm:tw-p-10"><section>
+        <p class="tw-mb-2 tw-text-xs tw-font-black tw-uppercase tw-tracking-[.2em] tw-text-[#b80000]">Anirok</p><h1 class="!tw-mb-2 tw-text-4xl tw-font-black">Crear cuenta</h1>
+        <p class="tw-mb-7 tw-text-gray-500">Registrate para guardar tu carrito y finalizar tus compras.</p>
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         <form method="post" action="@Url.Action("Registro", "Cuenta")" class="row g-3">
             @Html.AntiForgeryToken()
@@ -14,9 +15,39 @@
             <div class="col-md-6">@Html.LabelFor(m => m.Telefono, new { @class = "form-label" })@Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger" })</div>
             <div class="col-md-6">@Html.LabelFor(m => m.Direccion, new { @class = "form-label" })@Html.TextBoxFor(m => m.Direccion, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger" })</div>
             <div class="col-md-6">@Html.LabelFor(m => m.Dni, new { @class = "form-label" })@Html.TextBoxFor(m => m.Dni, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Dni, "", new { @class = "text-danger" })</div>
-            <div class="col-md-6">@Html.LabelFor(m => m.Contrasena, new { @class = "form-label" })@Html.PasswordFor(m => m.Contrasena, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.Contrasena, "", new { @class = "text-danger" })</div>
-            <div class="col-md-6">@Html.LabelFor(m => m.ConfirmarContrasena, new { @class = "form-label" })@Html.PasswordFor(m => m.ConfirmarContrasena, new { @class = "form-control" })@Html.ValidationMessageFor(m => m.ConfirmarContrasena, "", new { @class = "text-danger" })</div>
-            <div class="col-12"><button class="btn btn-primary" type="submit">Crear cuenta</button></div>
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.Contrasena, new { @class = "form-label" })
+                <div class="input-group">
+                    @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", id = "Contrasena" })
+                    <button type="button" class="btn btn-outline-secondary password-toggle" data-target="Contrasena" aria-label="Mostrar contraseña"><i class="fa-solid fa-eye"></i></button>
+                </div>
+                @Html.ValidationMessageFor(m => m.Contrasena, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.ConfirmarContrasena, new { @class = "form-label" })
+                <div class="input-group">
+                    @Html.PasswordFor(m => m.ConfirmarContrasena, new { @class = "form-control", id = "ConfirmarContrasena" })
+                    <button type="button" class="btn btn-outline-secondary password-toggle" data-target="ConfirmarContrasena" aria-label="Mostrar contraseña"><i class="fa-solid fa-eye"></i></button>
+                </div>
+                @Html.ValidationMessageFor(m => m.ConfirmarContrasena, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-12"><button class="tw-w-full tw-rounded-xl tw-bg-[#b80000] tw-px-5 tw-py-3 tw-font-black tw-text-white tw-shadow-lg hover:tw-bg-black sm:tw-w-auto" type="submit">Crear cuenta</button></div>
         </form>
     </section></div>
 </main>
+
+@section scripts {
+    <script>
+        document.querySelectorAll('.password-toggle').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var input = document.getElementById(button.dataset.target);
+                var icon = button.querySelector('i');
+                var visible = input.type === 'text';
+                input.type = visible ? 'password' : 'text';
+                icon.classList.toggle('fa-eye', visible);
+                icon.classList.toggle('fa-eye-slash', !visible);
+                button.setAttribute('aria-label', visible ? 'Mostrar contraseña' : 'Ocultar contraseña');
+            });
+        });
+    </script>
+}

@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Linq;
+using Guna.UI2.WinForms;
 using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
@@ -13,11 +15,14 @@ namespace EjemploABM.ControlesDeUsuario
         private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Subcategoria> subcategorias;
+        private readonly Guna2TextBox txtBuscar = new Guna2TextBox();
 
         public Subcategoria_UC()
         {
             InitializeComponent();
             ListadoVisual.Aplicar(this, guna2DataGridView1, "SUBCATEGORÍAS", "Clasificación específica dentro de cada categoría", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente, label1);
+            ListadoVisual.AplicarAcciones(guna2DataGridView1);
+            txtBuscar.PlaceholderText = "Buscar subcategoría..."; txtBuscar.Location = new System.Drawing.Point(24, 84); txtBuscar.Size = new System.Drawing.Size(300, 30); txtBuscar.TextChanged += (s,e) => { paginaActual = 1; ActualizarVista(); }; Controls.Add(txtBuscar); EstiloAplicacion.AplicarAControl(txtBuscar);
             CargarSubcategorias();
         }
 
@@ -31,22 +36,24 @@ namespace EjemploABM.ControlesDeUsuario
         {
             guna2DataGridView1.Rows.Clear();
 
+            var filtradas = subcategorias.Where(s => string.IsNullOrWhiteSpace(txtBuscar.Text) || s.Nombre.IndexOf(txtBuscar.Text.Trim(), StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             int inicio = (paginaActual - 1) * ElementosPorPagina;
-            int fin = Math.Min(inicio + ElementosPorPagina, subcategorias.Count);
+            int fin = Math.Min(inicio + ElementosPorPagina, filtradas.Count);
 
             for (int i = inicio; i < fin; i++)
             {
                 int rowIndex = guna2DataGridView1.Rows.Add();
 
-                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = subcategorias[i].Id.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = subcategorias[i].Nombre.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = subcategorias[i].categoria_id.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[3].Value = subcategorias[i].IsActive.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = filtradas[i].Id.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = filtradas[i].Nombre.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = filtradas[i].categoria_id.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[3].Value = filtradas[i].IsActive.ToString();
                 guna2DataGridView1.Rows[rowIndex].Cells[4].Value = "Editar";
                 guna2DataGridView1.Rows[rowIndex].Cells[5].Value = "Eliminar";
             }
 
-            lblPaginaActual.Text = $"Página {paginaActual} de {CalcularTotalDePaginas()}";
+            int paginas = filtradas.Count == 0 ? 0 : (int)Math.Ceiling((double)filtradas.Count / ElementosPorPagina);
+            lblPaginaActual.Text = paginas == 0 ? "Sin resultados" : $"Página {paginaActual} de {paginas}";
         }
 
         private int CalcularTotalDePaginas()

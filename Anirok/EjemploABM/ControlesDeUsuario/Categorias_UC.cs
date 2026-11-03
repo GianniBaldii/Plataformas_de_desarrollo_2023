@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Linq;
+using Guna.UI2.WinForms;
 using EjemploABM.Servicios;
 
 namespace EjemploABM.ControlesDeUsuario
@@ -13,11 +15,14 @@ namespace EjemploABM.ControlesDeUsuario
         private const int ElementosPorPagina = 8;
         private int paginaActual = 1;
         private List<Categoria> categorias;
+        private readonly Guna2TextBox txtBuscar = new Guna2TextBox();
 
         public Categorias_UC()
         {
             InitializeComponent();
             ListadoVisual.Aplicar(this, guna2DataGridView1, "CATEGORÍAS", "Organización del catálogo por familias de productos", btn_add_cat, lblPaginaActual, btn_anterior, btn_siguiente, label1);
+            ListadoVisual.AplicarAcciones(guna2DataGridView1);
+            txtBuscar.PlaceholderText = "Buscar categoría..."; txtBuscar.Location = new System.Drawing.Point(24, 84); txtBuscar.Size = new System.Drawing.Size(300, 30); txtBuscar.TextChanged += (s,e) => { paginaActual = 1; ActualizarVista(); }; Controls.Add(txtBuscar); EstiloAplicacion.AplicarAControl(txtBuscar);
             CargarCategorias();
         }
 
@@ -31,16 +36,17 @@ namespace EjemploABM.ControlesDeUsuario
         {
             guna2DataGridView1.Rows.Clear();
 
+            var filtradas = categorias.Where(c => string.IsNullOrWhiteSpace(txtBuscar.Text) || c.Nombre.IndexOf(txtBuscar.Text.Trim(), StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             int inicio = (paginaActual - 1) * ElementosPorPagina;
-            int fin = Math.Min(inicio + ElementosPorPagina, categorias.Count);
+            int fin = Math.Min(inicio + ElementosPorPagina, filtradas.Count);
 
             for (int i = inicio; i < fin; i++)
             {
                 int rowIndex = guna2DataGridView1.Rows.Add();
 
-                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = categorias[i].Id.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = categorias[i].Nombre.ToString();
-                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = categorias[i].IsActive.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[0].Value = filtradas[i].Id.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[1].Value = filtradas[i].Nombre.ToString();
+                guna2DataGridView1.Rows[rowIndex].Cells[2].Value = filtradas[i].IsActive.ToString();
                 guna2DataGridView1.Rows[rowIndex].Cells[3].Value = "Editar";
                 guna2DataGridView1.Rows[rowIndex].Cells[4].Value = "Eliminar";
             }
@@ -56,7 +62,8 @@ namespace EjemploABM.ControlesDeUsuario
             // considerando los filtros aplicados a tus datos.
             // Puedes adaptar esta lógica según tus necesidades.
 
-            int totalDePaginasFiltradas = (int)Math.Ceiling((double)categorias.Count / ElementosPorPagina);
+            int cantidad = categorias == null ? 0 : categorias.Count(c => string.IsNullOrWhiteSpace(txtBuscar.Text) || c.Nombre.IndexOf(txtBuscar.Text.Trim(), StringComparison.OrdinalIgnoreCase) >= 0);
+            int totalDePaginasFiltradas = cantidad == 0 ? 0 : (int)Math.Ceiling((double)cantidad / ElementosPorPagina);
 
             return totalDePaginasFiltradas;
         }
